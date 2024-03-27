@@ -6,10 +6,9 @@ Current features:
 
 + 2. ** GENERATE GOOGLE CALENDAR **
 
-+ 3. Tu hoc adding UI: 
++ 3. ** SEPARATE THE EXCEL READING LOGIC TO A PLUGIN ARCHITECTURE **
+    -> Multiple plugin reading format (google docs, excel) 
+    for multiple university as well (any place really)
+
++ 4. Tu hoc adding UI: 
     -> including Chu Nhat 
-
-+ 4. Separate the excel reading logic to a plugin architecture
-    -> Multiple plugin reading format (google docs, excel)
-    for multiple schools as well 
-

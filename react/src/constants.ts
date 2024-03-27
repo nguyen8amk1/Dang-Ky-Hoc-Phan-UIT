@@ -16,8 +16,8 @@ export const ROUTES = {
     path: '/3',
     name: '3. TKB và script',
   },
-  // _4GiaoDienDKHP: {
-  //   path: '/4',
-  //   name: '4. Trang ĐKHP UIT',
-  // },
+  _4GiaoDienDKHP: {
+    path: '/4',
+    name: '4. Xep lich tu hoc',
+  },
 } as const;
