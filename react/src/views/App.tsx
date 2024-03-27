@@ -85,6 +85,7 @@ const drawerWidth = 190;
 type StyleProps = {
   isDrawerOpen: boolean;
 };
+
 const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
   root: {
     display: 'flex',
