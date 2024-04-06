@@ -4,22 +4,27 @@
         Domain Name [X]
         VPS [X]
         SSL [] 
-        -> Let's encrypt SSL
-        Read how HTTPS works ? @Current 
+        -> Cloudflare ?? Let's encrypt SSL
         Read how Linux hosting books works ? @Next
+        Read about DNS ? 
 
 + Move the working code to some branches []
 
 + Setup the VPS []
 
-+ Backend:
-    Dockerize a simple Nodejs HTTP Server [] @Next
-        https://github.com/chrispauley/docker-express
-        https://levelup.gitconnected.com/a-containerized-nodejs-express-hello-world-application-28d286556890
++ Try to deploy the full Hoi dan it app @Current 
 
++ Backend:
+
+    Setup Docker Mysql database ver 5.7 [] @Later
+        
     Cloudflares, Let's encrypt
-    Setup HTTPs []
+
+    Setup HTTPs [] 
         Test using an SSR site   
+
+
+    API Subdomain []
 
 + Frontend: 
     Dockerize Simple React app [] @Next
