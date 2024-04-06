@@ -1,13 +1,14 @@
 import express from "express";
 
-// import bodyParser from "body-parser";
+import bodyParser from "body-parser";
 // import viewEngine from "./config/viewEngine";
 // import initWebRoutes from './route/web';
 //
 // //import connectDB from './config/connectDB';
 // // import cors from 'cors';
 //
-// require('dotenv').config();
+
+require('dotenv').config();
 //
 
 let app = express();
@@ -49,6 +50,11 @@ let app = express();
 
 let port = process.env.PORT || 6969;
 //Port === undefined => port = 6969
+
+app.post('/api/login',(req, res) => {
+    console.log("oh yeahh");
+    res.send("ditmesaigon");
+});
 
 app.listen(port, () => {
     //callback
