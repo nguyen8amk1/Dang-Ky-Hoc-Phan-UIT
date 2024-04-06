@@ -1,14 +1,36 @@
-Current features: 
+## TODO
+Buying all the materials [] 
+    Backend: 
+        Domain Name [X]
+        VPS [X]
+        SSL [] @Current
+        -> Let's encrypt SSL
 
-## Need to add features: 
-+ 1. ** GOOGLE LOGIN ** @Current 
-    with google calendar scope  
+Move the working code to some branches []
 
-+ 2. ** GENERATE GOOGLE CALENDAR **
+Setup the VPS []
 
-+ 3. ** SEPARATE THE EXCEL READING LOGIC TO A PLUGIN ARCHITECTURE **
+Backend:
+    Dockerize a simple Nodejs HTTP Server [] @Next
+    Setup HTTPs []
+
+Frontend: 
+    Dockerize Simple React app []
+    Connect the React to the API (HTTPs) []
+    Cloudflare ?? 
+
+Setup the Monitor, Google Analytic and stuff []
+
+Migrate the working code to this project []
+
+** SEPARATE THE EXCEL READING LOGIC TO A PLUGIN ARCHITECTURE **[]
     -> Multiple plugin reading format (google docs, excel) 
     for multiple university as well (any place really)
 
-+ 4. Tu hoc adding UI: 
+Tu hoc adding UI: 
     -> including Chu Nhat 
+
+## DONE
+Setup the Git Repo [] 
+    Nalendar [X]
+    Branches  [X]
