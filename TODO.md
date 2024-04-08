@@ -12,11 +12,13 @@
 
 + Setup the VPS []
 
-+ Try to deploy the full Hoi dan it app @Current 
++ Deploy our own simple api and front end @Later
++ Make all the docker production work into 1 single command  
+    Currently the Front end need to be build first then dockerize
 
 + Backend:
 
-    Setup Docker Mysql database ver 5.7 [] @Later
+    Setup Docker Mysql database ver 5.7 [] 
         
     Cloudflares, Let's encrypt
 
