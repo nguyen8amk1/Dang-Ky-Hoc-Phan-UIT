@@ -5,8 +5,8 @@ const fs = require('fs');
 const app = express();
 const port = 8080;
 
-const certificate = '/etc/letsencrypt/live/nalendar.online/fullchain.pem'
-const privateKey = '/etc/letsencrypt/live/nalendar.online/privkey.pem'
+const certificate = '../certs/fullchain.pem'
+const privateKey = '../certs/privkey.pem'
 
 
 // Check if SSL certificate and key files exist
