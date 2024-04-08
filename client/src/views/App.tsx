@@ -45,6 +45,7 @@ function App() {
   const isDrawerOpen = useDrawerStore((s) => s.isDrawerOpen);
   const classes = useStyles({ isDrawerOpen });
   const dataTkb = useTkbStore(selectFinalDataTkb);
+  console.log("vailonchimen");
 
   return (
     <div className={classes.root}>
