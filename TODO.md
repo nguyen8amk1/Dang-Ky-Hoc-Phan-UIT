@@ -19,6 +19,7 @@
         the Front end need to be build first then dockerize
 
 + Make the api available through the domain name [] @Current 
+    Have a subdomain api.nalendar.online with it's own certificate to use
 
 + Backend:
     Setup Docker Mysql database ver 5.7 [] 

@@ -51,7 +51,8 @@ function App() {
 
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:8080'); // Replace 'https://api.example.com/data' with your API endpoint
+      
+        const response = await fetch('http://103.162.20.149:8080'); // Replace 'https://api.example.com/data' with your API endpoint
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -132,3 +133,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     marginLeft: 0,
   },
 }));
+
+
+
+
