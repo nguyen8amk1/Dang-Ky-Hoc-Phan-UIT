@@ -2,12 +2,14 @@ const express = require('express');
 const https = require('https');
 const fs = require('fs');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 const port = 8080;
 
-const certificate = '../certs/fullchain.pem'
-const privateKey = '../certs/privkey.pem'
+const certificate = path.join(path.dirname(__dirname), '/certs/fullchain.pem'); 
+const privateKey = path.join(path.dirname(__dirname), '/certs/privkey.pem'); 
+console.log(certificate, privateKey);
 
 app.use(cors( {
   origin: '*',
