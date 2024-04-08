@@ -13,14 +13,16 @@
 + Setup the VPS []
 
 + Deploy our own simple api and front end @Later
+
 + Make all the docker production work into 1 single command  
-    Currently the Front end need to be build first then dockerize
+    Current state: 
+        the Front end need to be build first then dockerize
+
++ Make the api available through the domain name [] @Current 
+    Have a subdomain api.nalendar.online with it's own certificate to use
 
 + Backend:
-
     Setup Docker Mysql database ver 5.7 [] 
-        
-    Cloudflares, Let's encrypt
 
     Setup HTTPs [] 
         Test using an SSR site   
