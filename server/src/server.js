@@ -20,6 +20,8 @@ app.use(cors( {
 // Check if SSL certificate and key files exist
 const sslCertExists = fs.existsSync(certificate) && fs.existsSync(privateKey);
 
+console.log("ssl exist: ?", sslCertExists);
+
 // Define routes
 app.get('/', (req, res) => {
   res.json({ditme: "That khong the tin duoc"});
@@ -28,8 +30,8 @@ app.get('/', (req, res) => {
 // If SSL certificate and key files exist, create an HTTPS server
 if (sslCertExists) {
   const options = {
-    key: fs.readFileSync('path/to/private/key.pem'),
-    cert: fs.readFileSync('path/to/ssl/certificate.pem')
+    key: fs.readFileSync(privateKey),
+    cert: fs.readFileSync(certificate)
   };
 
   const server = https.createServer(options, app);
