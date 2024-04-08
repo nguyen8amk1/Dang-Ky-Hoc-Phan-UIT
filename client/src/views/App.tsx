@@ -25,6 +25,7 @@ type PersistedRouteProps = {
  * to show/hide only, instead of mount/unmount the component when route changes
  * for a smoother UX
  */
+
 function PersistedRoute(props: PersistedRouteProps) {
   const location = useLocation();
   const match = location.pathname === props.path;
@@ -45,7 +46,23 @@ function App() {
   const isDrawerOpen = useDrawerStore((s) => s.isDrawerOpen);
   const classes = useStyles({ isDrawerOpen });
   const dataTkb = useTkbStore(selectFinalDataTkb);
-  console.log("vailonchimen");
+    for(let i = 0; i < 10000; i++)
+        console.log("DITMESAIGON");
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:8080'); // Replace 'https://api.example.com/data' with your API endpoint
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+            const content = await response.json();
+            console.log(content);
+      } catch (error) {
+            console.log(error);
+      } 
+    };
+
+    fetchData();
 
   return (
     <div className={classes.root}>
