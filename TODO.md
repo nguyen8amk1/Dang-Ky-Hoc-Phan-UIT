@@ -1,4 +1,12 @@
 ## TODO
+For now just have a local docker and try to deploy it to production in 1 final 
+
+
++ For now deployment: 
+    Frontend: Nelify ?? 
+    Backend: Render ??
+    https://www.youtube.com/watch?v=aM_XIWjxcYA
+
 + Buying all the materials [] 
     Backend: 
         Domain Name [X]
@@ -7,6 +15,29 @@
         -> Cloudflare ?? Let's encrypt SSL
         Read how Linux hosting books works ? @Next
         Read about DNS ? 
+
+
++ Nginx Subdomain reverse proxy  @Current
+    https://www.youtube.com/watch?v=9t9Mp0BGnyI
+
++ API Domain Certificates HTTPs @Next
+
++ Docker development environment @Next
+    https://guillaumejacquart.medium.com/node-js-docker-workflow-12febcc0eed8
+    https://github.com/daniil/full-stack-js-docker-tutorial
+    https://www.docker.com/blog/how-to-setup-your-local-node-js-development-environment-using-docker/
+
++ Adding Certificates to Docker container @Next
+    https://stackoverflow.com/questions/26028971/docker-container-ssl-certificates
+
++ Local to VPS workflow @Next 
+
+
+
+
+
+
+    
 
 + Move the working code to some branches []
 
@@ -18,8 +49,6 @@
     Current state: 
         the Front end need to be build first then dockerize
 
-+ Make the api available through the domain name [] @Current 
-    Have a subdomain api.nalendar.online with it's own certificate to use
 
 + Backend:
     Setup Docker Mysql database ver 5.7 [] 
