@@ -1,12 +1,6 @@
 ## TODO
-For now just have a local docker and try to deploy it to production in 1 final 
 
-
-+ For now deployment: 
-    Frontend: Nelify ?? 
-    Backend: Render ??
-    https://www.youtube.com/watch?v=aM_XIWjxcYA
-
++ Merge the sample firebaseclient with the client @Current
 + Buying all the materials [] 
     Backend: 
         Domain Name [X]
@@ -17,7 +11,7 @@ For now just have a local docker and try to deploy it to production in 1 final
         Read about DNS ? 
 
 
-+ Nginx Subdomain reverse proxy  @Current
++ Nginx Subdomain reverse proxy  
     https://www.youtube.com/watch?v=9t9Mp0BGnyI
 
 + API Domain Certificates HTTPs @Next
@@ -31,13 +25,7 @@ For now just have a local docker and try to deploy it to production in 1 final
     https://stackoverflow.com/questions/26028971/docker-container-ssl-certificates
 
 + Local to VPS workflow @Next 
-
-
-
-
-
-
-    
+   
 
 + Move the working code to some branches []
 

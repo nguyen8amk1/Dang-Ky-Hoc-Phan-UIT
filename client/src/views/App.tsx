@@ -46,6 +46,7 @@ function App() {
   const isDrawerOpen = useDrawerStore((s) => s.isDrawerOpen);
   const classes = useStyles({ isDrawerOpen });
   const dataTkb = useTkbStore(selectFinalDataTkb);
+    /*
     for(let i = 0; i < 10000; i++)
         console.log("DITMESAIGON");
 
@@ -64,6 +65,7 @@ function App() {
     };
 
     fetchData();
+    */
 
   return (
     <div className={classes.root}>
@@ -133,7 +135,3 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     marginLeft: 0,
   },
 }));
-
-
-
-
