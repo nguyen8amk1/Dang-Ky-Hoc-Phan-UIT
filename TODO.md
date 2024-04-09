@@ -1,6 +1,6 @@
 ## TODO
-
 + Merge the sample firebaseclient with the client @Current
+
 + Buying all the materials [] 
     Backend: 
         Domain Name [X]
