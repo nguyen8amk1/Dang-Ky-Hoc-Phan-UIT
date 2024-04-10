@@ -1,0 +1,10 @@
+version: "3.8"
+services: 
+  server:
+    build: ./server
+    container_name: express-hello
+    ports: 
+      - '8000:8000'
+    volumes: 
+      - ./server:/nttn/app
+      #- ./server/node_modules
