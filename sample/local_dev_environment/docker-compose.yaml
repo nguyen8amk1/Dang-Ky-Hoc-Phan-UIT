@@ -5,6 +5,11 @@ services:
     container_name: express-hello
     ports: 
       - '8000:8000'
-    volumes: 
-      - ./server:/nttn/app
+    # volumes: 
+    #   - ./server:/nttn/app
       #- ./server/node_modules
+  
+  reverse_proxy: 
+    build: ./reverse_proxy
+    ports: 
+      - '80:80'
