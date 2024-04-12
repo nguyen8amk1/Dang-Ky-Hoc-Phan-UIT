@@ -12,7 +12,8 @@ COPY . .
 
 RUN npm run build-src
 
-CMD [ "mkdir","certs"]
+RUN mkdir certs
+
 CMD [ "npm","run", "build" ]
 
 #docker build --tag node-docker .
