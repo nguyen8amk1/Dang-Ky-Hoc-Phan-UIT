@@ -3,7 +3,7 @@ if ! sudo docker pull nguyen8a/nalendar-app:latest; then
 	exit 0
 fi
 
-if ! sudo docker run -p 80:80 nguyen8a/nalendar-app:latest -d; then
+if ! sudo docker run -p 80:80 -d --rm nguyen8a/nalendar-app:latest; then
 	echo "Error: Something wrong with docker run process"
 	exit 0
 fi
