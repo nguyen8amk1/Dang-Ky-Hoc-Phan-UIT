@@ -7,6 +7,7 @@ function App() {
 
     useEffect(() => {
         // Fetch data from the API
+        console.log('process.env.REACT_APP_API_URL');
         fetch('process.env.REACT_APP_API_URL')
             .then(response => response.json())
             .then(data => {

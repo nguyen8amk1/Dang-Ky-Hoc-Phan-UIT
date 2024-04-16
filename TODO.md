@@ -31,7 +31,16 @@
         (Optional) Bundle nodejs 
         
 
++ Steps: 
+    + Dev: 
+        Build Dev -> Build Prod 
+
+    + Prod: 
+        prod-compose
+     
 ## TODO
+    
+
 + Make the server works as well (Nginx related) @Current
     + Problem: 
         + Local dev: 
