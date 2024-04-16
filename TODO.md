@@ -1,3 +1,11 @@
++ 2 parts of the system: 
+    + code: 
+        + 1. You attach your code to the dev container 
+            Using docker compose
+
+    + image: 
+        
+
 + Code - Container - Image 
     + 2 types of images: 
         + Develoment Image: 
@@ -15,21 +23,10 @@
         + Output:
             New Dev Image (Push)
 
-
-
-    + What we currently do: 
-        Write the code -> Build the Image -> Push 
-
-        + Input: 
-            Code 
-
-        + Output: 
-            Image 
-
     + The Production Image gonna be build by GitHub Action: (but currently it's just me :v) : 
         Using multi-stage building
 
-        Build react -> Nginx 
+        Build react -> Nginx  @Current 
 
         (Optional) Bundle nodejs 
         

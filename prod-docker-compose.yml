@@ -1,25 +1,16 @@
 version: "3.8"
 services: 
   api: 
-    build: ./server
+    image: nguyen8a/nalendar-api
     container_name: api_container
     ports:
       - '8000:8000'
 
-    # volumes:
-    #   - ./server:/api
-    #   - /api/node_modules
-
-
   app: 
-    build: ./client
+    image: nguyen8a/nalendar-app
     container_name: app_container
     ports:
-      - '3000:3000'
-
-      # volumes:
-      #   - ./client:/app
-      #   - /app/node_modules
+      - '3000:80'
 
     stdin_open: true
     tty: true
