@@ -9,10 +9,9 @@ services:
   app: 
     image: nguyen8a/nalendar-app
     container_name: app_container
+    environment: 
+      - REACT_APP_API_URL='http://api:8000'
     ports:
       - '3000:80'
 
-    stdin_open: true
-    tty: true
-
-    # # docker-compose -f local-docker-compose.yml up
+    # # docker-compose -f prod-docker-compose.yml up

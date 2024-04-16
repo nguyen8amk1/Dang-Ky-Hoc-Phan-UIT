@@ -2,7 +2,7 @@ version: "3.8"
 services: 
   api: 
     build: ./server
-    image: nguyen8a/dev-nalendar-api:v0
+    image: nguyen8a/dev-nalendar-api:test
     container_name: api_container
     ports:
       - '8000:8000'
@@ -14,7 +14,7 @@ services:
 
   app: 
     build: ./client/Dockerfile-dev
-    image: nguyen8a/dev-nalendar-app:v0
+    image: nguyen8a/dev-nalendar-app:latest
     container_name: app_container
     ports:
       - '3000:3000'

@@ -7,7 +7,7 @@ function App() {
 
     useEffect(() => {
         // Fetch data from the API
-        fetch('http://localhost:8000')
+        fetch('process.env.REACT_APP_API_URL')
             .then(response => response.json())
             .then(data => {
                 // Update state with fetched data

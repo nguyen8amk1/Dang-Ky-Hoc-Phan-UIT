@@ -32,6 +32,17 @@
         
 
 ## TODO
++ Make the server works as well (Nginx related) @Current
+    + Problem: 
+        + Local dev: 
+            api and app connect through localhost hosting
+            not through Nginx 
+
+        + Prod: 
+            api and app connect through nginx 
+
+            -> Different api url -> use as env vars
+
 + Work on the our web
     + Local: 
         Local dev volumes @Later
@@ -46,11 +57,11 @@
 
         2. Run the images on local using the local docker-compose
 
-        3. Multi-stage building:
+        3. Multi-stage building: [X]
             Bundle local the React Image
                 -> Create Nginx image 
 
-        4. Push the Bundled images @Current
+        4. Push the Bundled images [X]
             
     + Production: 
         1. Pull the images
