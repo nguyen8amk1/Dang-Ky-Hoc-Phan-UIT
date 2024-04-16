@@ -1,16 +1,23 @@
 ## TODO
 + Work on the our web
-    + Implement the deployment simple workflow [] (2h) @Current
-        + Local: 
-            1. Build the image 
-                A React hello world 
-                A Nodejs hello world 
+    + Local: 
+        1. Build the images  
+            Using Local Docker Compose
+            Dockerize [] @Current
+                React Hello world  
+                Nodejs Hello world  
 
-            2. Push the images to docker hub  -> shell script 
+            -> Build Images @Next
 
-        + Production: 
-            1. Pull the images
-            2. Run with docker compose
+        2. Run the images on local using the local docker-compose
+
+        3. Push the images 
+            
+
+    + Production: 
+        1. Pull the images
+        2. Run with docker compose with production docker-compose
+            -> Run react app in Nginx 
 
 
     + Make a working prototype of our web [] (1d) @Next
