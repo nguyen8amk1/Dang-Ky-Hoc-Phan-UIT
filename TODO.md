@@ -41,7 +41,7 @@
 ## TODO
     
 
-+ Make the server works as well (Nginx related) @Current
++ Make the server works as well (Nginx related) 
     + Problem: 
         + Local dev: 
             api and app connect through localhost hosting
@@ -51,6 +51,8 @@
             api and app connect through nginx 
 
             -> Different api url -> use as env vars
+
+    + Having undefined Error but we are very very close @Current 
 
 + Work on the our web
     + Local: 
