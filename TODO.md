@@ -1,19 +1,60 @@
++ Code - Container - Image 
+    + 2 types of images: 
+        + Develoment Image: 
+            Have all the development tools  
+
+        + Production Image: 
+            Have all the development tools  
+
+    + How working with development image should be (build the development image): 
+        Pull the Dev Image from Docker Hub -> Create container from Image -> Change the code -> Changes reflect on the container -> Rebuild the image to agree that change 
+
+        + Input:
+            Old Dev Image  (Pull)
+
+        + Output:
+            New Dev Image (Push)
+
+
+
+    + What we currently do: 
+        Write the code -> Build the Image -> Push 
+
+        + Input: 
+            Code 
+
+        + Output: 
+            Image 
+
+    + The Production Image gonna be build by GitHub Action: (but currently it's just me :v) : 
+        Using multi-stage building
+
+        Build react -> Nginx 
+
+        (Optional) Bundle nodejs 
+        
+
 ## TODO
 + Work on the our web
     + Local: 
+        Local dev volumes @Later
+
         1. Build the images  
             Using Local Docker Compose
-            Dockerize [] @Current
+            Dockerize [X] 
                 React Hello world  
                 Nodejs Hello world  
 
-            -> Build Images @Next
+            -> Build Prod React Hello Images -> Nginx
 
         2. Run the images on local using the local docker-compose
 
-        3. Push the images 
-            
+        3. Multi-stage building:
+            Bundle local the React Image
+                -> Create Nginx image 
 
+        4. Push the Bundled images @Current
+            
     + Production: 
         1. Pull the images
         2. Run with docker compose with production docker-compose
