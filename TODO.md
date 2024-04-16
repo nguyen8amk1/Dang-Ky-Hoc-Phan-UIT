@@ -1,14 +1,23 @@
 ## TODO
-+ Merge the sample firebaseclient with the client @Current
++ Work on the our web
+    + Implement the deployment simple workflow [] (2h) @Current
+        + Local: 
+            1. Build the image 
+                A React hello world 
+                A Nodejs hello world 
 
-+ Buying all the materials [] 
-    Backend: 
-        Domain Name [X]
-        VPS [X]
-        SSL [] 
-        -> Cloudflare ?? Let's encrypt SSL
-        Read how Linux hosting books works ? @Next
-        Read about DNS ? 
+            2. Push the images to docker hub  -> shell script 
+
+        + Production: 
+            1. Pull the images
+            2. Run with docker compose
+
+
+    + Make a working prototype of our web [] (1d) @Next
+        mostly work on react router dom 
+            protect the app with a firebase authentication
+        port the server side nodejs code into 
+
 
 
 + Nginx Subdomain reverse proxy  
@@ -69,3 +78,13 @@
 Setup the Git Repo [] 
     Nalendar [X]
     Branches  [X]
+
++ Buying all the materials [] 
+    Backend: 
+        Domain Name [X]
+        VPS [X]
+        SSL [] 
+        -> Cloudflare ?? Let's encrypt SSL
+        Read how Linux hosting books works ? @Next
+        Read about DNS ? 
+
