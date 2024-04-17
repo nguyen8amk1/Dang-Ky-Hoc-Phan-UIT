@@ -1,45 +1,8 @@
-+ 2 parts of the system: 
-    + code: 
-        + 1. You attach your code to the dev container 
-            Using docker compose
-
-    + image: 
-        
-
-+ Code - Container - Image 
-    + 2 types of images: 
-        + Develoment Image: 
-            Have all the development tools  
-
-        + Production Image: 
-            Have all the development tools  
-
-    + How working with development image should be (build the development image): 
-        Pull the Dev Image from Docker Hub -> Create container from Image -> Change the code -> Changes reflect on the container -> Rebuild the image to agree that change 
-
-        + Input:
-            Old Dev Image  (Pull)
-
-        + Output:
-            New Dev Image (Push)
-
-    + The Production Image gonna be build by GitHub Action: (but currently it's just me :v) : 
-        Using multi-stage building
-
-        Build react -> Nginx  @Current 
-
-        (Optional) Bundle nodejs 
-        
-
-+ Steps: 
-    + Dev: 
-        Build Dev -> Build Prod 
-
-    + Prod: 
-        prod-compose
-     
 ## TODO
-    
+Steps: 
+    + Local: 
+        ./build_dev_image.sh -> ./dev-compose.sh   
+
 
 + Make the server works as well (Nginx related) 
     + Problem: 
@@ -52,7 +15,8 @@
 
             -> Different api url -> use as env vars
 
-    + Having undefined Error but we are very very close @Current 
+    + Having undefined Error but we are very very close @Later 
+
 
 + Work on the our web
     + Local: 
@@ -154,4 +118,9 @@ Setup the Git Repo []
         -> Cloudflare ?? Let's encrypt SSL
         Read how Linux hosting books works ? @Next
         Read about DNS ? 
+
++ Make React local development possible [X]
+    through dev docker compose 
+    But when installing new packages -> rebuild the image
+        -> docker compose up --build
 
