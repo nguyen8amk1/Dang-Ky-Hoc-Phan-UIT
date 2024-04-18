@@ -1,3 +1,7 @@
+## How authentication routing basically works: 
+    1. Have a global user authentication context
+    2. Pages check the global user authentication context to render data accordingly
+
 ## TODO
 Steps: 
     + Local: 
