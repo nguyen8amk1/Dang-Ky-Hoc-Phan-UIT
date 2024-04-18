@@ -7,6 +7,34 @@ Steps:
     + Local: 
         ./build_dev_image.sh -> ./dev-compose.sh   
 
++ Private Route and TKB Intergration: @Current
+    + Analysis: 
+        2 things need to combine 
+            -> 2 variables, each have 2 values 0, 1
+            + 1st var: 
+                + no tkb private route 
+                + have tkb private route 
+            + 2nd var: 
+                + stub authen
+                + firebase authen
+        -> 
+            no tkb private route - stub authen
+            no tkb private route - firebase authen
+            have tkb private route - stub authen
+            have tkb private route - firebase authen
+
+    + 1. no tkb private route - stub authen
+        -> 1st branch
+
+    + 2. no tkb private route - firebase authen
+        -> 2nd branch = merge with 1st branch 
+
+    + 3. have tkb private route - stub authen
+        -> 3rd branch = merge with 1st branch 
+
+    + 4. have tkb private route - firebase authen
+        -> 4th branch = merge 2nd + 3rd branch  
+
 
 + Make the server works as well (Nginx related) 
     + Problem: 
