@@ -40,6 +40,16 @@
 -> ./dev.sh --commit -> 3. rebuild the image 
 -> ./dev.sh --push -> 4. push the image to docker hub 
 
++ Normal flow of git to production  
+    1. Merge the code to dev branch 
+        push the dev to docker hub 
+    2. Merge the dev branch to production branch
+        1. Build the production image 
+        2. Push the production image 
+
+    3. Deploy the damn thing 
+        1. prod_deploy.sh
+
 + Private Route and TKB Intergration: 
     + Analysis: 
         2 things need to combine 
@@ -58,19 +68,12 @@
 
     + 1. no tkb private route - stub authen 
         -> 1st branch
-        -> Test out the production process/scripts 
-            + Normal flow of git to production  
-                1. Merge the code to dev branch 
-                    push the dev to docker hub 
-                2. Merge the dev branch to production branch
-                    1. Build the production image 
-                    2. Push the production image 
-
-                3. Deploy the damn thing 
-                    1. prod_deploy.sh
-
+        -> Simpify the ui since we don't really need most of it @Current 
+            + What we actually need: 
+                + Public: a Google login button page 
+                    + Private: a blank page
             
-    + 2. no tkb private route - firebase authen @Current 
+    + 2. no tkb private route - firebase authen 
         -> 2nd branch = merge with 1st branch 
 
     + 3. have tkb private route - stub authen @Next
