@@ -58,8 +58,19 @@
 
     + 1. no tkb private route - stub authen 
         -> 1st branch
+        -> Test out the production process/scripts 
+            + Normal flow of git to production  
+                1. Merge the code to dev branch 
+                    push the dev to docker hub 
+                2. Merge the dev branch to production branch
+                    1. Build the production image 
+                    2. Push the production image 
 
-    + 2. no tkb private route - firebase authen @Current
+                3. Deploy the damn thing 
+                    1. prod_deploy.sh
+
+            
+    + 2. no tkb private route - firebase authen @Current 
         -> 2nd branch = merge with 1st branch 
 
     + 3. have tkb private route - stub authen @Next
