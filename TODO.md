@@ -68,9 +68,9 @@
 
     + 1. no tkb private route - stub authen 
         -> 1st branch
-        -> Simpify the ui since we don't really need most of it @Current 
+        -> Simpify the ui since we don't really need most of it 
             + What we actually need: 
-                + Public: a Google login button page 
+                + Public: a Google login button page @Current 
                     + Private: a blank page
             
     + 2. no tkb private route - firebase authen 
