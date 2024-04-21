@@ -6,8 +6,10 @@ function App() {
     const [apiData, setApiData] = useState(null);
 
     useEffect(() => {
+
         // Fetch data from the API
         console.log(process.env.REACT_APP_API_URL);
+
         fetch(process.env.REACT_APP_API_URL)
             .then(response => response.json())
             .then(data => {
@@ -18,6 +20,7 @@ function App() {
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
+
     }, []);
 
     return (
@@ -25,7 +28,7 @@ function App() {
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
                 <p>
-                    DITMESAIGON <code>src/App.js</code> and save to reload.
+                    HELLO <code>src/App.js</code> and save to reload.
                 </p>
                 {apiData && (
                     <a

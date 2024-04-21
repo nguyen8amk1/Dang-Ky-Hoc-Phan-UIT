@@ -7,7 +7,7 @@ Steps:
     + Local: 
         ./build_dev_image.sh -> ./dev-compose.sh   
 
-+ Private Route and TKB Intergration: @Current
++ Private Route and TKB Intergration: 
     + Analysis: 
         2 things need to combine 
             -> 2 variables, each have 2 values 0, 1
@@ -23,7 +23,7 @@ Steps:
             have tkb private route - stub authen
             have tkb private route - firebase authen
 
-    + 1. no tkb private route - stub authen
+    + 1. no tkb private route - stub authen @Current
         -> 1st branch
 
     + 2. no tkb private route - firebase authen
