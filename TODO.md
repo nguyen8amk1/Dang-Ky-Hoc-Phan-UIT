@@ -3,9 +3,42 @@
     2. Pages check the global user authentication context to render data accordingly
 
 ## TODO
-Steps: 
++ Steps: 
     + Local: 
         ./build_dev_image.sh -> ./dev-compose.sh   
+    + Local dev problem: 
+        I need options to decide:
+            + when to dev local 
+            + when to push 
+    
+        -> I Need to mimic my git workflow for my ci/cd workflow 
+            -> Shell code 
+            Dev flow 
+            -> `dev.sh`
+
+        + Start: 
+            + 1. run the docker container
+        + Development: 
+            + 2. connect to the docker container to write the code 
+                + (Optional --update, install new dependencies) 
+                    + 2.1 rebuild the image 
+                        (go into the package.json and change the packages)
+                        -> the reinstallation of the dependencies is long as fuck
+                            need to find a way to cut down the time 
+                            https://stackoverflow.com/questions/47243471/docker-compose-for-local-development-installing-dependencies
+                    + 2.2 re-run the docker container 
+                    + 2.3 back to step 1 - run the docker container
+
+        + (--commit) Commit: 
+            + 3. rebuild (commiting) the image 
+
+        + (--push) Push: 
+            + 4. push the image to Docker Hub
+
+-> ./dev.sh -> gonna run Start and Development 
+-> ./dev.sh --update -> gonna run the 2.1 
+-> ./dev.sh --commit -> 3. rebuild the image 
+-> ./dev.sh --push -> 4. push the image to docker hub 
 
 + Private Route and TKB Intergration: 
     + Analysis: 
@@ -26,7 +59,7 @@ Steps:
     + 1. no tkb private route - stub authen @Current
         -> 1st branch
 
-    + 2. no tkb private route - firebase authen
+    + 2. no tkb private route - firebase authen @Next
         -> 2nd branch = merge with 1st branch 
 
     + 3. have tkb private route - stub authen
