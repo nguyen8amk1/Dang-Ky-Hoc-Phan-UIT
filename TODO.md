@@ -56,13 +56,13 @@
             have tkb private route - stub authen
             have tkb private route - firebase authen
 
-    + 1. no tkb private route - stub authen @Current
+    + 1. no tkb private route - stub authen 
         -> 1st branch
 
-    + 2. no tkb private route - firebase authen @Next
+    + 2. no tkb private route - firebase authen @Current
         -> 2nd branch = merge with 1st branch 
 
-    + 3. have tkb private route - stub authen
+    + 3. have tkb private route - stub authen @Next
         -> 3rd branch = merge with 1st branch 
 
     + 4. have tkb private route - firebase authen
