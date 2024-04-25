@@ -121,7 +121,7 @@ container_running() {
 if [ "$install_flag" = true ]; then
 	if container_running "$container_name"; then
 		echo "Docker Kill the old $container_name container"
-		sudo docker kill $container_name
+		sudo docker rm $container_name
 	fi
 
 	echo "Install New Dependencies"
