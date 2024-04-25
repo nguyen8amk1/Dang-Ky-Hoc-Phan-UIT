@@ -13,7 +13,7 @@ function App() {
       <BrowserRouter>
         <AuthProvider>
 
-            <RenderHeader />
+            {/* <RenderHeader /> */}
             <RenderMenu />
             <RenderRoutes />
 

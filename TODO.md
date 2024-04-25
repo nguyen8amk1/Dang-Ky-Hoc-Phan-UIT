@@ -87,9 +87,9 @@
         -> 3. Manage the user session 
             1. After logging in, store the access token to local storage [X]
 
-    + 4. have tkb private route - firebase authen @Next
-        -> 4th branch = merge 2nd + 3rd branch  
-
+    + 4. have tkb private route - firebase authen 
+        1. Have the private Chon file Excel [X]
+        2. Have the rest of the private route working [X]
 
 + Make the server works as well (Nginx related) 
     + Problem: 
