@@ -1,6 +1,6 @@
 ## How authentication routing basically works: 
-    1. Have a global user authentication context
-    2. Pages check the global user authentication context to render data accordingly
+1. Have a global user authentication context
+2. Pages check the global user authentication context to render data accordingly
 
 ## TODO
 + Steps: 
@@ -44,6 +44,7 @@
 -> ./prod.sh --build or -b 
 -> ./prod.sh --run or -r 
 
+
 + Normal flow of git to production  
     1. Merge the code to dev branch 
         push the dev to docker hub 
@@ -53,6 +54,44 @@
 
     3. Deploy the damn thing 
         1. prod_deploy.sh
+
++ Collaboration git flow: 
+    **Code -> Image**
+
+    + **NOTE**: 
+        + dev-image:
+            represent the **RUNNABLE HEAD OF THE DEV-BRANCH**
+
+    + 1. (Git) Pull code from dev branch -> (Docker) pull the dev-image 
+        -> Coder A pull the code from the dev branch  
+            -> Coder A pull the dev-image
+        -> Coder B pull the code from the dev branch 
+            -> Coder B pull the dev-image
+
+    + 2. (Git) Branch the code to develop features -> (Docker) use the dev-image as a base to their new image
+        -> Coder A branch feature A
+            -> Coder A use the dev-image as a base to create (local)feature-A-dev-image
+
+        -> Coder B branch feature B
+            -> Coder B use the dev-image as a base to create (local)feature-B-dev-image
+
+    + 3. (Git) Pull request to Merge the code to dev branch -> (Docker) Push the image to Docker Hub 
+        -> Coder A create a pull request to merge feature A to  dev branch 
+            -> Push Image feature-A-dev-image to Docker Hub 
+
+        -> Coder B create a pull request to merge feature B to dev branch 
+            -> Push Image feature-B-dev-image to Docker Hub 
+
+    + 4. (Git) Manager review the pull request -> (Docker) Manager pull the feature-dev-image to test 
+        -> Review feature A pull request 
+            -> Manager pull the feature-A-dev-image to test 
+
+        -> Review feature B pull request 
+            -> Manager pull the feature-A-dev-image to test 
+
+    + 5.1. If pull request good, merge the code to dev branch 
+        -> 1. GitHub Action take the merged code to build a new Image
+        -> 2. GitHub Action Push the new dev-image to the Docker Hub
 
 + Private Route and TKB Intergration: 
     + Analysis: 
@@ -91,6 +130,7 @@
         1. Have the private Chon file Excel [X]
         2. Have the rest of the private route working [] 
             Xep lop [] @Current
+                Get the ui in place first
             Ket qua [] @Next
 
 + Make the server works as well (Nginx related) 
