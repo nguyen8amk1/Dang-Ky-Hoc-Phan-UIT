@@ -89,7 +89,9 @@
 
     + 4. have tkb private route - firebase authen 
         1. Have the private Chon file Excel [X]
-        2. Have the rest of the private route working [X]
+        2. Have the rest of the private route working [] 
+            Xep lop [] @Current
+            Ket qua [] @Next
 
 + Make the server works as well (Nginx related) 
     + Problem: 
@@ -210,4 +212,3 @@ Setup the Git Repo []
     through dev docker compose 
     But when installing new packages -> rebuild the image
         -> docker compose up --build
-        buidl the dman thing 

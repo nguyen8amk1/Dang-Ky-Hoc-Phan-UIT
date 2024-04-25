@@ -19,7 +19,7 @@ function MyAlert({ children, color, ...otherProps }: AlertProps) {
   );
 }
 
-export function SelectExcelFile() {
+export function Scheduling() {
     return (
     <div style={{ maxWidth: 1500 }}>
       <SelectExcelButton />
