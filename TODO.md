@@ -87,9 +87,6 @@
         -> 3. Manage the user session 
             1. After logging in, store the access token to local storage [X]
 
-    + 3. have tkb private route - stub authen 
-        -> 3rd branch = merge with 1st branch 
-
     + 4. have tkb private route - firebase authen @Next
         -> 4th branch = merge 2nd + 3rd branch  
 
