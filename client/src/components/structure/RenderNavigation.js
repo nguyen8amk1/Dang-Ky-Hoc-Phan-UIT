@@ -1,18 +1,19 @@
 import { Link, Route, Routes } from "react-router-dom";
 import { AuthData } from "../../auth/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 import { nav } from "./navigation";
 
 
 export const RenderRoutes = () => {
 
-    const { user } = AuthData();
+    const { user, userIsAuthenticated } = AuthData();
 
     return (
         <Routes>
             { nav.map((r, i) => {
 
-                if (r.isPrivate && user.isAuthenticated) {
+                if (r.isPrivate && userIsAuthenticated()) {
                     return <Route key={i} path={r.path} element={r.element}/>
                 } else if (!r.isPrivate) {
                     return <Route key={i} path={r.path} element={r.element}/>
@@ -24,8 +25,9 @@ export const RenderRoutes = () => {
 }
 
 export const RenderMenu = () => {
+    const navigate = useNavigate();
 
-    const { user, login, logout } = AuthData()
+    const { user, userIsAuthenticated, login, logout } = AuthData()
 
     const MenuItem = ({r}) => {
         return (
@@ -36,9 +38,9 @@ export const RenderMenu = () => {
     const doLogin = async () => {
 
         try {
-            await login(); 
+            await login();
             console.log("authenticated user: ", user);
-            // navigate("/account")
+            navigate("/account")
         } catch (error) {
 
             // setErrorMessage(error)
@@ -54,14 +56,14 @@ export const RenderMenu = () => {
                     return (
                         <MenuItem key={i} r={r}/>
                     )
-                } else if (user.isAuthenticated && r.isMenu) {
+                } else if (userIsAuthenticated() && r.isMenu) {
                     return (
                         <MenuItem key={i} r={r}/>
                     )
                 } else return false
             } )}
 
-            { user.isAuthenticated ?
+            { userIsAuthenticated() ?
                 <div className="menuItem"><Link to={'#'} onClick={logout}>Log out</Link></div>
                 :
                 <div className="menuItem" style={{color:'white'}}onClick={doLogin}>Log in</div> }

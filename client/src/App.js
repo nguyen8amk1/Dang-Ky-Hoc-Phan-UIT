@@ -12,11 +12,13 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <AuthProvider>
+
             <RenderHeader />
             <RenderMenu />
             <RenderRoutes />
+
         </AuthProvider>
-      </BrowserRouter>      
+      </BrowserRouter>
     </div>
   );
 }

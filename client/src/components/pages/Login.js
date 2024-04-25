@@ -1,9 +1,7 @@
 import { useReducer, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
 
-     const navigate = useNavigate();
      const [ formData, setFormData ] = useReducer((formData, newItem) => { return ( {...formData, ...newItem} )}, {userName: "", password: ""})
      const [ errorMessage, setErrorMessage ] = useState(null)
 

@@ -4,14 +4,23 @@ import { RenderHeader } from "../components/structure/Header";
 import { RenderMenu, RenderRoutes } from "../components/structure/RenderNavigation";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
+import { useNavigate } from "react-router-dom";
+
 const AuthContext = createContext();
 export const AuthData = () => useContext(AuthContext);
 
 export const AuthProvider = ({children}) => {
-    const [ user, setUser ] = useState({name: "", isAuthenticated: false})
+    const navigate = useNavigate();
+
+    const [ user, setUser ] = useState({name: ""})
 
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
+
+    const userIsAuthenticated = () => {
+        return localStorage.getItem("accessToken") !== null; 
+    }
+
     const login = async () => {
         try {
             const result = await signInWithPopup(auth, provider);
@@ -20,14 +29,15 @@ export const AuthProvider = ({children}) => {
 
             // The signed-in user info.
             const resultUser = result.user;
-            //setUser({displayName: result.user.displayName, email: result.user.email});
 
             console.log("user", resultUser);
             console.log("user", resultUser.email);
 
             console.log("Firebase login");
             if (resultUser.accessToken) {
-                setUser({name: resultUser.displayName, isAuthenticated: true})
+                setUser({name: resultUser.displayName})
+
+                localStorage.setItem("accessToken", resultUser.accessToken);
                 return "success"
             } else {
                 return "Incorrect password"
@@ -47,12 +57,13 @@ export const AuthProvider = ({children}) => {
     }
 
     const logout = () => {
-        setUser({...user, isAuthenticated: false})
+        localStorage.removeItem("accessToken");
+        navigate("/")
     }
 
 
     return (
-        <AuthContext.Provider value={{user, login, logout}}>
+        <AuthContext.Provider value={{user, userIsAuthenticated, login, logout}}>
             {console.log(children)}
             {children}
         </AuthContext.Provider>

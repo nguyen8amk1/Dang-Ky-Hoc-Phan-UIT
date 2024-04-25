@@ -40,6 +40,10 @@
 -> ./dev.sh --commit -> 3. rebuild the image 
 -> ./dev.sh --push -> 4. push the image to docker hub 
 
+
+-> ./prod.sh --build or -b 
+-> ./prod.sh --run or -r 
+
 + Normal flow of git to production  
     1. Merge the code to dev branch 
         push the dev to docker hub 
@@ -80,12 +84,13 @@
                 2. Pages check the global user authentication context to render data accordingly (read the context in the private route) [X]
 
         -> 2. Show the user information in the Account Route 
-        -> 3. Manage the user session @Current
+        -> 3. Manage the user session 
+            1. After logging in, store the access token to local storage [X]
 
-    + 3. have tkb private route - stub authen @Next
+    + 3. have tkb private route - stub authen 
         -> 3rd branch = merge with 1st branch 
 
-    + 4. have tkb private route - firebase authen
+    + 4. have tkb private route - firebase authen @Next
         -> 4th branch = merge 2nd + 3rd branch  
 
 
