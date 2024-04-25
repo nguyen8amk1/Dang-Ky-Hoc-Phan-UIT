@@ -83,6 +83,16 @@ generate_docker_file_content() {
 }
 
 install_new_dependencies() {
+	# TODO:
+	# 1. Parse version from the dep args
+	# if the install don't specify version, get the version yourself
+	#   -> npm show express version | awk 'NR==1{print $1}'
+	# else
+	#   parse the version out of the dep args
+	#
+	# TODO:
+	# 2. put the dependencies json to the package.json file, in the right place :))
+
 	echo "Installing new dependencies:"
 
 	# 3. push the content to this file $script_dir/Temp-Install_New_Dependencies-Dockerfile
@@ -121,7 +131,7 @@ container_running() {
 if [ "$install_flag" = true ]; then
 	if container_running "$container_name"; then
 		echo "Docker Kill the old $container_name container"
-		sudo docker rm $container_name
+		sudo docker rm -f $container_name
 	fi
 
 	echo "Install New Dependencies"
