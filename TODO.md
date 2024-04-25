@@ -76,7 +76,7 @@
             -> Coder B use the dev-image as a base to create (local)feature-B-dev-image
 
     + 3. (Git) Pull request to Merge the code to dev branch -> (Docker) Push the image to Docker Hub 
-        -> Coder A create a pull request to merge feature A to  dev branch 
+        -> Coder A create a pull request to merge feature A to dev branch 
             -> Push Image feature-A-dev-image to Docker Hub 
 
         -> Coder B create a pull request to merge feature B to dev branch 
