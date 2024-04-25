@@ -82,18 +82,47 @@ generate_docker_file_content() {
 	done
 }
 
+dependencies_processing() {
+	local output=""
+	for dep in "${dependencies[@]}"; do
+		local dep_format_regex="^([a-zA-Z0-9._-]+)@([0-9]+(\.[0-9]+)*(\.[0-9]+)*)$"
+		if [[ $dep =~ $dep_format_regex ]]; then
+			# echo "Dependency format is correct: $dep"
+			local package="${BASH_REMATCH[1]}"
+			local version="${BASH_REMATCH[2]}"
+			output+="\"$package\": \"^$version\",\n"
+		else
+			# echo "Dependency format is incorrect: $dep"
+			local version=$(curl -s https://registry.npmjs.org/$dep/latest | grep -oP '(?<="version":")[^"]+')
+			output+="\"$dep\": \"^$version\",\n"
+		fi
+	done
+	echo -e "$output"
+}
+
+# Example usage
 install_new_dependencies() {
+	# NOTE:
+	#   Install these 2 steps in a loop rather (for each of the dep)
+
 	# TODO:
-	# 1. Parse version from the dep args
+	# 1. Parse version from the dep args [X]
+	#   -> input: package arg string
+	#   -> output: package name, version
 	# if the install don't specify version, get the version yourself
-	#   -> npm show express version | awk 'NR==1{print $1}'
+	#   -> npm show <package> version | awk 'NR==1{print $1}'
+	#   or
+	#   -> curl -s https://registry.npmjs.org/<package>/latest | grep -oP '(?<="version":")[^"]+'
 	# else
 	#   parse the version out of the dep args
 	#
 	# TODO:
-	# 2. put the dependencies json to the package.json file, in the right place :))
+	# 2. put the dependencies json to the package.json file, in the right place :)) @Current
+	# put to the top of the dependencies { <dependencies>, the old ones }
 
 	echo "Installing new dependencies:"
+
+	echo $(dependencies_processing)
 
 	# 3. push the content to this file $script_dir/Temp-Install_New_Dependencies-Dockerfile
 	generate_docker_file_content >$script_dir/Temp-Install_New_Dependencies-Dockerfile
