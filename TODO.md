@@ -70,11 +70,17 @@
         -> 1st branch
         -> Simpify the ui since we don't really need most of it 
             + What we actually need: 
-                + Public: a Google login button page @Current 
+                + Public: a Google login button page 
                     + Private: a blank page
             
     + 2. no tkb private route - firebase authen 
         -> 2nd branch = merge with 1st branch 
+        -> 1. Add the firebase authentication to the login button 
+                1. Have a global user authentication context (firebase context) [X]
+                2. Pages check the global user authentication context to render data accordingly (read the context in the private route) [X]
+
+        -> 2. Show the user information in the Account Route 
+        -> 3. Manage the user session @Current
 
     + 3. have tkb private route - stub authen @Next
         -> 3rd branch = merge with 1st branch 
@@ -202,4 +208,4 @@ Setup the Git Repo []
     through dev docker compose 
     But when installing new packages -> rebuild the image
         -> docker compose up --build
-
+        buidl the dman thing 
