@@ -31,6 +31,8 @@
 
         + (--commit) Commit: 
             + 3. rebuild (commiting) the image 
+            -> **DON'T HAVE TO DO THE LOCAL COMMIT ANY MORE**
+            -> **THE IMAGE FROM NOW ON IS JUST AN ENVIRONMENT, HAVE DEPENDENCIES ON THE SRC FOLDER**
 
         + (--push) Push: 
             + 4. push the image to Docker Hub
