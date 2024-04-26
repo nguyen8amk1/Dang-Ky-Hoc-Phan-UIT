@@ -133,6 +133,8 @@
                 Get the ui in place first
             Ket qua [] @Next
 
++ Better Session Management @Next 
+
 + Make the server works as well (Nginx related) 
     + Problem: 
         + Local dev: 

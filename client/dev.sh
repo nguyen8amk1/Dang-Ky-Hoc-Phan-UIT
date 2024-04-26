@@ -2,9 +2,9 @@
 
 # Initialize variables
 install_flag=false
-
 install_deps=false
 
+build_flag=false
 commit_flag=false
 push_flag=false
 
@@ -30,12 +30,16 @@ while [[ $# -gt 0 ]]; do
 		push_flag=true
 		shift
 		;;
+	-b | --build)
+		build_flag=true
+		shift
+		;;
 	*)
 		# 1. Input all the dependencies -> ./dev.sh --install express react ...
 		if $install_deps; then
 			dependencies+=("$1")
 		else
-			echo "Invalid option: $1"
+			echo "Error: Invalid option: $1"
 			exit 1
 		fi
 		shift
@@ -87,43 +91,44 @@ dependencies_processing() {
 	for dep in "${dependencies[@]}"; do
 		local dep_format_regex="^([a-zA-Z0-9._-]+)@([0-9]+(\.[0-9]+)*(\.[0-9]+)*)$"
 		if [[ $dep =~ $dep_format_regex ]]; then
-			# echo "Dependency format is correct: $dep"
 			local package="${BASH_REMATCH[1]}"
 			local version="${BASH_REMATCH[2]}"
-			output+="\"$package\": \"^$version\",\n"
+			output+="$package:$version,"
 		else
-			# echo "Dependency format is incorrect: $dep"
 			local version=$(curl -s https://registry.npmjs.org/$dep/latest | grep -oP '(?<="version":")[^"]+')
-			output+="\"$dep\": \"^$version\",\n"
+			output+="$dep:$version,"
 		fi
 	done
 	echo -e "$output"
 }
 
-# Example usage
+# Function to add a dependency to package.json
+add_packagejson_dependency() {
+	local package_name="$1"
+	local package_version="$2"
+	local package_json="package.json"
+
+	# Check if package.json exists
+	if [ ! -f "$script_dir/$package_json" ]; then
+		echo "Error: package.json not found."
+		return 1
+	fi
+
+	# Check if jq is installed
+	if ! command -v jq &>/dev/null; then
+		echo "Error: jq is not installed. Please install jq to run this script."
+		return 1
+	fi
+
+	# Add the dependency to package.json
+	jq --arg package_name "$package_name" --arg package_version "$package_version" \
+		'.dependencies += { ($package_name): $package_version }' "$package_json" >temp.json && mv temp.json "$package_json"
+
+	echo "Dev: Dependency $package_name@$package_version added to $package_json."
+}
+
 install_new_dependencies() {
-	# NOTE:
-	#   Install these 2 steps in a loop rather (for each of the dep)
-
-	# TODO:
-	# 1. Parse version from the dep args [X]
-	#   -> input: package arg string
-	#   -> output: package name, version
-	# if the install don't specify version, get the version yourself
-	#   -> npm show <package> version | awk 'NR==1{print $1}'
-	#   or
-	#   -> curl -s https://registry.npmjs.org/<package>/latest | grep -oP '(?<="version":")[^"]+'
-	# else
-	#   parse the version out of the dep args
-	#
-	# TODO:
-	# 2. put the dependencies json to the package.json file, in the right place :)) @Current
-	# put to the top of the dependencies { <dependencies>, the old ones }
-
-	echo "Installing new dependencies:"
-
-	echo $(dependencies_processing)
-
+	echo "Dev: Installing new dependencies:"
 	# 3. push the content to this file $script_dir/Temp-Install_New_Dependencies-Dockerfile
 	generate_docker_file_content >$script_dir/Temp-Install_New_Dependencies-Dockerfile
 
@@ -134,12 +139,21 @@ install_new_dependencies() {
 	fi
 
 	rm $script_dir/Temp-Install_New_Dependencies-Dockerfile
+
+	dependency_pairs=$(dependencies_processing)
+	echo "Dev: Dependencies:"
+	IFS=',' read -ra pairs <<<"$dependency_pairs"
+	for pair in "${pairs[@]}"; do
+		IFS=':' read -r package version <<<"$pair"
+		# echo "Package: $package, Version: $version"
+		add_packagejson_dependency "$package" "$version"
+	done
 }
 
 # Perform default action if no flags provided
-if ! $install_flag && ! $commit_flag && ! $push_flag; then
-	echo "Run the client Docker Image"
-	echo "Connect the src volume to the Docker Container"
+if ! $build_flag && ! $install_flag && ! $commit_flag && ! $push_flag; then
+	echo "Dev: Run the client Docker Image"
+	echo "Dev: Connect the src volume to the Docker Container"
 	run_and_link_docker_image
 fi
 
@@ -148,35 +162,40 @@ container_running() {
 	local container_status=$(sudo docker inspect -f '{{.State.Running}}' "$container_name" 2>/dev/null)
 
 	if [ "$container_status" == "true" ]; then
-		echo "Container '$container_name' is running."
+		echo "Dev: Container '$container_name' is running."
 		return 0 # Container is running
 	else
-		echo "Container '$container_name' is not running."
+		echo "Dev: Container '$container_name' is not running."
 		return 1 # Container is not running
 	fi
 }
 
 # Perform actions based on flags
-if [ "$install_flag" = true ]; then
-	if container_running "$container_name"; then
-		echo "Docker Kill the old $container_name container"
-		sudo docker rm -f $container_name
-	fi
-
-	echo "Install New Dependencies"
-	install_new_dependencies
-
-	echo "Run the New Docker Image"
-	echo "Connect the src volume to the Docker Container"
-	run_and_link_docker_image
-fi
-
-if [ "$commit_flag" = true ]; then
-	echo "Rebuild the Image"
+if [ "$build_flag" = true ]; then
+	echo "Dev: Build the Image"
 	build_docker_image
 fi
 
+if [ "$commit_flag" = true ]; then
+	echo "Dev: Rebuild the Image"
+	build_docker_image
+fi
+
+if [ "$install_flag" = true ]; then
+	if container_running "$container_name"; then
+		echo "Dev: Docker Kill the old $container_name container"
+		sudo docker rm -f $container_name
+	fi
+
+	echo "Dev: Install New Dependencies"
+	install_new_dependencies
+
+	echo "Dev: Run the New Docker Image"
+	echo "Dev: Connect the src volume to the Docker Container"
+	run_and_link_docker_image
+fi
+
 if [ "$push_flag" = true ]; then
-	echo "Push the image to Docker Hub"
+	echo "Dev: Push the image to Docker Hub"
 	push_docker_image
 fi
