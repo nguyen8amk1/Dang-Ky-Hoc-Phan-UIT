@@ -2,7 +2,6 @@ import { useReducer, useState } from "react";
 import { Alert, AlertProps } from '@mui/material';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import SelectExcelButton from './SelectExcelButton'
-
 function MyAlert({ children, color, ...otherProps }: AlertProps) {
   // const dataExcel = useTkbStore(selectDataExcel);
   // const finalColor = color ?? (dataExcel?.lastUpdate ? 'success' : 'info');
@@ -19,7 +18,7 @@ function MyAlert({ children, color, ...otherProps }: AlertProps) {
   );
 }
 
-export function SelectExcel() {
+export default function SelectExcel() {
     return (
     <div style={{ maxWidth: 1500 }}>
       <SelectExcelButton />

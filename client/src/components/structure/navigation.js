@@ -2,9 +2,9 @@ import { About } from "../pages/About"
 import { Account } from "../pages/Account"
 import { Home } from "../pages/Home"
 import { Login } from "../pages/Login"
-import { SelectExcel} from "../pages/SelectExcel"
-import { Scheduling } from "../pages/Scheduling"
-import { Result } from "../pages/Result"
+import SelectExcel from "../pages/SelectExcel"
+import Scheduling from "../pages/Scheduling"
+import  Result from "../pages/Result"
 import { Private } from "../pages/Private"
 
 export const nav = [
