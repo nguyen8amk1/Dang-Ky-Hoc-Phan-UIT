@@ -9,7 +9,7 @@ import Tooltip from "@mui/material/Tooltip"
 // import { selectIsChiVeTkb, selectTongSoTcBuoc3, useTkbStore } from "../../zus"
 // import ScriptDangKyInput, { DanhSachLopInput } from "./ScriptDangKyInput"
 
-export default function Result() {
+export default function Index() {
   // const setIsChiVeTkb = useTkbStore(s => s.setIsChiVeTkb)
   // const khongXepLop = useTkbStore(selectIsChiVeTkb)
   // const tongSoTC = useTkbStore(selectTongSoTcBuoc3)

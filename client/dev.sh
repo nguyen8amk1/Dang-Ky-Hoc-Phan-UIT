@@ -62,6 +62,7 @@ build_docker_image() {
 }
 
 run_and_link_docker_image() {
+
 	if ! sudo docker run --name $container_name -p 3000:3000 --rm \
 		-v "$script_dir/src":"/app/src" \
 		-v "/app/node_modules" \
@@ -78,12 +79,19 @@ push_docker_image() {
 	fi
 }
 
-generate_docker_file_content() {
+generate_install_dependencies_docker_file_content() {
 	# 2. Generate the docker file content
 	echo "FROM $image_tag_name AS build"
 	for dep in "${dependencies[@]}"; do
 		echo "RUN npm install $dep"
 	done
+}
+
+generate_copy_code_docker_file_content() {
+	# NOTE: not working
+	echo "FROM $image_tag_name AS build"
+	echo "RUN rm -rf ./src/*"
+	echo "COPY ./src ./src"
 }
 
 dependencies_processing() {
@@ -130,7 +138,7 @@ add_packagejson_dependency() {
 install_new_dependencies() {
 	echo "Dev: Installing new dependencies:"
 	# 3. push the content to this file $script_dir/Temp-Install_New_Dependencies-Dockerfile
-	generate_docker_file_content >$script_dir/Temp-Install_New_Dependencies-Dockerfile
+	generate_install_dependencies_docker_file_content >$script_dir/Temp-Install_New_Dependencies-Dockerfile
 
 	if ! sudo docker build --tag $image_tag_name --file $script_dir/Temp-Install_New_Dependencies-Dockerfile $script_dir; then
 		echo "Error: Something wrong with installing new dependencies process"
@@ -177,8 +185,18 @@ if [ "$build_flag" = true ]; then
 fi
 
 if [ "$commit_flag" = true ]; then
-	echo "Dev: Rebuild the Image"
-	build_docker_image
+	echo "Dev: Commit new code into the new dev image"
+	# build_docker_image
+
+	generate_copy_code_docker_file_content >$script_dir/Temp-Commit_New_Code-Dockerfile
+
+	if ! sudo docker build --tag $image_tag_name --file $script_dir/Temp-Commit_New_Code-Dockerfile $script_dir; then
+		echo "Error: Something wrong with commiting new code process"
+		rm $script_dir/Temp-Commit_New_Code-Dockerfile
+		exit 0
+	fi
+
+	rm $script_dir/Temp-Commit_New_Code-Dockerfile
 fi
 
 if [ "$install_flag" = true ]; then

@@ -19,7 +19,7 @@ function MyAlert({ children, color, ...otherProps }: AlertProps) {
   );
 }
 
-export default function SelectExcel() {
+export default function Index() {
     return (
     <div style={{ maxWidth: 1500 }}>
       <SelectExcelButton />
