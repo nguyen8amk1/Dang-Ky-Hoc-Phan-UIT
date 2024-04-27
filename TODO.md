@@ -130,8 +130,13 @@
 
     + 4. have tkb private route - firebase authen 
         1. Have the private Chon file Excel [X]
+            Make the upload button 100% works []
+                Upload the tkb HTML [] @Current
+                Parse it []
+                Show it on the tkb list []
+
         2. Have the rest of the private route working [] 
-            Xep lop [] @Current
+            Xep lop [] @Next
                 Get the ui in place first
             Ket qua [] @Next
 
