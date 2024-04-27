@@ -132,6 +132,7 @@
         1. Have the private Chon file Excel [X]
             Make the upload button 100% works []
                 Upload the tkb HTML [] @Current
+                   -> SelectExcelButton: reader.onload method 
                 Parse it []
                 Show it on the tkb list []
 

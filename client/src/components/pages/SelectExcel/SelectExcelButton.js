@@ -23,6 +23,11 @@ function SelectExcelButton() {
             const reader = new FileReader()
             const rABS = !!reader.readAsBinaryString
             reader.onload = e => {
+                // TODO: this is the excel parsing code, 
+                // very specific format processing of UIT excel file 
+                // A huge dependency exist between useTkbStore and setTkbStore
+                // and the whole system is based on these 2 functions
+                // Need someway to hotwap these functions and any other functions in this dependency chain
                 const bstr = e?.target?.result
                 const wb = XLSX.read(bstr, { type: rABS ? "binary" : "array" })
                 const wsLyThuyet = wb.Sheets[wb.SheetNames[0]]

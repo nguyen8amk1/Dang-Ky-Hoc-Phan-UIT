@@ -114,6 +114,7 @@ export const selectFinalDataTkb = state => {
     const dataExcel = selectDataExcel(state)
     return dataExcel?.data ?? []
 }
+
 export const selectSelectedClassesBuoc3 = memoize(state => {
     const isChiVeTkb = selectIsChiVeTkb(state)
     const textareaChiVeTkb = selectTextareaChiVeTkb(state)
@@ -131,6 +132,8 @@ export const selectSelectedClassesBuoc3 = memoize(state => {
 //   calcTongSoTC(selectSelectedClasses(state))
 // export const selectTongSoTcBuoc3 = state =>
 //   calcTongSoTC(selectSelectedClassesBuoc3(state))
-// export const selectPhanLoaiHocTrenTruong = memoize(state => {
-//   return partition(selectSelectedClassesBuoc3(state), { Thu: "*" })
-// })
+
+export const selectPhanLoaiHocTrenTruong = memoize(state => {
+  return partition(selectSelectedClassesBuoc3(state), { Thu: "*" })
+  //return null;
+})

@@ -5,12 +5,13 @@ import Tooltip from "@mui/material/Tooltip"
 
 // import { tracker } from "../.."
 // import SoTinChi from "../components/SoTinChi"
-// import ThoiKhoaBieuTable from "../components/ThoiKhoaBieuTable"
-// import { selectIsChiVeTkb, selectTongSoTcBuoc3, useTkbStore } from "../../zus"
+import ThoiKhoaBieuTable from "../components/ThoiKhoaBieuTable"
+//import { selectIsChiVeTkb, selectTongSoTcBuoc3, useTkbStore } from "../../zus"
+import { useTkbStore } from '../../zus';
 // import ScriptDangKyInput, { DanhSachLopInput } from "./ScriptDangKyInput"
 
 export default function Index() {
-  // const setIsChiVeTkb = useTkbStore(s => s.setIsChiVeTkb)
+  const setIsChiVeTkb = useTkbStore(s => s.setIsChiVeTkb)
   // const khongXepLop = useTkbStore(selectIsChiVeTkb)
   // const tongSoTC = useTkbStore(selectTongSoTcBuoc3)
 
@@ -36,7 +37,7 @@ export default function Index() {
               <Checkbox
                 // checked={khongXepLop}
                 onChange={e => {
-                  // setIsChiVeTkb(e.target.checked)
+                  setIsChiVeTkb(e.target.checked)
                   // tracker.track("[page3] checkbox_chi_ve_tkb_toggled", {
                   //   newState: e.target.checked
                   // })
@@ -56,7 +57,7 @@ export default function Index() {
         {/* <DanhSachLopInput /> */}
         {/* <ScriptDangKyInput /> */}
       </Grid>
-      {/* <ThoiKhoaBieuTable /> */}
+      <ThoiKhoaBieuTable />
     </div>
   )
 }
