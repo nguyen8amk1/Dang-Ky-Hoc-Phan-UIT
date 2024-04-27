@@ -23,7 +23,13 @@
     "graphql-ws": "^5.11.2",
     "immutable": "^4.2.2",
     "moment": "^2.29.4",
-    "constate": "3.3.2"
+    "constate": "3.3.2",
+    "ag-grid-react": "30.2.1",
+    "ag-grid-community": "30.2.1",
+    "ag-grid-enterprise": "30.2.1",
+    "proxy-memoize": "2.0.4",
+    "lodash": "4.17.21",
+    "zustand": "4.4.6"
   },
   "scripts": {
     "start": "react-scripts start",
