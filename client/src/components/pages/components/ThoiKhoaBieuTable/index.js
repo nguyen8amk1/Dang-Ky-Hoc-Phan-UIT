@@ -43,10 +43,26 @@ function RowHocTrenTruong({ row, index }) {
 
 function Render() {
     const {
-        rowDataHocTrenTruong,
+        //rowDataHocTrenTruong,
         khongHocTrenTruong,
         redundant
     } = usePhanLoaiHocTrenTruongContext()
+
+    // NOTE: this is just a hack, please make it work properly  
+    // something wrong happens with the usePhanLoaiHocTrenTruongContext, 
+    // all the variable gets from it are undefined 
+    console.log("FIXME: this is just a hack, to get the tkb rendered");
+    const rowDataHocTrenTruong = []
+    for (let i = 0; i < 13; i++) {
+        rowDataHocTrenTruong.push({
+            Thu2: CELL.NO_CLASS,
+            Thu3: CELL.NO_CLASS,
+            Thu4: CELL.NO_CLASS,
+            Thu5: CELL.NO_CLASS,
+            Thu6: CELL.NO_CLASS,
+            Thu7: CELL.NO_CLASS
+        })
+    }
 
     const location = useLocation()
     //const isChiVeTkb = useTkbStore(selectIsChiVeTkb)
@@ -115,9 +131,9 @@ function Render() {
                 <table>
                     <TableHead />
                     <tbody>
-                        {/* {rowDataHocTrenTruong.map((row, index) => ( */}
-                        {/*     <RowHocTrenTruong key={index} row={row} index={index} /> */}
-                        {/* ))} */}
+                        {rowDataHocTrenTruong.map((row, index) => (
+                            <RowHocTrenTruong key={index} row={row} index={index} />
+                        ))}
                         {/* {khongHocTrenTruong.map((lop, index) => ( */}
                         {/*     <tr key={index}> */}
                         {/*         <ClassCell colSpan={7} data={lop} /> */}

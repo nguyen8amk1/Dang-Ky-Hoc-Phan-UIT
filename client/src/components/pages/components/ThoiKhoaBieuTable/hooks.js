@@ -23,105 +23,106 @@ const rowDataExample = [
 */
 
 export const CELL = {
-  /** không có lớp học vào thời điểm này */
-  NO_CLASS: null,
+    /** không có lớp học vào thời điểm này */
+    NO_CLASS: null,
 
-  /** có lớp học vào thời điểm này, nhưng sẽ được render đè bởi cell khác (lớp có tiết 12345 thì chỉ tiết 1 là phải render) */
-  OCCUPIED: "xx"
+    /** có lớp học vào thời điểm này, nhưng sẽ được render đè bởi cell khác (lớp có tiết 12345 thì chỉ tiết 1 là phải render) */
+    OCCUPIED: "xx"
 }
 
 const initTableData = () => {
-  const tableData = []
-  for (let i = 0; i < 13; i++) {
-    tableData.push({
-      Thu2: CELL.NO_CLASS,
-      Thu3: CELL.NO_CLASS,
-      Thu4: CELL.NO_CLASS,
-      Thu5: CELL.NO_CLASS,
-      Thu6: CELL.NO_CLASS,
-      Thu7: CELL.NO_CLASS
-    })
-  }
-  return tableData
+    const tableData = []
+    for (let i = 0; i < 13; i++) {
+        tableData.push({
+            Thu2: CELL.NO_CLASS,
+            Thu3: CELL.NO_CLASS,
+            Thu4: CELL.NO_CLASS,
+            Thu5: CELL.NO_CLASS,
+            Thu6: CELL.NO_CLASS,
+            Thu7: CELL.NO_CLASS
+        })
+    }
+    return tableData
 }
 
 // Phân loại data thành các lớp học trên trường & các lớp HT2
 // Đồng thời tái cấu trúc CTDL nhằm tiện vẽ TKB hơn
 const usePhanLoaiHocTrenTruong = () => {
-  const [khongHocTrenTruong, hocTrenTruong] = useTkbStore(
-    selectPhanLoaiHocTrenTruong
-  )
+    const [khongHocTrenTruong, hocTrenTruong] = useTkbStore(
+        selectPhanLoaiHocTrenTruong
+    )
 
-  const { kept, redundant } = findOverlapedClasses(hocTrenTruong)
+    const { kept, redundant } = findOverlapedClasses(hocTrenTruong)
 
-  const rowDataHocTrenTruong = React.useMemo(() => {
-    const tableData = initTableData()
+    const rowDataHocTrenTruong = initTableData();
+    // const rowDataHocTrenTruong = React.useMemo(() => {
+    //     const tableData = initTableData()
+    //
+    //     // for (const lop of kept) {
+    //     //     const listTiet = getDanhSachTiet(lop.Tiet)
+    //     //
+    //     //     const tietBatDau = listTiet[0]
+    //     //     tableData[getTietIndex(tietBatDau)]["Thu" + lop.Thu] = lop
+    //     //
+    //     //     for (let i = 1; i < listTiet.length; i++) {
+    //     //         tableData[getTietIndex(listTiet[i])]["Thu" + lop.Thu] = CELL.OCCUPIED
+    //     //     }
+    //     // }
+    //     //
+    //     // const khongCoLopBuoiToi = tableData.slice(-3).every(tiet => {
+    //     //     return Object.values(tiet).every(cell => cell === CELL.NO_CLASS)
+    //     // })
+    //     // if (khongCoLopBuoiToi) tableData.splice(-3)
+    //
+    //     return tableData
+    // }, [kept])
 
-    for (const lop of kept) {
-      const listTiet = getDanhSachTiet(lop.Tiet)
-
-      const tietBatDau = listTiet[0]
-      tableData[getTietIndex(tietBatDau)]["Thu" + lop.Thu] = lop
-
-      for (let i = 1; i < listTiet.length; i++) {
-        tableData[getTietIndex(listTiet[i])]["Thu" + lop.Thu] = CELL.OCCUPIED
-      }
+    return {
+        redundant,
+        khongHocTrenTruong,
+        rowDataHocTrenTruong
     }
-
-    const khongCoLopBuoiToi = tableData.slice(-3).every(tiet => {
-      return Object.values(tiet).every(cell => cell === CELL.NO_CLASS)
-    })
-    if (khongCoLopBuoiToi) tableData.splice(-3)
-
-    return tableData
-  }, [kept])
-
-  return {
-    redundant,
-    khongHocTrenTruong,
-    rowDataHocTrenTruong
-  }
 }
 
 export const [
-  PhanLoaiHocTrenTruongContext,
-  usePhanLoaiHocTrenTruongContext
+PhanLoaiHocTrenTruongContext,
+usePhanLoaiHocTrenTruongContext
 ] = constate(usePhanLoaiHocTrenTruong)
 
 export const useProcessImageTkb = () => {
-  const tkbTableRef = React.useRef(null)
+    const tkbTableRef = React.useRef(null)
 
-  const saveTkbImageToComputer = React.useCallback(async () => {
-    if (!tkbTableRef.current) return
-    ////tracker.track("[tkb_table] btn_save_image_clicked")
-    const canvas = await html2canvas(tkbTableRef.current)
-    downloadFromCanvas(canvas, "thoikhoabieu.png")
-  }, [tkbTableRef])
+    const saveTkbImageToComputer = React.useCallback(async () => {
+        if (!tkbTableRef.current) return
+        ////tracker.track("[tkb_table] btn_save_image_clicked")
+        const canvas = await html2canvas(tkbTableRef.current)
+        downloadFromCanvas(canvas, "thoikhoabieu.png")
+    }, [tkbTableRef])
 
-  const copyTkbImageToClipboard = React.useCallback(async () => {
-    if (!tkbTableRef.current) return
-    //tracker.track("[tkb_table] btn_copy_image_clicked")
-    const canvas = await html2canvas(tkbTableRef.current)
-    canvas.toBlob(blob => {
-      if (blob === null) {
-        // enqueueSnackbar("Sao chép vào clipboard thất bại, vui lòng thử lại.", {
-        //   variant: "error"
-        // })
-        return
-      }
-      navigator.clipboard.write([
-        new window.ClipboardItem({ [blob.type]: blob })
-      ])
-      // enqueueSnackbar("Sao chép vào clipboard thành công.", {
-      //   variant: "success"
-      // })
-    })
-  }, [])
+    const copyTkbImageToClipboard = React.useCallback(async () => {
+        if (!tkbTableRef.current) return
+        //tracker.track("[tkb_table] btn_copy_image_clicked")
+        const canvas = await html2canvas(tkbTableRef.current)
+        canvas.toBlob(blob => {
+            if (blob === null) {
+                // enqueueSnackbar("Sao chép vào clipboard thất bại, vui lòng thử lại.", {
+                //   variant: "error"
+                // })
+                return
+            }
+            navigator.clipboard.write([
+                new window.ClipboardItem({ [blob.type]: blob })
+            ])
+            // enqueueSnackbar("Sao chép vào clipboard thành công.", {
+            //   variant: "success"
+            // })
+        })
+    }, [])
 
-  return {
-    tkbTableRef,
-    saveTkbImageToComputer,
-    copyTkbImageToClipboard
-  }
+    return {
+        tkbTableRef,
+        saveTkbImageToComputer,
+        copyTkbImageToClipboard
+    }
 }
 
