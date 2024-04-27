@@ -134,6 +134,6 @@ export const selectSelectedClassesBuoc3 = memoize(state => {
 //   calcTongSoTC(selectSelectedClassesBuoc3(state))
 
 export const selectPhanLoaiHocTrenTruong = memoize(state => {
-  return partition(selectSelectedClassesBuoc3(state), { Thu: "*" })
+    return partition(selectSelectedClassesBuoc3(state), { Thu: "*" })
   //return null;
 })

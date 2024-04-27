@@ -11,39 +11,53 @@ import { arrayToTkbObject, sheetJSFT, toDateTimeString } from './utils';
 
 const Bold = ({ children }) => <b style={{ marginLeft: 5 }}>{children}</b>;
 
+const UIT_xlsxFileProcessing = (e, rABS, setDataExcel, file) => {
+    // TODO: this is the excel parsing code, 
+    // very specific format processing of UIT excel file 
+    // A huge dependency exist between useTkbStore and setTkbStore, setDataExcel
+    // and the whole system is based on these 2 functions
+    // Need someway to hotwap these functions and any other functions in this dependency chain
+    const bstr = e?.target?.result
+    const wb = XLSX.read(bstr, { type: rABS ? "binary" : "array" })
+    const wsLyThuyet = wb.Sheets[wb.SheetNames[0]]
+    const wsThucHanh = wb.Sheets[wb.SheetNames[1]]
+    const dataLyThuyet = XLSX.utils.sheet_to_json(wsLyThuyet, { header: 1 })
+    const dataThucHanh = XLSX.utils.sheet_to_json(wsThucHanh, { header: 1 })
+    const dataInArray = [...dataLyThuyet, ...dataThucHanh].filter(
+        // những row có cột 0 là STT (STT là number) thì mới là data ta cần
+        row => typeof row[0] === "number"
+    )
+    if (!dataInArray.length) return false;
+    setDataExcel({
+        data: dataInArray.map(array => arrayToTkbObject(array)),
+        fileName: file.name,
+        lastUpdate: toDateTimeString(new Date())
+    }); 
+}
+
+const UIT_htmlFileProcessing = () => {
+    // TODO: implement the html parsing in here
+    return false; 
+}
+
+const currentFileProcessing = UIT_xlsxFileProcessing;
+
 function SelectExcelButton() {
     const dataExcel = useTkbStore(selectDataExcel) || {};
     //const dataExcel = {};
     const setDataExcel = useTkbStore((s) => s.setDataExcel);
 
     const handleUploadFileExcel = React.useCallback(
+        // TODO: currently there are no checking of the excel content format 
+        // just upload any excel file will work
         event => {
             const file = event.target.files?.[0]
             if (!file) return
             const reader = new FileReader()
             const rABS = !!reader.readAsBinaryString
             reader.onload = e => {
-                // TODO: this is the excel parsing code, 
-                // very specific format processing of UIT excel file 
-                // A huge dependency exist between useTkbStore and setTkbStore
-                // and the whole system is based on these 2 functions
-                // Need someway to hotwap these functions and any other functions in this dependency chain
-                const bstr = e?.target?.result
-                const wb = XLSX.read(bstr, { type: rABS ? "binary" : "array" })
-                const wsLyThuyet = wb.Sheets[wb.SheetNames[0]]
-                const wsThucHanh = wb.Sheets[wb.SheetNames[1]]
-                const dataLyThuyet = XLSX.utils.sheet_to_json(wsLyThuyet, { header: 1 })
-                const dataThucHanh = XLSX.utils.sheet_to_json(wsThucHanh, { header: 1 })
-                const dataInArray = [...dataLyThuyet, ...dataThucHanh].filter(
-                    // những row có cột 0 là STT (STT là number) thì mới là data ta cần
-                    row => typeof row[0] === "number"
-                )
-                if (dataInArray.length) {
-                    setDataExcel({
-                        data: dataInArray.map(array => arrayToTkbObject(array)),
-                        fileName: file.name,
-                        lastUpdate: toDateTimeString(new Date())
-                    })
+                const success = currentFileProcessing(e, rABS, setDataExcel, file);
+                if(success) {
                     // enqueueSnackbar(
                     //     <>
                     //         Upload file thành công <Bold>{file.name}</Bold>

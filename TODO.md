@@ -131,10 +131,15 @@
     + 4. have tkb private route - firebase authen 
         1. Have the private Chon file Excel [X]
             Make the upload button 100% works []
-                Upload the tkb HTML [] @Current
+                Upload the tkb HTML [] 
                    -> SelectExcelButton: reader.onload method 
                 Parse it []
-                Show it on the tkb list []
+                Show it on the tkb list [] 
+            -> Try to understand how the **STATE MANAGEMENT** libraries works @Current
+                + constate 
+                + zustand  
+                    parition 
+                    persist  
 
         2. Have the rest of the private route working [] 
             Xep lop [] @Next

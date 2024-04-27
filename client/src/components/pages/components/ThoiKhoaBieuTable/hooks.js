@@ -26,7 +26,9 @@ export const CELL = {
     /** không có lớp học vào thời điểm này */
     NO_CLASS: null,
 
-    /** có lớp học vào thời điểm này, nhưng sẽ được render đè bởi cell khác (lớp có tiết 12345 thì chỉ tiết 1 là phải render) */
+    /** có lớp học vào thời điểm này, 
+     *  nhưng sẽ được render đè bởi cell khác 
+     *  (lớp có tiết 12345 thì chỉ tiết 1 là phải render) */
     OCCUPIED: "xx"
 }
 
@@ -55,6 +57,7 @@ const usePhanLoaiHocTrenTruong = () => {
     const { kept, redundant } = findOverlapedClasses(hocTrenTruong)
 
     const rowDataHocTrenTruong = initTableData();
+
     // const rowDataHocTrenTruong = React.useMemo(() => {
     //     const tableData = initTableData()
     //

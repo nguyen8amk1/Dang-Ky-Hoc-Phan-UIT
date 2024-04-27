@@ -34,8 +34,9 @@ function RowHocTrenTruong({ row, index }) {
                 Tiết {index + 1} <br />
                 {timeLookup[index]}
             </td>
-            {[2, 3, 4, 5, 6, 7].map(t => (
-                <GetCell key={t} data={row["Thu" + t]} />
+            {[2, 3, 4, 5, 6, 7, 8].map(t => (
+                (t < 8) ? <GetCell key={t} data={row["Thu" + t]} />
+                : <GetCell key={t} data={row["CN"]} />
             ))}
         </tr>
     )
@@ -48,22 +49,44 @@ function Render() {
         redundant
     } = usePhanLoaiHocTrenTruongContext()
 
-    // NOTE: this is just a hack, please make it work properly  
+    // FIXME: this is just a hack, please make it work properly  
     // something wrong happens with the usePhanLoaiHocTrenTruongContext, 
     // all the variable gets from it are undefined 
+    
     console.log("FIXME: this is just a hack, to get the tkb rendered");
-    const rowDataHocTrenTruong = []
-    for (let i = 0; i < 13; i++) {
-        rowDataHocTrenTruong.push({
-            Thu2: CELL.NO_CLASS,
-            Thu3: CELL.NO_CLASS,
-            Thu4: CELL.NO_CLASS,
-            Thu5: CELL.NO_CLASS,
-            Thu6: CELL.NO_CLASS,
-            Thu7: CELL.NO_CLASS
-        })
-    }
 
+    const rowDataHocTrenTruong = []; 
+    // for (let i = 0; i < 13; i++) {
+    //     rowDataHocTrenTruong.push({
+    //         Thu2: CELL.NO_CLASS,
+    //         Thu3: CELL.NO_CLASS,
+    //         Thu4: CELL.NO_CLASS,
+    //         Thu5: CELL.NO_CLASS,
+    //         Thu6: CELL.NO_CLASS,
+    //         Thu7: CELL.NO_CLASS,
+    //         CN: CELL.NO_CLASS,
+    //     })
+    // }
+    
+    rowDataHocTrenTruong.push({ Thu2: CELL.NO_CLASS, Thu3: CELL.NO_CLASS, Thu4: CELL.NO_CLASS, Thu5: CELL.NO_CLASS, Thu6: CELL.NO_CLASS, Thu7: CELL.NO_CLASS, CN: CELL.NO_CLASS, });
+    rowDataHocTrenTruong.push({ Thu2: CELL.OCCUPIED, Thu3: CELL.OCCUPIED, Thu4: CELL.NO_CLASS, Thu5: CELL.NO_CLASS, Thu6: CELL.NO_CLASS, Thu7: CELL.NO_CLASS, CN: CELL.NO_CLASS, });
+    rowDataHocTrenTruong.push({ Thu2: CELL.NO_CLASS, Thu3: CELL.OCCUPIED, Thu4: CELL.NO_CLASS, Thu5: CELL.NO_CLASS, Thu6: CELL.NO_CLASS, Thu7: CELL.NO_CLASS, CN: CELL.NO_CLASS, });
+    rowDataHocTrenTruong.push({ Thu2: CELL.NO_CLASS, Thu3: CELL.NO_CLASS, Thu4: CELL.NO_CLASS, Thu5: CELL.NO_CLASS, Thu6: CELL.NO_CLASS, Thu7: CELL.NO_CLASS, CN: CELL.NO_CLASS, });
+    rowDataHocTrenTruong.push({ Thu2: CELL.NO_CLASS, Thu3: CELL.NO_CLASS, Thu4: CELL.NO_CLASS, Thu5: CELL.NO_CLASS, Thu6: CELL.NO_CLASS, Thu7: CELL.NO_CLASS, CN: CELL.NO_CLASS, });
+
+    // const rowDataHocTrenTruong = [
+    //     { Thu2: {  }, Thu3: {  }, Thu4: {  }, Thu5: null, Thu6: null, Thu7: null }, // tiet 1
+    //     { Thu2: 'xx', Thu3: 'xx', Thu4: 'xx', Thu5: null, Thu6: {  }, Thu7: null }, // tiet 2
+    //     { Thu2: 'xx', Thu3: 'xx', Thu4: 'xx', Thu5: null, Thu6: 'xx', Thu7: null }, // tiet 3
+    //     { Thu2: {  }, Thu3: 'xx', Thu4: 'xx', Thu5: null, Thu6: 'xx', Thu7: null }, // tiet 4
+    //     { Thu2: 'xx', Thu3: 'xx', Thu4: null, Thu5: null, Thu6: 'xx', Thu7: null }, // tiet 5
+    //     { Thu2: {  }, Thu3: null, Thu4: {  }, Thu5: {  }, Thu6: null, Thu7: null }, // tiet 6
+    //     { Thu2: 'xx', Thu3: null, Thu4: 'xx', Thu5: 'xx', Thu6: null, Thu7: null }, // tiet 7
+    //     { Thu2: 'xx', Thu3: null, Thu4: 'xx', Thu5: 'xx', Thu6: null, Thu7: null }, // tiet 8
+    //     { Thu2: 'xx', Thu3: null, Thu4: 'xx', Thu5: null, Thu6: null, Thu7: null }, // tiet 9
+    //     { Thu2: 'xx', Thu3: null, Thu4: 'xx', Thu5: null, Thu6: null, Thu7: null }, // tiet 10
+    // ];
+    
     const location = useLocation()
     //const isChiVeTkb = useTkbStore(selectIsChiVeTkb)
     const {
