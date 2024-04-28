@@ -6,7 +6,7 @@ import ImageIcon from "@mui/icons-material/Image"
 import { useState } from "react"
 
 //import { ROUTES } from "../../../constants"
-//import { getDanhSachTiet } from "../../../utils"
+import { getDanhSachTiet } from "../../../utils"
 //import { selectIsChiVeTkb, useTkbStore } from "../../../zus"
 import { useTkbStore } from "../../../zus"
 import ClassCell, { ClassCellContext } from "./ClassCell"
@@ -21,10 +21,9 @@ import "./styles.css"
 import { timeLookup } from "./utils"
 
 const GetCell = ({ data }) => {
-    if (data === CELL.NO_CLASS) return <td />
-    if (data === CELL.OCCUPIED) return null
-    //return <ClassCell data={data} rowSpan={getDanhSachTiet(data.Tiet).length} />
-    return <ClassCell data={data} rowSpan={102} />
+    if (data === CELL.NO_CLASS) return <td />; 
+    if (data === CELL.OCCUPIED) return null; 
+    return <ClassCell data={data} rowSpan={getDanhSachTiet(data.Tiet).length} />
 }
 
 function RowHocTrenTruong({ row, index }) {
@@ -42,12 +41,178 @@ function RowHocTrenTruong({ row, index }) {
     )
 }
 
+// NOTE: this is just a temporary function
+const html2RowDataHocTrenTruong = () => {
+    // TODO: parse the TKB HTML in here
+    
+    return [
+        {
+            "Thu2": null,
+            "Thu3": null,
+            "Thu4": null,
+            "Thu5": null,
+            "Thu6": {
+                "STT": 32,
+                "MaMH": "MA006",
+                "MaLop": "MA006.O21.CLC",
+                "TenMH": "Giải tích",
+                "MaGV": "80508",
+                "TenGV": "Nguyễn Văn Hợi",
+                "SiSo": "40(0)",
+                "SoTc": 4,
+                "ThucHanh": 0,
+                "HTGD": "LT",
+                "Thu": "6",
+                "Tiet": "1234",
+                "CachTuan": "1",
+                "PhongHoc": "C101",
+                "KhoaHoc": "0",
+                "HocKy": "2",
+                "NamHoc": "2023",
+                "HeDT": "CLC",
+                "KhoaQL": "BMTL",
+                "NBD": "2024-02-19",
+                "NKT": "2024-06-08",
+                "NgonNgu": "VN"
+            },
+            "Thu7": {
+                "STT": 31,
+                "MaMH": "MA005",
+                "MaLop": "MA005.O21.CLC",
+                "TenMH": "Xác suất thống kê",
+                "MaGV": "80048",
+                "TenGV": "Dương Ngọc Hảo",
+                "SiSo": "40(0)",
+                "SoTc": 3,
+                "ThucHanh": 0,
+                "HTGD": "LT",
+                "Thu": "7",
+                "Tiet": "1234",
+                "CachTuan": "1",
+                "PhongHoc": "*",
+                "KhoaHoc": "0",
+                "HocKy": "2",
+                "NamHoc": "2023",
+                "HeDT": "CLC",
+                "KhoaQL": "BMTL",
+                "NBD": "2024-02-19",
+                "NKT": "2024-05-11",
+                "NgonNgu": "VN"
+            }, 
+            "CN": null, 
+        },
+        {
+            "Thu2": null,
+            "Thu3": null,
+            "Thu4": null,
+            "Thu5": null,
+            "Thu6": "xx",
+            "Thu7": "xx", 
+            "CN": null, 
+        },
+        {
+            "Thu2": null,
+            "Thu3": null,
+            "Thu4": null,
+            "Thu5": null,
+            "Thu6": "xx",
+            "Thu7": "xx", 
+            "CN": null, 
+        },
+        {
+            "Thu2": null,
+            "Thu3": null,
+            "Thu4": null,
+            "Thu5": null,
+            "Thu6": "xx",
+            "Thu7": "xx", 
+            "CN": null
+        },
+        {
+            "Thu2": null,
+            "Thu3": null,
+            "Thu4": null,
+            "Thu5": null,
+            "Thu6": null,
+            "Thu7": null, 
+            "CN": null
+        },
+        {
+            "Thu2": {
+                "STT": 35,
+                "MaMH": "IT002",
+                "MaLop": "IT002.O21.CLC.1",
+                "TenMH": "Lập trình hướng đối tượng",
+                "SiSo": "20(0)",
+                "SoTc": 1,
+                "ThucHanh": 1,
+                "HTGD": "HT1",
+                "Thu": "2",
+                "Tiet": "67890",
+                "CachTuan": "2",
+                "PhongHoc": "B3.02",
+                "KhoaHoc": "0",
+                "HocKy": "2",
+                "NamHoc": "2023",
+                "HeDT": "CLC",
+                "KhoaQL": "CNPM",
+                "NBD": "2024-03-04",
+                "NKT": "2024-06-01",
+                "NgonNgu": "VN"
+            },
+            "Thu3": null,
+            "Thu4": null,
+            "Thu5": null,
+            "Thu6": null,
+            "Thu7": null, 
+            "CN": null
+        },
+        {
+            "Thu2": "xx",
+            "Thu3": null,
+            "Thu4": null,
+            "Thu5": null,
+            "Thu6": null,
+            "Thu7": null, 
+            "CN": null
+        },
+        {
+            "Thu2": "xx",
+            "Thu3": null,
+            "Thu4": null,
+            "Thu5": null,
+            "Thu6": null,
+            "Thu7": null, 
+            "CN": null
+        },
+        {
+            "Thu2": "xx",
+            "Thu3": null,
+            "Thu4": null,
+            "Thu5": null,
+            "Thu6": null,
+            "Thu7": null, 
+            "CN": null
+        },
+        {
+            "Thu2": "xx",
+            "Thu3": null,
+            "Thu4": null,
+            "Thu5": null,
+            "Thu6": null,
+            "Thu7": null,
+            "CN": null
+        }
+    ]
+}
+
 function Render() {
-    const {
-        //rowDataHocTrenTruong,
-        //khongHocTrenTruong,
-        //redundant
-    } = usePhanLoaiHocTrenTruongContext()
+    // const {
+    //     //rowDataHocTrenTruong,
+    //     //khongHocTrenTruong,
+    //     //redundant
+    // } = 
+    // usePhanLoaiHocTrenTruongContext();
 
     // FIXME: this is just a hack, please make it work properly  
     // something wrong happens with the usePhanLoaiHocTrenTruongContext, 
@@ -58,40 +223,9 @@ function Render() {
     // TODO: almost everything depends on the rowDataHocTrenTruong
     // -> the OCCUPIED blocks gonna be filled with class data -> and things gonna work
     // -> other things doesn't matter
-    const rowDataHocTrenTruong = []; 
-    const khongHocTrenTruong = []; 
-    // for (let i = 0; i < 13; i++) {
-    //     rowDataHocTrenTruong.push({
-    //         Thu2: CELL.NO_CLASS,
-    //         Thu3: CELL.NO_CLASS,
-    //         Thu4: CELL.NO_CLASS,
-    //         Thu5: CELL.NO_CLASS,
-    //         Thu6: CELL.NO_CLASS,
-    //         Thu7: CELL.NO_CLASS,
-    //         CN: CELL.NO_CLASS,
-    //     })
-    // }
     
-    rowDataHocTrenTruong.push({ Thu2: CELL.NO_CLASS, Thu3: CELL.NO_CLASS, Thu4: CELL.NO_CLASS, Thu5: CELL.NO_CLASS, Thu6: CELL.NO_CLASS, Thu7: CELL.NO_CLASS, CN: CELL.NO_CLASS, });
-    rowDataHocTrenTruong.push({ Thu2: CELL.OCCUPIED, Thu3: CELL.OCCUPIED, Thu4: CELL.NO_CLASS, Thu5: CELL.NO_CLASS, Thu6: CELL.NO_CLASS, Thu7: CELL.NO_CLASS, CN: CELL.NO_CLASS, });
-    rowDataHocTrenTruong.push({ Thu2: CELL.NO_CLASS, Thu3: CELL.OCCUPIED, Thu4: CELL.NO_CLASS, Thu5: CELL.NO_CLASS, Thu6: CELL.NO_CLASS, Thu7: CELL.NO_CLASS, CN: CELL.NO_CLASS, });
-    rowDataHocTrenTruong.push({ Thu2: CELL.NO_CLASS, Thu3: CELL.NO_CLASS, Thu4: CELL.NO_CLASS, Thu5: CELL.NO_CLASS, Thu6: CELL.NO_CLASS, Thu7: CELL.NO_CLASS, CN: CELL.NO_CLASS, });
-    rowDataHocTrenTruong.push({ Thu2: {MaLop:"NTTN", NgonNgu:"VN", TenMH:"THAT KHONG THE TIN DUOC", TenGV:"NTTN", PhongHoc:"dia nguc", NBD:"something", NKT:"HKT", Thu:"2", Tiet:'100'}, Thu3: CELL.NO_CLASS, Thu4: CELL.NO_CLASS, Thu5: CELL.NO_CLASS, Thu6: CELL.NO_CLASS, Thu7: CELL.NO_CLASS, CN: CELL.NO_CLASS, });
-    //khongHocTrenTruong.push({MaLop:"NTTN", NgonNgu:"VN", TenMH:"THAT KHONG THE TIN DUOC", TenGV:"NTTN", PhongHoc:"dia nguc", NBD:"something", NKT:"HKT", Thu:"2", Tiet:'100'});
+    const rowDataHocTrenTruong = html2RowDataHocTrenTruong();
 
-    // const rowDataHocTrenTruong = [
-    //     { Thu2: {  }, Thu3: {  }, Thu4: {  }, Thu5: null, Thu6: null, Thu7: null }, // tiet 1
-    //     { Thu2: 'xx', Thu3: 'xx', Thu4: 'xx', Thu5: null, Thu6: {  }, Thu7: null }, // tiet 2
-    //     { Thu2: 'xx', Thu3: 'xx', Thu4: 'xx', Thu5: null, Thu6: 'xx', Thu7: null }, // tiet 3
-    //     { Thu2: {  }, Thu3: 'xx', Thu4: 'xx', Thu5: null, Thu6: 'xx', Thu7: null }, // tiet 4
-    //     { Thu2: 'xx', Thu3: 'xx', Thu4: null, Thu5: null, Thu6: 'xx', Thu7: null }, // tiet 5
-    //     { Thu2: {  }, Thu3: null, Thu4: {  }, Thu5: {  }, Thu6: null, Thu7: null }, // tiet 6
-    //     { Thu2: 'xx', Thu3: null, Thu4: 'xx', Thu5: 'xx', Thu6: null, Thu7: null }, // tiet 7
-    //     { Thu2: 'xx', Thu3: null, Thu4: 'xx', Thu5: 'xx', Thu6: null, Thu7: null }, // tiet 8
-    //     { Thu2: 'xx', Thu3: null, Thu4: 'xx', Thu5: null, Thu6: null, Thu7: null }, // tiet 9
-    //     { Thu2: 'xx', Thu3: null, Thu4: 'xx', Thu5: null, Thu6: null, Thu7: null }, // tiet 10
-    // ];
-    
     const location = useLocation()
     //const isChiVeTkb = useTkbStore(selectIsChiVeTkb)
     const {

@@ -52,36 +52,42 @@ const initTableData = () => {
 const usePhanLoaiHocTrenTruong = () => {
     const [khongHocTrenTruong, hocTrenTruong] = useTkbStore(
         selectPhanLoaiHocTrenTruong
-    )
+    );
 
-    const { kept, redundant } = findOverlapedClasses(hocTrenTruong)
+    console.log("khong hoc tren truong: ", khongHocTrenTruong);
+    console.log("hoc tren truong: ", hocTrenTruong);
 
-    const rowDataHocTrenTruong = initTableData();
+    //const { kept, redundant } = findOverlapedClasses(hocTrenTruong)
 
-    // const rowDataHocTrenTruong = React.useMemo(() => {
-    //     const tableData = initTableData()
-    //
-    //     // for (const lop of kept) {
-    //     //     const listTiet = getDanhSachTiet(lop.Tiet)
-    //     //
-    //     //     const tietBatDau = listTiet[0]
-    //     //     tableData[getTietIndex(tietBatDau)]["Thu" + lop.Thu] = lop
-    //     //
-    //     //     for (let i = 1; i < listTiet.length; i++) {
-    //     //         tableData[getTietIndex(listTiet[i])]["Thu" + lop.Thu] = CELL.OCCUPIED
-    //     //     }
-    //     // }
-    //     //
-    //     // const khongCoLopBuoiToi = tableData.slice(-3).every(tiet => {
-    //     //     return Object.values(tiet).every(cell => cell === CELL.NO_CLASS)
-    //     // })
-    //     // if (khongCoLopBuoiToi) tableData.splice(-3)
-    //
-    //     return tableData
-    // }, [kept])
+    // const rowDataHocTrenTruong = initTableData();
+
+    const rowDataHocTrenTruong = React.useMemo(() => {
+        const tableData = initTableData()
+
+        // for (const lop of kept) {
+        //     const listTiet = getDanhSachTiet(lop.Tiet)
+        //
+        //     const tietBatDau = listTiet[0]
+        //     tableData[getTietIndex(tietBatDau)]["Thu" + lop.Thu] = lop
+        //
+        //     for (let i = 1; i < listTiet.length; i++) {
+        //         tableData[getTietIndex(listTiet[i])]["Thu" + lop.Thu] = CELL.OCCUPIED
+        //     }
+        // }
+        //
+        // const khongCoLopBuoiToi = tableData.slice(-3).every(tiet => {
+        //     return Object.values(tiet).every(cell => cell === CELL.NO_CLASS)
+        // })
+        // if (khongCoLopBuoiToi) tableData.splice(-3)
+
+        return tableData
+    //}, [kept])
+    }, [])
+
+    console.log("row data hoc tren truong: ", rowDataHocTrenTruong);
 
     return {
-        redundant,
+        //redundant,
         khongHocTrenTruong,
         rowDataHocTrenTruong
     }

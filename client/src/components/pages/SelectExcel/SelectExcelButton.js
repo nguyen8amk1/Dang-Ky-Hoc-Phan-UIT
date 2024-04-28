@@ -26,7 +26,7 @@ const UIT_xlsxFileProcessing = (e, rABS, setDataExcel, file) => {
     const dataInArray = [...dataLyThuyet, ...dataThucHanh].filter(
         // những row có cột 0 là STT (STT là number) thì mới là data ta cần
         row => typeof row[0] === "number"
-    )
+    );
     if (!dataInArray.length) return false;
     setDataExcel({
         data: dataInArray.map(array => arrayToTkbObject(array)),

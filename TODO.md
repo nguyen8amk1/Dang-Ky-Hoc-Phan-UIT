@@ -130,14 +130,20 @@
 
     + 4. have tkb private route - firebase authen 
         1. Have the private Chon file Excel [X]
-            Make the upload button 100% works []
-                Upload the tkb HTML [] 
+            Make the upload button 100% works [] 
+                Make the Result Display working [X]
+                    + NOTE: 
+                        there are 2 things that is important when displaying the result 
+                            ->  the rowDataHocTrenTruong 
+                                the rowspan of the subject -> need a function to calculate the rowspan based on the information given
+
+            **SO MANY GLOBAL STATES, I FUCKING HATE IT**
+
+                Upload the tkb HTML []  @Current
                    -> SelectExcelButton: reader.onload method 
+
                 Parse it []
                 Show it on the tkb list [] 
-                + constate 
-                + zustand  
-                    persist   @Current
 
             Lodash: parition  @Next
 

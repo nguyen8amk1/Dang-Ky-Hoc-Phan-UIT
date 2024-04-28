@@ -7,7 +7,7 @@ import groupBy from 'lodash/groupBy';
 import reverse from 'lodash/reverse';
 import { useMemo, useState } from 'react';
 //import { tracker } from '../../..';
-import { isSameAgGridRowId, uniqMaLop } from '../../../utils';
+//import { isSameAgGridRowId, uniqMaLop } from '../../../utils';
 import { selectIsChiVeTkb, selectSelectedClasses, selectSelectedClassesBuoc3, useTkbStore } from '../../../zus';
 import { usePhanLoaiHocTrenTruongContext } from './hooks';
 import './styles.css';
@@ -68,8 +68,8 @@ const useMonChonRoi = () => {
     const mapColor = {}
     let index = 0
     Object.entries(map).forEach(([key, value]) => {
-        const hasDuplication = uniqMaLop(value).length > 1
-        if (hasDuplication) mapColor[key] = newRandomColors[index++]
+        // const hasDuplication = uniqMaLop(value).length > 1
+        // if (hasDuplication) mapColor[key] = newRandomColors[index++]
     })
 
     const getWarningColor = data => mapColor[getMonChonRoiKey(data)]
