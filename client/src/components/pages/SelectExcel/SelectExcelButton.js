@@ -7,7 +7,7 @@ import React from 'react';
 import XLSX from 'xlsx';
 import { selectDataExcel, useTkbStore } from '../../zus';
 // import { tracker } from '../..';
-import { arrayToTkbObject, sheetJSFT, toDateTimeString } from './utils';
+import { HTMLCalendarParser, arrayToTkbObject, sheetJSFT, toDateTimeString } from './utils';
 
 const Bold = ({ children }) => <b style={{ marginLeft: 5 }}>{children}</b>;
 
@@ -35,12 +35,62 @@ const UIT_xlsxFileProcessing = (e, rABS, setDataExcel, file) => {
     }); 
 }
 
-const UIT_htmlFileProcessing = () => {
-    // TODO: implement the html parsing in here
-    return false; 
+const outputCorrectFormat = (schedule) => {
+const array = []; 
+  return {
+    // STT: array[0],
+    // MaMH: array[1],
+    // MaLop: array[2],
+    // TenMH: array[3],
+    // MaGV: array[4],
+    // TenGV: array[5],
+    // SiSo: array[6],
+    // SoTc: parseInt(array[7]),
+    // ThucHanh: array[8],
+    // HTGD: array[9],
+    // Thu: String(array[10]),
+    // Tiet: String(array[11]),
+    // CachTuan: String(array[12]),
+    // PhongHoc: array[13],
+    // KhoaHoc: String(array[14]),
+    // HocKy: String(array[15]),
+    // NamHoc: String(array[16]),
+    // HeDT: array[17],
+    // KhoaQL: array[18],
+    // NBD:
+    //   typeof array[19] === "string"
+    //     ? array[19]
+    //     : convertExcelDateToStringDate(array[19]),
+    // NKT:
+    //   typeof array[20] === "string"
+    //     ? array[20]
+    //     : convertExcelDateToStringDate(array[20]),
+    // GhiChu: array[21],
+    // NgonNgu: array[22]
+  }
 }
 
-const currentFileProcessing = UIT_xlsxFileProcessing;
+const UIT_htmlFileProcessing = (e, rABS, setDataExcel, file) => {
+    const htmlText = e.target.result;
+    console.log(htmlText);
+
+    const calendarParser = new HTMLCalendarParser();
+    calendarParser.setData(htmlText);
+
+    const schedule = calendarParser.parse();
+    console.log(schedule);
+    // TODO: convert the schedule format to the format that works with the current system, 
+    // in the outputCorrectFormat() function
+    
+    setDataExcel({
+        //data: outputCorrectFormat(schedule),
+        fileName: file.name,
+        lastUpdate: toDateTimeString(new Date())
+    }); 
+}
+
+//const currentFileProcessing = UIT_xlsxFileProcessing;
+const currentFileProcessing = UIT_htmlFileProcessing;
 
 function SelectExcelButton() {
     const dataExcel = useTkbStore(selectDataExcel) || {};
@@ -88,8 +138,14 @@ function SelectExcelButton() {
                     //tracker.track("[page1] upload_excel_resulted", { success: false })
                 }
             }
-            if (rABS) reader.readAsBinaryString(file)
-            else reader.readAsArrayBuffer(file)
+
+            //FIXME: different files format use different reader, try some way to abstract this out, ASAP
+            console.log('FIXME: different files format use different reader, try some way to abstract this out, ASAP');
+            // if (rABS) reader.readAsBinaryString(file)
+            // else if() reader.readAsArrayBuffer(file)
+            // else reader.readAsText(file, 'UTF-8');
+            reader.readAsText(file, 'UTF-8');
+
         },
         [setDataExcel]
     )
@@ -116,6 +172,7 @@ function SelectExcelButton() {
                         type="file"
                         style={{ display: 'none' }}
                         accept={sheetJSFT}
+                        acceptCharset="UTF-8" // Add this line
                         onChange={handleUploadFileExcel}
                         onClick={() => {
                             // tracker.track('[page1] btn_upload_excel_clicked');
