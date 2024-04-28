@@ -138,21 +138,19 @@
                                 the rowspan of the subject -> need a function to calculate the rowspan based on the information given
 
             **SO MANY GLOBAL STATES, I FUCKING HATE IT**
-
-                Upload the tkb HTML []  @Current
+                Upload the tkb HTML [X]  
                    -> SelectExcelButton: reader.onload method 
-
-                Parse it []
-                Show it on the tkb list [] 
-
-            Lodash: parition  @Next
+                Parse it [X]
+                Show it on the tkb list [X] 
+                
+            Lodash: parition
 
         2. Have the rest of the private route working [] 
             Xep lop [] @Next
                 Get the ui in place first
             Ket qua [] @Next
 
-+ Better Session Management @Next 
++ Better Firebase Session Management @Current 
 
 + Make the server works as well (Nginx related) 
     + Problem: 

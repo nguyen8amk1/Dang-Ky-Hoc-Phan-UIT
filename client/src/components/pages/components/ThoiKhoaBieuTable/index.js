@@ -8,15 +8,17 @@ import { useState } from "react"
 //import { ROUTES } from "../../../constants"
 import { getDanhSachTiet } from "../../../utils"
 //import { selectIsChiVeTkb, useTkbStore } from "../../../zus"
-import { useTkbStore } from "../../../zus"
+import { useTkbStore, selectDataExcel } from "../../../zus"
 import ClassCell, { ClassCellContext } from "./ClassCell"
 import TableHead from "./TableHead"
+
 import {
     CELL,
     PhanLoaiHocTrenTruongContext,
     usePhanLoaiHocTrenTruongContext,
     useProcessImageTkb
 } from "./hooks"
+
 import "./styles.css"
 import { timeLookup } from "./utils"
 
@@ -42,189 +44,61 @@ function RowHocTrenTruong({ row, index }) {
 }
 
 // NOTE: this is just a temporary function
-const html2RowDataHocTrenTruong = () => {
-    // TODO: parse the TKB HTML in here
-    
-    return [
-        {
+const html2RowDataHocTrenTruong = (subjects) => {
+    // TODO: try to use the function that he already wrote
+    const result = []
+    for(let i = 0; i < 10; i++) {
+        const obj = {
             "Thu2": null,
-            "Thu3": null,
-            "Thu4": null,
-            "Thu5": null,
-            "Thu6": {
-                "STT": 32,
-                "MaMH": "MA006",
-                "MaLop": "MA006.O21.CLC",
-                "TenMH": "Giải tích",
-                "MaGV": "80508",
-                "TenGV": "Nguyễn Văn Hợi",
-                "SiSo": "40(0)",
-                "SoTc": 4,
-                "ThucHanh": 0,
-                "HTGD": "LT",
-                "Thu": "6",
-                "Tiet": "1234",
-                "CachTuan": "1",
-                "PhongHoc": "C101",
-                "KhoaHoc": "0",
-                "HocKy": "2",
-                "NamHoc": "2023",
-                "HeDT": "CLC",
-                "KhoaQL": "BMTL",
-                "NBD": "2024-02-19",
-                "NKT": "2024-06-08",
-                "NgonNgu": "VN"
-            },
-            "Thu7": {
-                "STT": 31,
-                "MaMH": "MA005",
-                "MaLop": "MA005.O21.CLC",
-                "TenMH": "Xác suất thống kê",
-                "MaGV": "80048",
-                "TenGV": "Dương Ngọc Hảo",
-                "SiSo": "40(0)",
-                "SoTc": 3,
-                "ThucHanh": 0,
-                "HTGD": "LT",
-                "Thu": "7",
-                "Tiet": "1234",
-                "CachTuan": "1",
-                "PhongHoc": "*",
-                "KhoaHoc": "0",
-                "HocKy": "2",
-                "NamHoc": "2023",
-                "HeDT": "CLC",
-                "KhoaQL": "BMTL",
-                "NBD": "2024-02-19",
-                "NKT": "2024-05-11",
-                "NgonNgu": "VN"
-            }, 
-            "CN": null, 
-        },
-        {
-            "Thu2": null,
-            "Thu3": null,
-            "Thu4": null,
-            "Thu5": null,
-            "Thu6": "xx",
-            "Thu7": "xx", 
-            "CN": null, 
-        },
-        {
-            "Thu2": null,
-            "Thu3": null,
-            "Thu4": null,
-            "Thu5": null,
-            "Thu6": "xx",
-            "Thu7": "xx", 
-            "CN": null, 
-        },
-        {
-            "Thu2": null,
-            "Thu3": null,
-            "Thu4": null,
-            "Thu5": null,
-            "Thu6": "xx",
-            "Thu7": "xx", 
-            "CN": null
-        },
-        {
-            "Thu2": null,
-            "Thu3": null,
-            "Thu4": null,
-            "Thu5": null,
-            "Thu6": null,
-            "Thu7": null, 
-            "CN": null
-        },
-        {
-            "Thu2": {
-                "STT": 35,
-                "MaMH": "IT002",
-                "MaLop": "IT002.O21.CLC.1",
-                "TenMH": "Lập trình hướng đối tượng",
-                "SiSo": "20(0)",
-                "SoTc": 1,
-                "ThucHanh": 1,
-                "HTGD": "HT1",
-                "Thu": "2",
-                "Tiet": "67890",
-                "CachTuan": "2",
-                "PhongHoc": "B3.02",
-                "KhoaHoc": "0",
-                "HocKy": "2",
-                "NamHoc": "2023",
-                "HeDT": "CLC",
-                "KhoaQL": "CNPM",
-                "NBD": "2024-03-04",
-                "NKT": "2024-06-01",
-                "NgonNgu": "VN"
-            },
-            "Thu3": null,
-            "Thu4": null,
-            "Thu5": null,
-            "Thu6": null,
-            "Thu7": null, 
-            "CN": null
-        },
-        {
-            "Thu2": "xx",
-            "Thu3": null,
-            "Thu4": null,
-            "Thu5": null,
-            "Thu6": null,
-            "Thu7": null, 
-            "CN": null
-        },
-        {
-            "Thu2": "xx",
-            "Thu3": null,
-            "Thu4": null,
-            "Thu5": null,
-            "Thu6": null,
-            "Thu7": null, 
-            "CN": null
-        },
-        {
-            "Thu2": "xx",
-            "Thu3": null,
-            "Thu4": null,
-            "Thu5": null,
-            "Thu6": null,
-            "Thu7": null, 
-            "CN": null
-        },
-        {
-            "Thu2": "xx",
             "Thu3": null,
             "Thu4": null,
             "Thu5": null,
             "Thu6": null,
             "Thu7": null,
-            "CN": null
+            "CN": null,
         }
-    ]
+        result.push(obj);
+    }
+
+    // NOTE: the Tiet re-numbered from 0 to 9 -> for simplicity though :v  
+    for(let i = 0;  i < subjects.length; i++) {
+        console.log(subjects[i]);
+        const thu = subjects[i].Thu; 
+        const separatedTietDigits = subjects[i].Tiet.split('').map(Number);
+        const tiet = separatedTietDigits[0];
+        console.log(result[tiet][`Thu${thu}`]);
+        result[tiet][`Thu${thu}`] = subjects[i];
+
+        console.log(separatedTietDigits);
+        for(let t = 1; t < separatedTietDigits.length; t++) {
+            if(result[separatedTietDigits[t]]) {
+                result[separatedTietDigits[t]][`Thu${thu}`] = CELL.OCCUPIED;
+            }
+        }
+    }
+    console.log(result);
+
+    return result;
 }
 
 function Render() {
-    // const {
-    //     //rowDataHocTrenTruong,
-    //     //khongHocTrenTruong,
-    //     //redundant
-    // } = 
-    // usePhanLoaiHocTrenTruongContext();
+    const {
+        //rowDataHocTrenTruong,
+        //khongHocTrenTruong,
+        //redundant
+    } = usePhanLoaiHocTrenTruongContext();
+
+
+    
+    const dataExcel = useTkbStore(selectDataExcel);
+    console.log(dataExcel.data);
 
     // FIXME: this is just a hack, please make it work properly  
     // something wrong happens with the usePhanLoaiHocTrenTruongContext, 
     // all the variable gets from it are undefined 
-    
     console.log("FIXME: this is just a hack, to get the tkb rendered");
-
-    // TODO: almost everything depends on the rowDataHocTrenTruong
-    // -> the OCCUPIED blocks gonna be filled with class data -> and things gonna work
-    // -> other things doesn't matter
     
-    const rowDataHocTrenTruong = html2RowDataHocTrenTruong();
+    const rowDataHocTrenTruong = html2RowDataHocTrenTruong(dataExcel.data);
 
     const location = useLocation()
     //const isChiVeTkb = useTkbStore(selectIsChiVeTkb)
