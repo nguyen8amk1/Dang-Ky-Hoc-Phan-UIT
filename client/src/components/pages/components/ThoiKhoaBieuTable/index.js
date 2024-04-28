@@ -45,8 +45,8 @@ function RowHocTrenTruong({ row, index }) {
 function Render() {
     const {
         //rowDataHocTrenTruong,
-        khongHocTrenTruong,
-        redundant
+        //khongHocTrenTruong,
+        //redundant
     } = usePhanLoaiHocTrenTruongContext()
 
     // FIXME: this is just a hack, please make it work properly  
@@ -55,7 +55,11 @@ function Render() {
     
     console.log("FIXME: this is just a hack, to get the tkb rendered");
 
+    // TODO: almost everything depends on the rowDataHocTrenTruong
+    // -> the OCCUPIED blocks gonna be filled with class data -> and things gonna work
+    // -> other things doesn't matter
     const rowDataHocTrenTruong = []; 
+    const khongHocTrenTruong = []; 
     // for (let i = 0; i < 13; i++) {
     //     rowDataHocTrenTruong.push({
     //         Thu2: CELL.NO_CLASS,
@@ -72,7 +76,8 @@ function Render() {
     rowDataHocTrenTruong.push({ Thu2: CELL.OCCUPIED, Thu3: CELL.OCCUPIED, Thu4: CELL.NO_CLASS, Thu5: CELL.NO_CLASS, Thu6: CELL.NO_CLASS, Thu7: CELL.NO_CLASS, CN: CELL.NO_CLASS, });
     rowDataHocTrenTruong.push({ Thu2: CELL.NO_CLASS, Thu3: CELL.OCCUPIED, Thu4: CELL.NO_CLASS, Thu5: CELL.NO_CLASS, Thu6: CELL.NO_CLASS, Thu7: CELL.NO_CLASS, CN: CELL.NO_CLASS, });
     rowDataHocTrenTruong.push({ Thu2: CELL.NO_CLASS, Thu3: CELL.NO_CLASS, Thu4: CELL.NO_CLASS, Thu5: CELL.NO_CLASS, Thu6: CELL.NO_CLASS, Thu7: CELL.NO_CLASS, CN: CELL.NO_CLASS, });
-    rowDataHocTrenTruong.push({ Thu2: CELL.NO_CLASS, Thu3: CELL.NO_CLASS, Thu4: CELL.NO_CLASS, Thu5: CELL.NO_CLASS, Thu6: CELL.NO_CLASS, Thu7: CELL.NO_CLASS, CN: CELL.NO_CLASS, });
+    rowDataHocTrenTruong.push({ Thu2: {MaLop:"NTTN", NgonNgu:"VN", TenMH:"THAT KHONG THE TIN DUOC", TenGV:"NTTN", PhongHoc:"dia nguc", NBD:"something", NKT:"HKT", Thu:"2", Tiet:'100'}, Thu3: CELL.NO_CLASS, Thu4: CELL.NO_CLASS, Thu5: CELL.NO_CLASS, Thu6: CELL.NO_CLASS, Thu7: CELL.NO_CLASS, CN: CELL.NO_CLASS, });
+    //khongHocTrenTruong.push({MaLop:"NTTN", NgonNgu:"VN", TenMH:"THAT KHONG THE TIN DUOC", TenGV:"NTTN", PhongHoc:"dia nguc", NBD:"something", NKT:"HKT", Thu:"2", Tiet:'100'});
 
     // const rowDataHocTrenTruong = [
     //     { Thu2: {  }, Thu3: {  }, Thu4: {  }, Thu5: null, Thu6: null, Thu7: null }, // tiet 1
@@ -157,6 +162,7 @@ function Render() {
                         {rowDataHocTrenTruong.map((row, index) => (
                             <RowHocTrenTruong key={index} row={row} index={index} />
                         ))}
+
                         {/* {khongHocTrenTruong.map((lop, index) => ( */}
                         {/*     <tr key={index}> */}
                         {/*         <ClassCell colSpan={7} data={lop} /> */}

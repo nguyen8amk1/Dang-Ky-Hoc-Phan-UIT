@@ -31,7 +31,8 @@
     "lodash": "4.17.21",
     "zustand": "4.4.6",
     "xlsx": "0.17.0",
-    "html2canvas": "1.4.1"
+    "html2canvas": "1.4.1",
+    "notistack": "3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

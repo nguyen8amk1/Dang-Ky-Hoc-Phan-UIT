@@ -135,11 +135,11 @@
                    -> SelectExcelButton: reader.onload method 
                 Parse it []
                 Show it on the tkb list [] 
-            -> Try to understand how the **STATE MANAGEMENT** libraries works @Current
                 + constate 
                 + zustand  
-                    parition 
-                    persist  
+                    persist   @Current
+
+            Lodash: parition  @Next
 
         2. Have the rest of the private route working [] 
             Xep lop [] @Next
