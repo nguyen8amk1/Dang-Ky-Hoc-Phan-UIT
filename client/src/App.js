@@ -4,23 +4,24 @@ import { AuthProvider } from './auth/AuthProvider';
 import { RenderHeader } from "./components/structure/Header";
 import { RenderMenu, RenderRoutes } from "./components/structure/RenderNavigation";
 
-import './firebase/init_firebase'
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 
 function App() {
     return (
-    <div className="App">
-      <BrowserRouter>
-        <AuthProvider>
+        <div className="App">
+            <BrowserRouter>
+                <GoogleOAuthProvider clientId="39117228837-iktth2scgqkeojkeg5tbemcu2o9ab9fq.apps.googleusercontent.com">
+                    <AuthProvider>
+                        {/* <RenderHeader /> */}
+                        <RenderMenu />
+                        <RenderRoutes />
 
-            {/* <RenderHeader /> */}
-            <RenderMenu />
-            <RenderRoutes />
-
-        </AuthProvider>
-      </BrowserRouter>
-    </div>
-  );
+                    </AuthProvider>
+                </GoogleOAuthProvider>;
+            </BrowserRouter>
+        </div>
+    );
 }
 
 export default App;

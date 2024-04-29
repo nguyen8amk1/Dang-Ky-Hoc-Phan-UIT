@@ -82,9 +82,9 @@ export const UIT_htmlFileProcessing = (e, rABS, setDataExcel, file) => {
     calendarParser.setData(htmlText);
 
     const schedule = calendarParser.parse();
+
+    localStorage.setItem("raw-format-schedule", JSON.stringify(schedule));
     console.log(schedule);
-    // TODO: convert the schedule format to the format that works with the current system, 
-    // in the outputCorrectFormat() function
     
     setDataExcel({
         data: outputCorrectFormat(schedule),

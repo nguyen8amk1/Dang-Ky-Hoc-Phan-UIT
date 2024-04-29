@@ -1,8 +1,10 @@
 import { createContext, useContext, useState, useEffect } from "react"
-import { getAuth, signInWithPopup, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
 import { CircularProgress } from '@mui/material';
-
 import { useNavigate } from "react-router-dom";
+
+import { useGoogleLogin } from '@react-oauth/google';
+import jwt_decode from 'jwt-decode';
+import axios from 'axios';
 
 const AuthContext = createContext();
 export const AuthData = () => useContext(AuthContext);
@@ -11,71 +13,96 @@ export const AuthProvider = ({children}) => {
     const navigate = useNavigate();
     const [ user, setUser ] = useState({})
     const [isLoading, setIsLoading] = useState(true);
-
-    const auth = getAuth();
-    const provider = new GoogleAuthProvider();
+    
+    const getUserInfo = async (callback) => {
+        // TODO: get the new access token, to compare with the old one 
+        // FIXME: with this way of handling, everytime there are no internet connection -> auto logout  
+        // -> since no internet also create exception
+        const oldAccessToken = localStorage.getItem('accessToken'); 
+        const newAccessToken = oldAccessToken;
+        let userInfo; 
+        try {
+            const res = await axios.get(
+                "https://www.googleapis.com/oauth2/v3/userinfo", 
+                {
+                    headers: {
+                        Authorization: `Bearer ${newAccessToken}`
+                    }
+                }
+            )
+            userInfo = {displayName: res.data.name}; 
+            console.log(res);
+        } catch(e) {
+            userInfo = undefined
+            console.error(e);
+        }
+        callback(userInfo);
+    } 
 
     useEffect(()=> {
-        const unsubscribeIdTokenChange = auth.onIdTokenChanged(user => {
-            console.log("on state change: ", user); 
-            // TODO: delegate all the user information setting in here instead in the login function
+        // NOTE: Setting the user information everytime the page load
+        // TODO: 
+        // 1. check if the access token is still valid -> calling the information url 
+        // if user result valid -> setUser with the user information getted 
+        // else -> setUser({})
+
+        getUserInfo(userInfo => {
+            console.log("on state change: ", userInfo); 
+            // TODO: delegate all the userInfo information setting in here instead in the login function
             // TODO: find a way to get new access token 
             //  -> onIdTokenChanged
-            if(!user) {
-                console.log("User sign out");
+            if(!userInfo) {
+                console.log("userInfo sign out");
                 setIsLoading(false);
-                setUser({});
-                localStorage.removeItem("accessToken");
-                navigate('/');
+                logout();
                 return; 
             } 
 
-            console.log("User sign in Or token Change");
-            setUser({name: user.displayName})
-            if (user.accessToken !== localStorage.getItem('accessToken')) {
-                console.log("Token change");
-                localStorage.setItem('accessToken', user.accessToken);
-                window.location.reload();
-            }
+            console.log("userInfo sign in Or token Change");
+            setUser({name: userInfo.displayName})
+            // if (userInfo.accessToken !== localStorage.getItem('accessToken')) {
+            //     console.log("Token change");
+            //     localStorage.setItem('accessToken', userInfo.accessToken);
+            //     //window.location.reload();
+            // }
             setIsLoading(false);
         });
 
-        return () => {unsubscribeIdTokenChange(); } 
-    }, [auth]); 
+    }, []); 
 
     const userIsAuthenticated = () => {
         //return localStorage.getItem("accessToken"); 
         return user?.name; 
     }
+    
+    const login = useGoogleLogin({
+        onSuccess: async response => {
+            localStorage.setItem('accessToken', response.access_token);
+            console.log(response.access_token);
 
-    const login = async () => {
-        try {
-            //const {displayName, photoURL, auth} = 
-            await signInWithPopup(auth, provider);
-
-            // const token = credential.accessToken;
-            // const resultUser = result.user;
-            // if (resultUser.accessToken) {
-            //     setUser({name: resultUser.displayName})
-            // } 
-            
-        } catch(error) {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.customData.email;
-            // The AuthCredential type that was used.
-            const credential = GoogleAuthProvider.credentialFromError(error);
-
-            console.log(error);
+            try {
+                const res = await axios.get(
+                    "https://www.googleapis.com/oauth2/v3/userinfo", 
+                    {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                        }
+                    }
+                )
+                console.log(res.data);
+                setUser({name: res.data.name});
+            } catch(e) {
+                setUser(undefined);
+                console.error(e);
+            }
         }
-    }
-
+    });
+    
     const logout = async () => {
         try{
-            await auth.signOut();
-            navigate("/")
+            setUser({});
+            localStorage.removeItem("accessToken");
+            navigate('/');
         } catch(e) {
             console.error(e);
         }

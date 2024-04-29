@@ -150,17 +150,18 @@
                 Get the ui in place first
             Ket qua [] @Next
 
-+ Better Firebase Session Management
-    + Get new access token [X] 
++ Better Google Session Management
+    + Get new access token [] @Next
     + Sign Out [X]
 
 + Calendar creation @Current
     put a button in result 
-        -> if click -> generate google calendar  
-        + Problem: 
-            firebase sucks
-        migrate the CalendarCreator to firebase
-        FirebaseUI ?? 
+        -> if click -> generate google calendar  [X]
+            2 functions have to have:  
+                + create new event
+                    -> api url: 
+                + create new calendar
+                    -> api url: 
 
 + Make the server works as well (Nginx related) 
     + Problem: 

@@ -1,10 +1,11 @@
-const {google} = require('googleapis');
-const moment = require('moment-timezone');
+import { gapi } from 'gapi-script'
+import {moment} from 'moment-timezone';
+import { datetime, RRule, RRuleSet, rrulestr } from 'rrule'; 
+import axios from 'axios';
 
+const GOOGLE_API_KEY = "AIzaSyCh6uWHq_ISH1bbMgvIbuHsetWx6xhmDFo";
 
-const { datetime, RRule, RRuleSet, rrulestr } = require('rrule');
-
-class CalendarCreator {
+export default class CalendarCreator {
     // byweekday: [RRule.MO, RRule.FR],
     static WEEKDAYS_MAPPING = [
         0, 0, 
@@ -18,21 +19,20 @@ class CalendarCreator {
     ];
 
     constructor() {
-        this.userCredentials = undefined;
+        this.accessToken = undefined;
         this.calendarId = 'primary';
-        this.calendar = undefined;
         this.timezone = 'Asia/Ho_Chi_Minh';
         this.eventColors = undefined; 
         this.calendarColors = undefined;
+    }
+    
 
+    getEvents (accessToken) {
     }
 
     // NOTE: this should be generated from the HTML parser 
-    setCredentials(accessToken) {
-        // Create an OAuth2 client with the access token
-        this.userCredentials = new google.auth.OAuth2();
-        this.userCredentials.setCredentials({ access_token: accessToken });
-        this.calendar = google.calendar({version: 'v3', auth: this.userCredentials});
+    setAccessToken(accessToken) {
+        this.accessToken = accessToken;
     }
 
     setTimeZone(timezone) {
@@ -79,7 +79,7 @@ class CalendarCreator {
         const newArray = schedule.map(a => ({...a}));
 
         for(let i = 0; i < schedule.length; i++) {
-            newArray[i] = adjustAsyncWeekdateStateDate(schedule[i]);
+            newArray[i] = this._adjustAsyncWeekdateStateDate(schedule[i]);
         }
 
         return newArray;
@@ -166,7 +166,7 @@ class CalendarCreator {
     }
 
     async enableRandomColors() {
-        if(!this.calendar) {
+        if(!this.accessToken) {
             throw new Error("Credentials undefined");
         }
         const colors = await this.calendar.colors.get(); 
@@ -175,53 +175,75 @@ class CalendarCreator {
         //console.log(this.eventColors);
     }
 
-    async newCalendar(calendarName) {
-        if(!this.calendar) {
+    async createCalendar(calendarName) {
+        if(!this.accessToken) {
             throw new Error("Credentials undefined");
+
         }
 
-        return new Promise((resolve, reject) => {
+        const url = 'https://www.googleapis.com/calendar/v3/calendars';
+        const requestData = {
+            summary: calendarName, 
+            timeZone: "Asia/Ho_Chi_Minh"
+        };
 
-            const calendar = {
-                'summary': calendarName,
-                'timeZone': 'Asia/Ho_Chi_Minh'
-            }
-
-            //console.log(this.calendar.calendars);
-            this.calendar.calendars.insert({
-                requestBody: calendar
-            }, (err, res) => {
-                if (err)  { 
-                    console.error('The API returned an error:', err); return reject(err)
-                };
-                console.log('New calendar ID:', res.data.id);
-                resolve(res.data.id);
+        try {
+            const response = await axios.post(url, requestData, {
+                headers: {
+                    'Authorization': `Bearer ${this.accessToken}`,
+                    'Content-Type': 'application/json'
+                }
             });
-        });
+
+            const calendarId = response.data.id;
+            //console.log('Calendar created successfully:', calendarId);
+            return calendarId;
+        } catch (error) {
+            console.error('Error creating calendar:', error.response.data);
+            throw error;
+        }
+
     }
 
     async createEvent(event) {
-        if(!this.calendar) {
+        if(!this.accessToken) {
             throw new Error("Credentials undefined");
         }
 
         // TODO: make this works 
         const validEvent = this._eventParse(event);
-        //console.log(validEvent);
+        console.log(validEvent);
 
+        const url = `https://www.googleapis.com/calendar/v3/calendars/${this.calendarId}/events`;
 
-        await this.calendar.events.insert({
-            calendarId: this.calendarId,
-            resource: validEvent,
-            //colorId: this._stringToIndexInRange(validEvent.summary, 1, this.eventColors.length), 
-            colorId: '1'
-        }, (err, event) => {
-            if (err) {
-                console.log('There was an error contacting the Calendar service: ' + err);
-                return;
-            }
-            console.log('Event created: %s', event.data.summary);
-        });
+        try {
+            const response = await axios.post(url, validEvent, {
+                headers: {
+                    'Authorization': `Bearer ${this.accessToken}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            const eventId = response.data.id;
+            console.log('Event created successfully:', eventId);
+            return eventId;
+        } catch (error) {
+            console.error('Error creating event:', error.response.data);
+            throw error;
+        }        
+
+        // await this.calendar.events.insert({
+        //     calendarId: this.calendarId,
+        //     resource: validEvent,
+        //     //colorId: this._stringToIndexInRange(validEvent.summary, 1, this.eventColors.length), 
+        //     colorId: '1'
+        // }, (err, event) => {
+        //     if (err) {
+        //         console.log('There was an error contacting the Calendar service: ' + err);
+        //         return;
+        //     }
+        //     console.log('Event created: %s', event.data.summary);
+        // });
     }
 
     async generateResultCalendar(schedule) {
@@ -232,35 +254,50 @@ class CalendarCreator {
     }
 
     async listEvents(count) {
-        if(!this.calendar) {
-            throw new Error("Credentials undefined");
+        if(!this.accessToken) {
+            throw new Error("Error: No accessToken");
         }
 
         let result = "ditme, bi cai lon gi roi"; 
-
-        const res = await this.calendar.events.list({
-            calendarId: this.calendarId,
-            timeMin: new Date().toISOString(),
-            maxResults: count,
-            singleEvents: true,
-            orderBy: 'startTime',
-        });
-
-        const events = res.data.items;
-        if (!events || events.length === 0) {
-            result = 'No upcoming events found.';
-            // return;
-        } else {
-            //console.log('Upcoming 10 events:');
-            result = [];
-            events.map((event, i) => {
-                const start = event.start.dateTime || event.start.date;
-                //console.log(`${start} - ${event.summary}`);
-                result.push(`${start} - ${event.summary}`);
-            });
+        try {
+            const res = await axios.get(
+                `https://www.googleapis.com/calendar/v3/calendars/${this.calendarId}/events`, 
+                {
+                    headers: {
+                        Authorization: `Bearer ${this.accessToken}`
+                    }
+                }
+            );
+            const data = res.data;
+            console.log("Calendar data: ", data);
+            // TODO: do something that get the result 
+        } catch (e){
+            console.error(e);
         }
         return result;
+
+        //
+        // const res = await this.calendar.events.list({
+        //     calendarId: this.calendarId,
+        //     timeMin: new Date().toISOString(),
+        //     maxResults: count,
+        //     singleEvents: true,
+        //     orderBy: 'startTime',
+        // });
+        //
+        // const events = res.data.items;
+        // if (!events || events.length === 0) {
+        //     result = 'No upcoming events found.';
+        //     // return;
+        // } else {
+        //     //console.log('Upcoming 10 events:');
+        //     result = [];
+        //     events.map((event, i) => {
+        //         const start = event.start.dateTime || event.start.date;
+        //         //console.log(`${start} - ${event.summary}`);
+        //         result.push(`${start} - ${event.summary}`);
+        //     });
+        // }
+        // return result;
     }
 };
-
-module.exports = CalendarCreator;
