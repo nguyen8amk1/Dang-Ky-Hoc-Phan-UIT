@@ -15,10 +15,6 @@ export const AuthProvider = ({children}) => {
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
 
-    const userIsAuthenticated = () => {
-        return localStorage.getItem("accessToken") !== undefined; 
-    }
-
     useEffect(()=> {
         const unsubscribeIdTokenChange = auth.onIdTokenChanged(user => {
             console.log("on state change: ", user); 
@@ -29,7 +25,7 @@ export const AuthProvider = ({children}) => {
                 console.log("User sign out");
                 setIsLoading(false);
                 setUser({});
-                localStorage.clear();
+                localStorage.removeItem("accessToken");
                 navigate('/');
                 return; 
             } 
@@ -47,9 +43,15 @@ export const AuthProvider = ({children}) => {
         return () => {unsubscribeIdTokenChange(); } 
     }, [auth]); 
 
+    const userIsAuthenticated = () => {
+        //return localStorage.getItem("accessToken"); 
+        return user?.name; 
+    }
+
     const login = async () => {
         try {
-            const {displayName, photoURL, auth} = await signInWithPopup(auth, provider);
+            //const {displayName, photoURL, auth} = 
+            await signInWithPopup(auth, provider);
 
             // const token = credential.accessToken;
             // const resultUser = result.user;

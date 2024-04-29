@@ -154,7 +154,13 @@
     + Get new access token [X] 
     + Sign Out [X]
 
-+ Firebase Calendar creation @Current
++ Calendar creation @Current
+    put a button in result 
+        -> if click -> generate google calendar  
+        + Problem: 
+            firebase sucks
+        migrate the CalendarCreator to firebase
+        FirebaseUI ?? 
 
 + Make the server works as well (Nginx related) 
     + Problem: 

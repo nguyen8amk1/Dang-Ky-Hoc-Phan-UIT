@@ -41,9 +41,8 @@ export const RenderMenu = () => {
         try {
             await login();
             console.log("authenticated user: ", user);
-            navigate("/account")
+            navigate("/account");
         } catch (error) {
-
             // setErrorMessage(error)
             console.log(error);
         }
