@@ -27,7 +27,8 @@ export const RenderRoutes = () => {
 export const RenderMenu = () => {
     const navigate = useNavigate();
 
-    const { user, userIsAuthenticated, login, logout } = AuthData()
+    const { user, userIsAuthenticated, login, logout } = AuthData();
+    console.log("from render menu: ", user);
 
     const MenuItem = ({r}) => {
         return (

@@ -1,8 +1,6 @@
-import { createContext, useContext, useState } from "react"
-import { Outlet } from 'react-router-dom';
-import { RenderHeader } from "../components/structure/Header";
-import { RenderMenu, RenderRoutes } from "../components/structure/RenderNavigation";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { createContext, useContext, useState, useEffect } from "react"
+import { getAuth, signInWithPopup, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
+import { CircularProgress } from '@mui/material';
 
 import { useNavigate } from "react-router-dom";
 
@@ -11,38 +9,54 @@ export const AuthData = () => useContext(AuthContext);
 
 export const AuthProvider = ({children}) => {
     const navigate = useNavigate();
-
-    const [ user, setUser ] = useState({name: ""})
+    const [ user, setUser ] = useState({})
+    const [isLoading, setIsLoading] = useState(true);
 
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
 
     const userIsAuthenticated = () => {
-        return localStorage.getItem("accessToken") !== null; 
+        return localStorage.getItem("accessToken") !== undefined; 
     }
+
+    useEffect(()=> {
+        const unsubscribeIdTokenChange = auth.onIdTokenChanged(user => {
+            console.log("on state change: ", user); 
+            // TODO: delegate all the user information setting in here instead in the login function
+            // TODO: find a way to get new access token 
+            //  -> onIdTokenChanged
+            if(!user) {
+                console.log("User sign out");
+                setIsLoading(false);
+                setUser({});
+                localStorage.clear();
+                navigate('/');
+                return; 
+            } 
+
+            console.log("User sign in Or token Change");
+            setUser({name: user.displayName})
+            if (user.accessToken !== localStorage.getItem('accessToken')) {
+                console.log("Token change");
+                localStorage.setItem('accessToken', user.accessToken);
+                window.location.reload();
+            }
+            setIsLoading(false);
+        });
+
+        return () => {unsubscribeIdTokenChange(); } 
+    }, [auth]); 
 
     const login = async () => {
         try {
-            const result = await signInWithPopup(auth, provider);
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
+            const {displayName, photoURL, auth} = await signInWithPopup(auth, provider);
 
-            // The signed-in user info.
-            const resultUser = result.user;
-
-            console.log("user", resultUser);
-            console.log("user", resultUser.email);
-
-            console.log("Firebase login");
-            if (resultUser.accessToken) {
-                setUser({name: resultUser.displayName})
-
-                localStorage.setItem("accessToken", resultUser.accessToken);
-                return "success"
-            } else {
-                return "Incorrect password"
-            }
-
+            // const token = credential.accessToken;
+            // const resultUser = result.user;
+            // if (resultUser.accessToken) {
+            //     setUser({name: resultUser.displayName})
+            // } 
+            
         } catch(error) {
             // Handle Errors here.
             const errorCode = error.code;
@@ -56,16 +70,19 @@ export const AuthProvider = ({children}) => {
         }
     }
 
-    const logout = () => {
-        localStorage.removeItem("accessToken");
-        navigate("/")
+    const logout = async () => {
+        try{
+            await auth.signOut();
+            navigate("/")
+        } catch(e) {
+            console.error(e);
+        }
     }
 
 
     return (
         <AuthContext.Provider value={{user, userIsAuthenticated, login, logout}}>
-            {console.log(children)}
-            {children}
+            {isLoading ? <CircularProgress /> : children}
         </AuthContext.Provider>
 
     )

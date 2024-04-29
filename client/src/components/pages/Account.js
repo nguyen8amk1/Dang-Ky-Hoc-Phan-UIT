@@ -1,7 +1,6 @@
 import { AuthData } from "../../auth/AuthProvider"
 
 export const Account = () => {
-
      const { user } = AuthData();
 
      return (

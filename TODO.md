@@ -150,7 +150,11 @@
                 Get the ui in place first
             Ket qua [] @Next
 
-+ Better Firebase Session Management @Current 
++ Better Firebase Session Management
+    + Get new access token [X] 
+    + Sign Out [X]
+
++ Firebase Calendar creation @Current
 
 + Make the server works as well (Nginx related) 
     + Problem: 
