@@ -65,6 +65,7 @@ run_and_link_docker_image() {
 
 	if ! sudo docker run --name $container_name -p 3000:3000 --rm \
 		-v "$script_dir/src":"/app/src" \
+		-v "$script_dir/public":"/app/public" \
 		-v "/app/node_modules" \
 		$image_tag_name; then
 		echo "Error: Something wrong with docker run process"
@@ -92,6 +93,7 @@ generate_copy_code_docker_file_content() {
 	echo "FROM $image_tag_name AS build"
 	echo "RUN rm -rf ./src/*"
 	echo "COPY ./src ./src"
+	echo "COPY ./public ./public"
 }
 
 dependencies_processing() {
