@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 import { nav } from "./navigation";
 
-
 export const RenderRoutes = () => {
 
     const { user, userIsAuthenticated } = AuthData();
@@ -37,7 +36,6 @@ export const RenderMenu = () => {
     }
 
     const doLogin = async () => {
-
         try {
             await login();
             console.log("authenticated user: ", user);
@@ -46,12 +44,11 @@ export const RenderMenu = () => {
             // setErrorMessage(error)
             console.log(error);
         }
-
     }
+
     return (
         <div className="menu">
             { nav.map((r, i) => {
-
                 if (!r.isPrivate && r.isMenu) {
                     return (
                         <MenuItem key={i} r={r}/>

@@ -178,8 +178,17 @@
         3. Web app 
 
 + Implement the stub web pages 
-    + Homepage [] (1h) @Current
-    + Web app page [] (1h) @Next
+    + Homepage [X] (1h)
+        -> Just render a simple homepage 
+        // TODO: whats the navbar gonna have 
+        // Logo 
+        // Home 
+        // About
+        // Contact
+        // Sign in with google button 
+
+    + Web app page [] (1h) @Current
+
     + Implement the correct Routing, and routing protection  @Next
 
 + Make the server works as well (Nginx related) 
