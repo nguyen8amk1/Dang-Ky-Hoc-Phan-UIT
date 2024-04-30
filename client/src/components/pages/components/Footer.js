@@ -13,7 +13,7 @@ function Footer() {
                 justifyContent="space-around"
                 alignItems="center"
                 sx={{
-                    backgroundColor: "green", 
+                    backgroundColor: "blue", 
                     height: "12em", 
                 }}
             >
@@ -32,7 +32,7 @@ function Footer() {
                     >
                         <Stack direction="row" spacing={2}>
                             <LocationOnIcon/>
-                            <Typography color="primary" sx={{
+                            <Typography color="white" sx={{
                                 fontSize: "1.3em"
                             }}>
                                 Khu phố 6 P, Thủ Đức, TP.HCM
@@ -40,7 +40,7 @@ function Footer() {
                         </Stack>
                         <Stack direction="row" spacing={2}>
                             <CallIcon/>
-                            <Typography color="primary" sx={{
+                            <Typography color="white" sx={{
                                 fontSize: "1.3em"
                             }}>
                                 19001008
@@ -49,7 +49,7 @@ function Footer() {
 
                         <Stack direction="row" spacing={2}>
                             <SendIcon/>
-                            <Typography color="primary" sx={{
+                            <Typography color="white" sx={{
                                 fontSize: "1.3em"
                             }}>
                                 trungnguyen123akohshit@gmail.com
@@ -70,13 +70,13 @@ function Footer() {
                         justifyContent="center"
                         alignItems="center"
                     >
-                        <Typography color="primary" sx={{
+                        <Typography color="white" sx={{
                             fontSize: "1.3em"
                         }}>
                             Một vài lời xamloz
                         </Typography>
 
-                        <Typography paragraph="true" color="primary" sx={{
+                        <Typography paragraph="true" color="white" sx={{
                             fontSize: "1.3em"
                         }}>
                             Lorem ipsum dolor sit amet, 
