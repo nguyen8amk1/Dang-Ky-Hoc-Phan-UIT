@@ -154,14 +154,33 @@
     + Get new access token [] @Next
     + Sign Out [X]
 
-+ Calendar creation @Current
-    put a button in result 
-        -> if click -> generate google calendar  [X]
-            2 functions have to have:  
-                + create new event
-                    -> api url: 
-                + create new calendar
-                    -> api url: 
++ Design UI/UX for the current features, i.e: html ->  google calendar 
+    + Homepage 
+    + Features page 
+        + 1 feature
+            convert tkb html to google calendar
+    + Web app page 
+
+    Step 1: Draw sitemap (10m)
+        Homepage
+            Features Page
+                Web app
+
+    Step 2: Draw wireframe: 
+        1. Homepage and also Features (30p) [X]
+            Header 
+                Logo and navigation 
+            Footer
+        3. Web app (1h)
+
+    Step 3: Create layout: 
+        1. Homepage
+        3. Web app 
+
++ Implement the stub web pages 
+    + Homepage [] (1h) @Current
+    + Web app page [] (1h) @Next
+    + Implement the correct Routing, and routing protection  @Next
 
 + Make the server works as well (Nginx related) 
     + Problem: 
@@ -282,3 +301,13 @@ Setup the Git Repo []
     through dev docker compose 
     But when installing new packages -> rebuild the image
         -> docker compose up --build
+
+
++ Calendar creation 
+    put a button in result 
+        -> if click -> generate google calendar  [X]
+            2 functions have to have:  
+                + create new event
+                    -> api url: 
+                + create new calendar
+                    -> api url: 
