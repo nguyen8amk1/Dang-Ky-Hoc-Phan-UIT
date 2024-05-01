@@ -108,7 +108,6 @@ export const AuthProvider = ({children}) => {
         }
     }
 
-
     return (
         <AuthContext.Provider value={{user, userIsAuthenticated, login, logout}}>
             {isLoading ? <CircularProgress /> : children}

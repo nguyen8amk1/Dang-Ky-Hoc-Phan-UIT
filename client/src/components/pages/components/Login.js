@@ -22,6 +22,7 @@ function Login({loggedIn=false}) {
                     <Stack direction="column" spacing={2}>
                     <img style={{width: '100%', height: '100%'}} alt="This suppose to be a meme :))"
                         src="https://www.mememaker.net/static/images/memes/4806874.jpg"/>
+
                     <Button>Sign in with Google</Button>
                     </Stack>
                     </ListItem>
