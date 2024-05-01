@@ -192,7 +192,7 @@
         1. Submit your TKB HTML [X]
             1.1. Tutorial Dialog [] @Later
 
-        2. The tkb view [] @Current
+        2. The tkb view [X] 
 
         3. Create an app bar for the user info [X]
             Basically just the other app bar [X]
@@ -203,14 +203,27 @@
 
     + Implement the correct Routing, 
         and routing protection 
+        -> Mapping these features with the original page
 
-        1. User go to homepage 
-        2. User click 'thu ngay' 
-            3. User go to web app page 
-            4. Web app display Login -> User login 
+        + Routing: 
+            /: Home
+            /gcg : GoogleCalendarGenerator
+
+
+        1. User go to homepage [X]
+            -> (Old) User go to localhost:3000 
+
+        2. User click 'thu ngay' -> thu ngay is just a navlink to the /gcg [X]
+            -> go to web app page 
+
+            3. Web app display Login -> User login 
+                -> (Old) User click login button 
+
             4. Web app display Submit TKB
 
-        3. User click 'dang nhap voi google'
+        3. User click 'dang nhap voi google' [] @Current
+                -> (Old) User click login button 
+
         4. User click 'thu ngay' 
             5. Web app display 
 

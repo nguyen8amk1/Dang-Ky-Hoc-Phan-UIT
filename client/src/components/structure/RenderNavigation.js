@@ -11,7 +11,6 @@ export const RenderRoutes = () => {
     return (
         <Routes>
             { nav.map((r, i) => {
-
                 if (r.isPrivate && userIsAuthenticated()) {
                     return <Route key={i} path={r.path} element={r.element}/>
                 } else if (!r.isPrivate) {

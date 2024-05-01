@@ -1,6 +1,7 @@
 import Header from './components/HomePageHeader.js'; 
 import Footer from './components/Footer.js'; 
 import {Box, Container, Typography, Grid, Button} from '@mui/material';
+import { NavLink, Link} from 'react-router-dom';
 
 const lastestProduct = {
     name: "Google Calendar Generator", 
@@ -45,7 +46,9 @@ export const Home = () => {
                     </Grid>
 
                     <Grid item> 
-                        <Button variant="contained">Thử ngay</Button>
+                        <Button variant="contained">
+                            <NavLink to="gcg">Thử ngay </NavLink>
+                        </Button>
                     </Grid>
                 </Grid>
 

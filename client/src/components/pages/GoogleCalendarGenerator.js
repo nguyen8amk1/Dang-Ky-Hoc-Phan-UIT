@@ -15,7 +15,7 @@ function GoogleCalendarGenerator() {
         // conditional rendering the login dialog 
         // TODO: set loading for when checking the logged in
         const loginCheckTimeout = setTimeout(() => {
-            const isLoggedIn = true; // Assume the user is logged in for demonstration purposes
+            const isLoggedIn = false; // Assume the user is logged in for demonstration purposes
             setLoggedIn(isLoggedIn);
         }, 2000);
 
