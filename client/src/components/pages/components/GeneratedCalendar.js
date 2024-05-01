@@ -9,7 +9,6 @@ function GeneratedCalendar() {
         // 2. A calendar view 
         
         <>
-            <Header/>
             <Grid container
                 direction="row"
                 justifyContent="space-around"

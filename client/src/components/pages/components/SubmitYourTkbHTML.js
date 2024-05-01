@@ -1,7 +1,43 @@
 import {Box, Container, Typography, Grid, Button} from '@mui/material';
 import { DropzoneArea } from 'mui-file-dropzone';
+import {useState} from 'react';
 
 function SubmitYourTkbHTML({onSubmit}) {
+    const [selectedFile, setSelectedFile] = useState(null);
+
+    const handleFileChange = (files) => {
+        console.log(files);
+        setSelectedFile(files[0]);
+    };
+
+    const handleSubmit = () => {
+        // Check if a file is selected
+        if (selectedFile) {
+            // Perform submission
+            // Clear the selected file after submission
+            
+            // TODO: Figure out a way to get the file content out of this
+            // TODO: submit mean: read the file content and move to the next step 
+            // If the file content valid -> move to the next step 
+            // If the file content not valid -> Tell user to find another file 
+            
+            const fileReader = new FileReader();
+            fileReader.onload = () => {
+                const fileContent = fileReader.result;
+                // Here you have access to the content of the file
+                console.log("File content:", fileContent);
+                onSubmit(fileContent);
+                // You can perform any validation or processing logic here
+            };
+
+            fileReader.readAsText(selectedFile);
+
+            setSelectedFile(null);
+        } else {
+            alert('Please select a file before submitting.');
+        }
+    };
+
     return(
         <>
             <Grid container 
@@ -39,7 +75,14 @@ function SubmitYourTkbHTML({onSubmit}) {
                             alert('Only image files are allowed');
                         }}
                         dropzoneText={"Kéo thả file ở đây hoặc nhấn vào đây để chọn file trong thư mục"}
+                        onChange={handleFileChange}
                     />
+                </Grid>
+
+                <Grid item>
+                    <Button variant="contained" color="primary" onClick={handleSubmit}>
+                        Submit
+                    </Button>
                 </Grid>
             </Grid>
         </>

@@ -233,8 +233,13 @@
                 -> have a method to check the context user logged in context 
 
             + Login form checking on /gcg [X]
-            + Checking file uploaded on the submit step [] @Current
-        
+
+        + Make the file upload works [X]
+            1. Checking file uploaded on the submit step [] 
+            2. Printout the content of the uploaded file [X] 
+
+        + Change the GCG 2 steps into a normal navigation [] @Current 
+
 + Make the server works as well (Nginx related) 
     + Problem: 
         + Local dev: 

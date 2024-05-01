@@ -33,19 +33,25 @@ function GoogleCalendarGenerator() {
         
         // For demonstration purposes, let's assume the calendar generation happens asynchronously
         // Simulate the behavior of generating calendar after 2 seconds
-        setTimeout(() => {
+        if(file) {
             const generatedCalendarData = {}; // Assume you have generated calendar data
             setGeneratedCalendar(generatedCalendarData);
-        }, 2000);
+        }
+
+        // setTimeout(() => {
+        //     const generatedCalendarData = {}; // Assume you have generated calendar data
+        //     setGeneratedCalendar(generatedCalendarData);
+        // }, 2000);
     };
 
     return(
+        // TODO: change the 2 steps into a normal navigation   
         <>
             <Header/>
             {loggedIn === undefined && <CircularProgress/>}
             {loggedIn !== undefined && <Login loggedIn={loggedIn}/>}
 
-            {loggedIn && !submittedFile && <SubmitYourTkbHTML/>}
+            {loggedIn && !submittedFile && <SubmitYourTkbHTML onSubmit={handleFileSubmit} />}
             {generatedCalendar && <GeneratedCalendar data={generatedCalendar} />}
 
             {/* Show loading state or spinner while calendar is being generated */}

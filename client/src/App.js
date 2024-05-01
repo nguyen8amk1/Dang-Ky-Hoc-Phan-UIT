@@ -24,8 +24,8 @@ const router = createBrowserRouter(
                     </AuthProvider>
                 </GoogleOAuthProvider>
             }></Route>
-            <Route path="gcg"   element={
 
+            <Route path="gcg"   element={
                 <GoogleOAuthProvider clientId="39117228837-iktth2scgqkeojkeg5tbemcu2o9ab9fq.apps.googleusercontent.com">
                     <AuthProvider>
                         <GoogleCalendarGenerator/>
