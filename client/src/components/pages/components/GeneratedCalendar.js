@@ -2,6 +2,7 @@ import Header from './WebAppHeader';
 import {Box, Container, Typography, Grid, Button} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import {useGoogleCalendarGeneratorContext} from '../GoogleCalendarGenerator';
+import Result from '../Result';
 
 function GeneratedCalendar() {
     const navigate = useNavigate();
@@ -34,7 +35,7 @@ function GeneratedCalendar() {
                     }}>Tạo Google Calendar</Button>
                 </Grid>
             </Grid>
-            This is the GeneratedCalendar
+            <Result/>
         </>
     );
 }

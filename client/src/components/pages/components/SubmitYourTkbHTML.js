@@ -3,11 +3,15 @@ import { DropzoneArea } from 'mui-file-dropzone';
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useGoogleCalendarGeneratorContext} from '../GoogleCalendarGenerator';
+import { useTkbStore, selectDataExcel } from '../../zus';
+import {UIT_htmlFileProcessing} from '../SelectExcel/file_format_processor'; 
 
 function SubmitYourTkbHTML() {
     const [selectedFile, setSelectedFile] = useState(null);
     const {generatedCalendar, handleFileSubmit} = useGoogleCalendarGeneratorContext();
 
+    const dataExcel = useTkbStore(selectDataExcel) || {};
+    const setDataExcel = useTkbStore((s) => s.setDataExcel);
     const navigate = useNavigate();
 
     const handleFileChange = (files) => {
@@ -29,6 +33,12 @@ function SubmitYourTkbHTML() {
             const fileReader = new FileReader();
             fileReader.onload = () => {
                 const fileContent = fileReader.result;
+                const success = UIT_htmlFileProcessing({target: {result: fileContent}}, null, setDataExcel, selectedFile); 
+                if(success) {
+                    console.log("UIT HTML FILE PROCESS GOOD")
+                } else {
+                    console.log("UIT HTML FILE PROCESS BAD")
+                }
                 // Here you have access to the content of the file
                 console.log("File content:", fileContent);
                 //onSubmit(fileContent)

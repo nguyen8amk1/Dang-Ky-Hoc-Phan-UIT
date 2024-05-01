@@ -239,9 +239,13 @@
             2. Printout the content of the uploaded file [X] 
 
         + Change the GCG 2 steps into a normal navigation [X] 
-        + Make the Change TKB name form [] @Current
 
-        + Make sure everything works [] @Next
+        + Make the Change TKB name form [] 
+        + Merge the SubmitTKB with Select tkb [X] 
+        + Make the generated TKB works [X] 
+            
+
+        + Make sure everything works nicely [] @Current
             + the upload file
                 have loading
 
@@ -250,6 +254,8 @@
 
             + the generate calendar
                 have loading
+
+        + Complete the UI
 
 + Make the server works as well (Nginx related) 
     + Problem: 

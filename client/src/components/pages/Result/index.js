@@ -11,7 +11,6 @@ import { useTkbStore } from '../../zus';
 // import ScriptDangKyInput, { DanhSachLopInput } from "./ScriptDangKyInput"
 import CalendarCreator from './google_calendar'; 
 
-
 const generateGoogleCalendar = async () => {
     console.log("Generate Google Calendar");
     const accessToken = localStorage.getItem("accessToken");
