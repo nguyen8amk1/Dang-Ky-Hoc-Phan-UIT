@@ -187,7 +187,12 @@
         // Contact
         // Sign in with google button 
 
-    + Web app page [] (1h) @Current
+    + Web app page [] (1h) 
+        0. Login Dialog [X] 
+        1. Submit your TKB HTML [] @Current
+            1.1. Tutorial Dialog [] @Later
+
+        2. The tkb view
 
     + Implement the correct Routing, and routing protection  @Next
 

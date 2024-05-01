@@ -7,6 +7,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 
 import {createTheme} from '@mui/material/styles';
 import {ThemeProvider} from '@emotion/react';
+import GoogleCalendarGenerator from './components/pages/GoogleCalendarGenerator.js'
 
 const theme = createTheme({
     // NOTE: any custom theme put here
@@ -19,7 +20,8 @@ function App() {
                 <GoogleOAuthProvider clientId="39117228837-iktth2scgqkeojkeg5tbemcu2o9ab9fq.apps.googleusercontent.com">
                     <AuthProvider>
                         <ThemeProvider theme={theme}>
-                            <Home/>
+                            {/* <Home/> */}
+                            <GoogleCalendarGenerator/>
                         </ThemeProvider>
                         {/* <RenderMenu /> */}
                         {/* <RenderRoutes /> */}
