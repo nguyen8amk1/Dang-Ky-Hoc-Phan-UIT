@@ -1,8 +1,11 @@
 import Header from './WebAppHeader';
 import {Box, Container, Typography, Grid, Button} from '@mui/material';
-
+import { useNavigate } from 'react-router-dom';
+import {useGoogleCalendarGeneratorContext} from '../GoogleCalendarGenerator';
 
 function GeneratedCalendar() {
+    const navigate = useNavigate();
+    const {clearCalendarSession} = useGoogleCalendarGeneratorContext();
     return(
         // TODO: what i'm gonna need 
         // 1. 2 Buttons 
@@ -18,10 +21,11 @@ function GeneratedCalendar() {
                 }}
             >
                 <Grid item>
+                    {/* TODO: when clicked remove the generatedCalendar and submittedfile and navigate to the gcg/step1-html-upload*/}
                     <Button size="large" variant="contained" sx={{
                         width: '13em',
                         height: '4em',
-                    }}>Upload TKB khác</Button>
+                    }} onClick={() => {clearCalendarSession(); navigate('/gcg/step-1-html-upload')}} >Upload TKB khác</Button>
                 </Grid>
                 <Grid item>
                     <Button size="large" variant="contained" sx={{

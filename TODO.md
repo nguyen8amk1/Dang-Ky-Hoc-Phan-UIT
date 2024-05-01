@@ -238,7 +238,18 @@
             1. Checking file uploaded on the submit step [] 
             2. Printout the content of the uploaded file [X] 
 
-        + Change the GCG 2 steps into a normal navigation [] @Current 
+        + Change the GCG 2 steps into a normal navigation [X] 
+        + Make the Change TKB name form [] @Current
+
+        + Make sure everything works [] @Next
+            + the upload file
+                have loading
+
+            + the show calendar
+                have loading, skeleton
+
+            + the generate calendar
+                have loading
 
 + Make the server works as well (Nginx related) 
     + Problem: 

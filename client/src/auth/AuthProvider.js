@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react"
 import { CircularProgress } from '@mui/material';
-import { useNavigate } from "react-router-dom";
+
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { useGoogleLogin } from '@react-oauth/google';
 import jwt_decode from 'jwt-decode';
@@ -11,6 +12,8 @@ export const AuthData = () => useContext(AuthContext);
 
 export const AuthProvider = ({children}) => {
     const navigate = useNavigate();
+    const location = useLocation();
+
     const [ user, setUser ] = useState({})
     const [isLoading, setIsLoading] = useState(true);
     
@@ -91,6 +94,10 @@ export const AuthProvider = ({children}) => {
                 )
                 console.log(res.data);
                 setUser({name: res.data.name, image: res.data.picture});
+                console.log("authenticated user: ", user);
+                console.log("location: ", location);
+                //navigate('/');
+
             } catch(e) {
                 setUser(undefined);
                 console.error(e);

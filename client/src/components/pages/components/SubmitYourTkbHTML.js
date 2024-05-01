@@ -1,9 +1,14 @@
 import {Box, Container, Typography, Grid, Button} from '@mui/material';
 import { DropzoneArea } from 'mui-file-dropzone';
 import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {useGoogleCalendarGeneratorContext} from '../GoogleCalendarGenerator';
 
-function SubmitYourTkbHTML({onSubmit}) {
+function SubmitYourTkbHTML() {
     const [selectedFile, setSelectedFile] = useState(null);
+    const {generatedCalendar, handleFileSubmit} = useGoogleCalendarGeneratorContext();
+
+    const navigate = useNavigate();
 
     const handleFileChange = (files) => {
         console.log(files);
@@ -20,19 +25,23 @@ function SubmitYourTkbHTML({onSubmit}) {
             // TODO: submit mean: read the file content and move to the next step 
             // If the file content valid -> move to the next step 
             // If the file content not valid -> Tell user to find another file 
-            
+
             const fileReader = new FileReader();
             fileReader.onload = () => {
                 const fileContent = fileReader.result;
                 // Here you have access to the content of the file
                 console.log("File content:", fileContent);
-                onSubmit(fileContent);
+                //onSubmit(fileContent)
+                handleFileSubmit(fileContent);
                 // You can perform any validation or processing logic here
+                console.log("Generated Calendar: ", generatedCalendar());
+                if(generatedCalendar()) {
+                    navigate('/gcg/step2-generate-calendar');
+                }
             };
-
+            setSelectedFile(null);
             fileReader.readAsText(selectedFile);
 
-            setSelectedFile(null);
         } else {
             alert('Please select a file before submitting.');
         }
@@ -46,12 +55,12 @@ function SubmitYourTkbHTML({onSubmit}) {
                 justifyContent="center"
                 alignItems="center"
                 sx={{
-                border: "1px solid black", 
-                padding: "1em", 
-                width: "60%", 
-                margin: 'auto',
-                marginTop: '5%', 
-            }}>
+                    border: "1px solid black", 
+                    padding: "1em", 
+                    width: "60%", 
+                    margin: 'auto',
+                    marginTop: '5%', 
+                }}>
                 <Grid item> 
                     <Typography color="black" sx={{
                         fontSize: "2em", 
