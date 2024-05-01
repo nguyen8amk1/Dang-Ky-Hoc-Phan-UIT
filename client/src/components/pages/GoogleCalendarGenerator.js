@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react';
 import SubmitYourTkbHTML from './components/SubmitYourTkbHTML'
 import GeneratedCalendar from './components/GeneratedCalendar'
 import { CircularProgress } from '@mui/material';
+import Header from './components/WebAppHeader'; 
 
 function GoogleCalendarGenerator() {
     const [loggedIn, setLoggedIn] = useState(undefined);
@@ -42,6 +43,7 @@ function GoogleCalendarGenerator() {
 
     return(
         <>
+            <Header/>
             {loggedIn === undefined && <CircularProgress/>}
             {loggedIn !== undefined && <Login loggedIn={loggedIn}/>}
 

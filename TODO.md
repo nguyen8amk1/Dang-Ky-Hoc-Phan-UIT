@@ -194,8 +194,27 @@
 
         2. The tkb view [] @Current
 
-    + Implement the correct Routing, and routing protection  @Next
+        3. Create an app bar for the user info [X]
+            Basically just the other app bar [X]
+            Integrate it into the Web app [X]
 
+        4. Create a login with google button [X]
+        5. Create a user info avatar thing [X]
+
+    + Implement the correct Routing, 
+        and routing protection 
+
+        1. User go to homepage 
+        2. User click 'thu ngay' 
+            3. User go to web app page 
+            4. Web app display Login -> User login 
+            4. Web app display Submit TKB
+
+        3. User click 'dang nhap voi google'
+        4. User click 'thu ngay' 
+            5. Web app display 
+
+        
 + Make the server works as well (Nginx related) 
     + Problem: 
         + Local dev: 

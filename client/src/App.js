@@ -20,8 +20,8 @@ function App() {
                 <GoogleOAuthProvider clientId="39117228837-iktth2scgqkeojkeg5tbemcu2o9ab9fq.apps.googleusercontent.com">
                     <AuthProvider>
                         <ThemeProvider theme={theme}>
-                            {/* <Home/> */}
-                            <GoogleCalendarGenerator/>
+                            <Home/>
+                            {/* <GoogleCalendarGenerator/> */}
                         </ThemeProvider>
                         {/* <RenderMenu /> */}
                         {/* <RenderRoutes /> */}

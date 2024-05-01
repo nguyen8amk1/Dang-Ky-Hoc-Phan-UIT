@@ -1,4 +1,4 @@
-import Header from './components/Header.js'; 
+import Header from './components/HomePageHeader.js'; 
 import Footer from './components/Footer.js'; 
 import {Box, Container, Typography, Grid, Button} from '@mui/material';
 
