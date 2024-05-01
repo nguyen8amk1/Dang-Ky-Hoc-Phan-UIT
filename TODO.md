@@ -221,12 +221,19 @@
 
             4. Web app display Submit TKB
 
-        3. User click 'dang nhap voi google' [] @Current
+        3. User click 'dang nhap voi google' [X] 
+                make the sign in with google button works
                 -> (Old) User click login button 
 
-        4. User click 'thu ngay' 
+        4. User click 'thu ngay' [X]
             5. Web app display 
 
+        + Make the prerequisite checking (vd: authentication, file uploaded) on sites work correctly
+            + Sign in button changing on homepage header and web app header [X] 
+                -> have a method to check the context user logged in context 
+
+            + Login form checking on /gcg [X]
+            + Checking file uploaded on the submit step [] @Current
         
 + Make the server works as well (Nginx related) 
     + Problem: 

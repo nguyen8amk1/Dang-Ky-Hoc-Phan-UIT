@@ -46,9 +46,11 @@ export const Home = () => {
                     </Grid>
 
                     <Grid item> 
-                        <Button variant="contained">
-                            <NavLink to="gcg">Thử ngay </NavLink>
-                        </Button>
+                        <NavLink to="gcg">
+                            <Button variant="contained">
+                                Thử ngay 
+                            </Button>
+                        </NavLink>
                     </Grid>
                 </Grid>
 

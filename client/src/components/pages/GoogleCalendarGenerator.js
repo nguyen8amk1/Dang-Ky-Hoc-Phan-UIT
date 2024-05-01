@@ -4,23 +4,21 @@ import SubmitYourTkbHTML from './components/SubmitYourTkbHTML'
 import GeneratedCalendar from './components/GeneratedCalendar'
 import { CircularProgress } from '@mui/material';
 import Header from './components/WebAppHeader'; 
+import { AuthData } from "../../auth/AuthProvider";
 
 function GoogleCalendarGenerator() {
-    const [loggedIn, setLoggedIn] = useState(undefined);
+    const [loggedIn, setLoggedIn] = useState(false);
     const [submittedFile, setSubmittedFile] = useState(undefined);
     const [generatedCalendar, setGeneratedCalendar] = useState(undefined);
+    const { userIsAuthenticated, user } = AuthData();
 
     useEffect(() => {
         // TODO: check for login
         // conditional rendering the login dialog 
         // TODO: set loading for when checking the logged in
-        const loginCheckTimeout = setTimeout(() => {
-            const isLoggedIn = false; // Assume the user is logged in for demonstration purposes
-            setLoggedIn(isLoggedIn);
-        }, 2000);
-
-        // Clear the timeout on component unmount to avoid memory leaks
-        return () => clearTimeout(loginCheckTimeout);
+        const loggedIn = userIsAuthenticated() !== undefined;
+        console.log(loggedIn, userIsAuthenticated());
+        setLoggedIn(loggedIn);
     }, []);  
 
     // TODO: what behaviour i want when i navigate to google calendar generator

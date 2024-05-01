@@ -14,10 +14,12 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import SignInWithGoogleButton from './SignInWithGoogleButton'
 import UserAvatar from './UserAvatar'
+import { AuthData } from "../../../auth/AuthProvider";
 
 function Header() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [loggedIn, setLoggedIn] = React.useState(false);
+    //const [loggedIn, setLoggedIn] = React.useState(false);
+    const { userIsAuthenticated, user } = AuthData();
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -84,7 +86,7 @@ function Header() {
                             LOGO
                         </Typography>
 
-                        {loggedIn ? <UserAvatar/>: <SignInWithGoogleButton/>}
+                        {userIsAuthenticated() ? <UserAvatar userInfo={user}/>: <SignInWithGoogleButton/>}
                     </Toolbar>
                 </Container>
             </AppBar>

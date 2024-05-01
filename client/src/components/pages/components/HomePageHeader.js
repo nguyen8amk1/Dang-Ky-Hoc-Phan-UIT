@@ -7,13 +7,13 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import UserAvatar from './UserAvatar';
 import SignInWithGoogleButton from './SignInWithGoogleButton';
+import { AuthData } from "../../../auth/AuthProvider";
 
 // TODO: this list should be getting from the navigation.js file
 const pages = ['Home', 'About', 'Contact'];
@@ -22,7 +22,8 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 function Header() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const [loggedIn, setLoggedIn] = React.useState(false);
+    //const [loggedIn, setLoggedIn] = React.useState(false);
+    const { userIsAuthenticated, user } = AuthData();
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -130,7 +131,7 @@ function Header() {
                             ))}
                         </Box>
 
-                        {loggedIn ? <UserAvatar/>: <SignInWithGoogleButton/>}
+                        {userIsAuthenticated() ? <UserAvatar userInfo={user}/>: <SignInWithGoogleButton/>}
                     </Toolbar>
                 </Container>
             </AppBar>

@@ -59,7 +59,7 @@ export const AuthProvider = ({children}) => {
             } 
 
             console.log("userInfo sign in Or token Change");
-            setUser({name: userInfo.displayName})
+            setUser({name: userInfo.displayName, image: userInfo.picture}); 
             // if (userInfo.accessToken !== localStorage.getItem('accessToken')) {
             //     console.log("Token change");
             //     localStorage.setItem('accessToken', userInfo.accessToken);
@@ -90,7 +90,7 @@ export const AuthProvider = ({children}) => {
                     }
                 )
                 console.log(res.data);
-                setUser({name: res.data.name});
+                setUser({name: res.data.name, image: res.data.picture});
             } catch(e) {
                 setUser(undefined);
                 console.error(e);

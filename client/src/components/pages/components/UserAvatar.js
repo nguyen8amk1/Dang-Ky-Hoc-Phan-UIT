@@ -10,11 +10,19 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import { AuthData } from "../../../auth/AuthProvider";
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function UserAvatar() {
+function UserAvatar({userInfo}) {
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const { userIsAuthenticated, user, logout } = AuthData();
+
+    const settings = [
+        { name: 'Profile', handler: () => {console.log("Profile")} } ,
+        { name: 'Account', handler: () => {console.log("Account")} } , 
+        { name: 'Dashboard', handler: () => {console.log("Dashboard")} } ,
+        { name: 'Logout', handler: () => {logout()} } ,
+    ];
 
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
@@ -25,11 +33,13 @@ function UserAvatar() {
     };
 
 
+    console.log(userInfo);
+
     return (
         <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                    <Avatar alt="User Google Avatar" src={userInfo.image} />
                 </IconButton>
             </Tooltip>
             <Menu
@@ -49,8 +59,8 @@ function UserAvatar() {
                 onClose={handleCloseUserMenu}
             >
                 {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">{setting}</Typography>
+                    <MenuItem key={setting.name} onClick={setting.handler}>
+                        <Typography textAlign="center">{setting.name}</Typography>
                     </MenuItem>
                 ))}
             </Menu>

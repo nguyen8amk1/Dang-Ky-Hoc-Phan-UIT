@@ -2,6 +2,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import Dialog from '@mui/material/Dialog';
 import {Button, Typography, List, ListItem, ListItemText, ListItemButton, Stack} from '@mui/material';
+import SignInWithGoogleButton from './SignInWithGoogleButton';
 
 function Login({loggedIn=false}) {
     if(loggedIn) return <></>
@@ -23,7 +24,7 @@ function Login({loggedIn=false}) {
                     <img style={{width: '100%', height: '100%'}} alt="This suppose to be a meme :))"
                         src="https://www.mememaker.net/static/images/memes/4806874.jpg"/>
 
-                    <Button>Sign in with Google</Button>
+                    <SignInWithGoogleButton/>
                     </Stack>
                     </ListItem>
                 </List>
