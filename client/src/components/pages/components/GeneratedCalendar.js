@@ -17,7 +17,6 @@ function GeneratedCalendar() {
     const navigate = useNavigate();
     const {clearCalendarSession} = useGoogleCalendarGeneratorContext();
     const [calendarState, setCalendarState] = useState("haven't");
-    const [isOperationFinish, setIsOperationFinish] = useState(false);
 
     // TODO: how to do enum is JS ?? 
     // 4 states: 
@@ -25,6 +24,7 @@ function GeneratedCalendar() {
     // isDoing 
     // success 
     // fail 
+    
 
     const handleGenerateGoogleCalendar = async () => {
         setCalendarState("isDoing"); 
@@ -33,13 +33,20 @@ function GeneratedCalendar() {
             setCalendarState("success");
         else 
             setCalendarState("fail");
-        
-        setIsOperationFinish(); 
     }
 
     const handleUploadAnotherTKB = () => {
         clearCalendarSession(); 
         navigate('/gcg/step-1-html-upload');
+    }
+
+    const getCalendarStateStatus = () => {
+        if(calendarState === 'success') {
+            return "Success"; 
+        }
+        else if(calendarState === 'fail') {
+            return "Failed"; 
+        }
     }
 
     return(
@@ -78,7 +85,7 @@ function GeneratedCalendar() {
             </Backdrop>
 
             <Dialog onClose={() => {setCalendarState("haven't")}} open={calendarState === 'success' || calendarState === 'fail'}>
-                <DialogTitle>The operation is {calendarState}</DialogTitle>
+                <DialogTitle>The operation is {getCalendarStateStatus()}</DialogTitle>
             </Dialog>
             <Result/>
         </>

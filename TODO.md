@@ -282,16 +282,20 @@
             + Better calendar UI 
 
         + Fix bugs: 
-            The user Avatar only appear once right after the login @Current 
+            + The finish status kinda sketchy, when dialog close event the status change then close. [] 
+
+            + The user Avatar only appear once right after the login 
             
-            Some time create tkb only create the Calendar but not the event
+            + Some time create tkb only create the Calendar but not the event
                 -> The few first passes work perfectly
                 -> But then things start to break 
 
-            The finish status kinda sketchy, when dialog close event the status change then close.
+            + Merge the format between the old and the new tkb localstorage stuff @Current 
 
             + Fix all the fixme: 
                 the big fixme in the login system 
+
+            + After logout the localstorage data not cleared
 
 
         + Publish the google app @Later 
