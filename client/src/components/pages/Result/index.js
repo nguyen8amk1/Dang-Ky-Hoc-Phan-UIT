@@ -11,7 +11,8 @@ import { useTkbStore } from '../../zus';
 // import ScriptDangKyInput, { DanhSachLopInput } from "./ScriptDangKyInput"
 import CalendarCreator from './google_calendar'; 
 
-const generateGoogleCalendar = async () => {
+export const generateGoogleCalendar = async () => {
+    // TODO: return the result status 
     console.log("Generate Google Calendar");
     const accessToken = localStorage.getItem("accessToken");
 
@@ -25,6 +26,8 @@ const generateGoogleCalendar = async () => {
     const schedule = JSON.parse(localStorage.getItem('raw-format-schedule') || []); 
     console.log("schedule: ", schedule);
     calendarCreator.generateResultCalendar(schedule);
+
+    return true;
 }
 
 export default function Index() {
@@ -42,7 +45,7 @@ export default function Index() {
                 paddingRight: TABLE_EXTRA_BUTTONS_WIDTH
             }}
         >
-            <button onClick={generateGoogleCalendar}>Generate Google Calendar</button>
+            {/* <button onClick={generateGoogleCalendar}>Generate Google Calendar</button> */}
             <Grid sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Tooltip
                     title={

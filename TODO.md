@@ -244,18 +244,65 @@
         + Merge the SubmitTKB with Select tkb [X] 
         + Make the generated TKB works [X] 
             
-
-        + Make sure everything works nicely [] @Current
+        + Make sure everything works nicely [] 
             + the upload file
                 have loading
 
             + the show calendar
                 have loading, skeleton
 
-            + the generate calendar
-                have loading
+            + the generate calendar 
+                have loading [X]
+                have finish status [X] 
+                change calendar's name option [] @Later
 
-        + Complete the UI
+        + Refine the UI 
+            + Avatar: 
+                + Remove all the redundancy 
+                    just leave the logout option
+                + Better positioned avatar on the web app bar 
+
+            + Logo: 
+                + Have a proper logo 
+                + Click on logo to go right back to the homepage
+                
+            + Disable the responsive appbar for now 
+
+            + Reposition all the loading into a backdrop
+
+            + Separate all the sections in the homepage
+
+            + Choose better color for text, background
+
+            + Create a ABOUT, CONTACT Section in the homepage
+                -> When click -> automatically slide to that Section 
+
+            + Show the calendar link for user to quickly navigate to the Google calendar after finish generating it
+
+            + Better calendar UI 
+
+        + Fix bugs: 
+            The user Avatar only appear once right after the login @Current 
+            
+            Some time create tkb only create the Calendar but not the event
+                -> The few first passes work perfectly
+                -> But then things start to break 
+
+            The finish status kinda sketchy, when dialog close event the status change then close.
+
+            + Fix all the fixme: 
+                the big fixme in the login system 
+
+
+        + Publish the google app @Later 
+
++ List out the missing parts of our websites: 
+    SEO: google analytic ?? 
+    CI: GitHub Actions
+    CD: Ansible
+    Monitoring: Prometheus
+    Web app performance: 
+    Security: 
 
 + Make the server works as well (Nginx related) 
     + Problem: 
@@ -269,7 +316,6 @@
             -> Different api url -> use as env vars
 
     + Having undefined Error but we are very very close @Later 
-
 
 + Work on the our web
     + Local: 

@@ -1,12 +1,47 @@
 import Header from './WebAppHeader';
 import {Box, Container, Typography, Grid, Button} from '@mui/material';
+import Backdrop from '@mui/material/Backdrop';
+import { CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import {useGoogleCalendarGeneratorContext} from '../GoogleCalendarGenerator';
 import Result from '../Result';
+import {generateGoogleCalendar} from '../Result';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle'
 
 function GeneratedCalendar() {
     const navigate = useNavigate();
     const {clearCalendarSession} = useGoogleCalendarGeneratorContext();
+    const [calendarState, setCalendarState] = useState("haven't");
+    const [isOperationFinish, setIsOperationFinish] = useState(false);
+
+    // TODO: how to do enum is JS ?? 
+    // 4 states: 
+    // haven't
+    // isDoing 
+    // success 
+    // fail 
+
+    const handleGenerateGoogleCalendar = async () => {
+        setCalendarState("isDoing"); 
+        const result = await generateGoogleCalendar(); 
+        if(result)
+            setCalendarState("success");
+        else 
+            setCalendarState("fail");
+        
+        setIsOperationFinish(); 
+    }
+
+    const handleUploadAnotherTKB = () => {
+        clearCalendarSession(); 
+        navigate('/gcg/step-1-html-upload');
+    }
+
     return(
         // TODO: what i'm gonna need 
         // 1. 2 Buttons 
@@ -26,15 +61,25 @@ function GeneratedCalendar() {
                     <Button size="large" variant="contained" sx={{
                         width: '13em',
                         height: '4em',
-                    }} onClick={() => {clearCalendarSession(); navigate('/gcg/step-1-html-upload')}} >Upload TKB khác</Button>
+                    }} onClick={handleUploadAnotherTKB} >Upload TKB khác</Button>
                 </Grid>
                 <Grid item>
                     <Button size="large" variant="contained" sx={{
                         width: '13em',
                         height: '4em',
-                    }}>Tạo Google Calendar</Button>
+                    }} onClick={handleGenerateGoogleCalendar}>Tạo Google Calendar</Button>
                 </Grid>
             </Grid>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={calendarState === 'isDoing'}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
+
+            <Dialog onClose={() => {setCalendarState("haven't")}} open={calendarState === 'success' || calendarState === 'fail'}>
+                <DialogTitle>The operation is {calendarState}</DialogTitle>
+            </Dialog>
             <Result/>
         </>
     );
