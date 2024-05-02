@@ -13,7 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { AuthData } from "../../../auth/AuthProvider";
 
 
-function UserAvatar({userInfo}) {
+function UserAvatar() {
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const { userIsAuthenticated, user, logout } = AuthData();
 
@@ -32,14 +32,13 @@ function UserAvatar({userInfo}) {
         setAnchorElUser(null);
     };
 
-
-    console.log(userInfo);
+    console.log(user);
 
     return (
         <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="User Google Avatar" src={userInfo.image} />
+                    <Avatar alt="User Google Avatar" src={user.image} />
                 </IconButton>
             </Tooltip>
             <Menu

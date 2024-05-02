@@ -33,7 +33,7 @@ export const AuthProvider = ({children}) => {
                     }
                 }
             )
-            userInfo = {displayName: res.data.name, image: res.data.picture}; 
+            userInfo = {displayName: res.data.name, picture: res.data.picture}; 
             console.log(res);
         } catch(e) {
             userInfo = undefined
