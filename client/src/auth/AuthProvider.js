@@ -43,6 +43,11 @@ export const AuthProvider = ({children}) => {
         //callback(userInfo);
     } 
 
+    const checkIfSessionValid = async () => {
+        // TODO: do something to check if the session is valid 
+
+    }
+
     useEffect( async ()=> {
         // NOTE: Setting the user information everytime the page load
         // TODO: 

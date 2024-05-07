@@ -5,10 +5,13 @@ import {useNavigate} from 'react-router-dom';
 import {useGoogleCalendarGeneratorContext} from '../GoogleCalendarGenerator';
 import { useTkbStore, selectDataExcel } from '../../zus';
 import {UIT_htmlFileProcessing} from '../SelectExcel/file_format_processor'; 
+import {AuthData} from '../../../auth/AuthProvider';
+import Login from './Login';
 
 function SubmitYourTkbHTML() {
     const [selectedFile, setSelectedFile] = useState(null);
     const {generatedCalendar, handleFileSubmit} = useGoogleCalendarGeneratorContext();
+    const {userIsAuthenticated} = AuthData();
 
     const dataExcel = useTkbStore(selectDataExcel) || {};
     const setDataExcel = useTkbStore((s) => s.setDataExcel);
@@ -45,6 +48,7 @@ function SubmitYourTkbHTML() {
                 handleFileSubmit(fileContent);
                 // You can perform any validation or processing logic here
                 console.log("Generated Calendar: ", generatedCalendar());
+
                 if(generatedCalendar()) {
                     navigate('/gcg/step2-generate-calendar');
                 }
@@ -56,6 +60,11 @@ function SubmitYourTkbHTML() {
             alert('Please select a file before submitting.');
         }
     };
+
+    // if(!userIsAuthenticated()) {
+    //     console.log("User is unauthenticated");
+    //     return <Login/>
+    // }
 
     return(
         <>

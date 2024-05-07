@@ -46,7 +46,7 @@ export const Home = () => {
                     </Grid>
 
                     <Grid item> 
-                        <NavLink to="gcg">
+                        <NavLink to="gcg/step1-html-upload">
                             <Button variant="contained">
                                 Thử ngay 
                             </Button>

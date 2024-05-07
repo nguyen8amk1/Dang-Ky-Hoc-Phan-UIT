@@ -65,39 +65,73 @@ export const GoogleCalendarGeneratorProvider = ({children}) => {
     );
 }
 
-function GoogleCalendarGenerator({children}) {
-    const [loggedIn, setLoggedIn] = useState(false);
-    // TODO: Moves these states to global using Context API
-    // The handleFileSubmit function 
-    // the generated data 
-    // the submitedData 
-    // const [submittedFile, setSubmittedFile] = useState(undefined);
-    // const [generatedCalendar, setGeneratedCalendar] = useState(undefined);
-    const { userIsAuthenticated, user } = AuthData();
-    const {submittedFile, generatedCalendar, handleFileSubmit} = useGoogleCalendarGeneratorContext();
 
-    useEffect(() => {
-        // TODO: check for login
-        // conditional rendering the login dialog 
-        // TODO: set loading for when checking the logged in
-        const loggedIn = userIsAuthenticated() !== undefined;
-        console.log(loggedIn, userIsAuthenticated());
-        setLoggedIn(loggedIn);
-    }, [user]);  
+// TODO: this could be a great place for a state machine
+//
+
+// // The machine is the context, meaning it's gonna replace the GoogleCalendarGeneratorProvider
+// import { createMachine } from "xstate";
+// export const machine = createMachine(
+//     {
+//         id: "Small App Navigation",
+//         initial: "Submit TKB HTML",
+//         states: {
+//             "Submit TKB HTML": {
+//                 on: {
+//                     "a tkb been submitted": {
+//                         target: "Generate Calendar",
+//                     },
+//                 },
+//             "Generate Calendar": {
+//                 on: {
+//                     "Submit another TKB": {
+//                         target: "Submit TKB HTML",
+//                     },
+//                 },
+//             },
+//         },
+//         on: {
+//             "navigate to submit tkb": [
+//                 {
+//                     target: ".Submit TKB HTML",
+//                     guard: "a file haven't been submitted",
+//                 },
+//                 {
+//                     target: ".Generate Calendar",
+//                 },
+//             ],
+//         },
+//     },
+//     {
+//         actions: {},
+//         actors: {},
+//         guards: {
+//             "a file haven't been submitted": ({ context, event }, params) => {
+//                 return false;
+//             },
+//         },
+//         delays: {},
+//     },
+// );
+
+
+function GoogleCalendarGenerator({children}) {
+    const { userIsAuthenticated } = AuthData();
+    const {submittedFile, generatedCalendar, handleFileSubmit} = useGoogleCalendarGeneratorContext();
     
     return(
         <>
             <Header/>
-            {loggedIn === undefined && <CircularProgress/>}
-            {loggedIn !== undefined && <Login loggedIn={loggedIn}/>}
+            {userIsAuthenticated() && <CircularProgress/>}
+            {/* {!userIsAuthenticated() !== undefined && <Login />} */}
+            {/* {userIsAuthenticated() === undefined && <CircularProgress/>} */}
 
-            {/**/}
             {/* TODO: instead of showing the file submit form -> navigate to the submit */}
-            {/* {loggedIn && !submittedFile && <SubmitYourTkbHTML onSubmit={handleFileSubmit} />} */}
+            {/* {userIsAuthenticated() && !submittedFile && <SubmitYourTkbHTML onSubmit={handleFileSubmit} />} */}
             {/* // TODO:  instead of showing the generated calendar -> navigate to the thing*/}
             {/* {generatedCalendar && <GeneratedCalendar data={generatedCalendar} />} */}
 
-            {loggedIn && !submittedFile() && <Navigate to='/gcg/step1-html-upload'/> }
+            {userIsAuthenticated() && !submittedFile() && <Navigate to='/gcg/step1-html-upload'/> }
             {generatedCalendar() && <Navigate to='/gcg/step2-generate-calendar'/>}
 
             {/* Show loading state or spinner while calendar is being generated */}

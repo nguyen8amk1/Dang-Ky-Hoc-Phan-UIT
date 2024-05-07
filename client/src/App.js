@@ -1,4 +1,4 @@
-import { createBrowserRouter, createRoutesFromElements, RouterProvider, Routes, Route, Link, Outlet} from 'react-router-dom';
+import { createBrowserRouter, createRoutesFromElements, RouterProvider, BrowserRouter, Routes, Route, Link, Outlet} from 'react-router-dom';
 import './App.css';
 import { AuthProvider } from './auth/AuthProvider';
 import {Home} from './components/pages/Home'; 
@@ -13,8 +13,7 @@ import { RenderMenu, RenderRoutes}from './components/structure/RenderNavigation'
 import SubmitYourTkbHTML from './components/pages/components/SubmitYourTkbHTML'
 import GeneratedCalendar from './components/pages/components/GeneratedCalendar'
 import { GoogleCalendarGeneratorProvider, useGoogleCalendarGeneratorContext } from './components/pages/GoogleCalendarGenerator'
-
-
+import {PrivateRoute}  from './components/pages/components/PrivateRoute';
 
 
 const theme = createTheme({
@@ -27,6 +26,23 @@ function App() {
         createRoutesFromElements(
             // TODO: create a layout that wraps around these, to have a uniform layout
             <Route path='/'>
+                <Route path="gcg/*" element={ // Use wildcard to catch all nested routes under /gcg
+                    <GoogleOAuthProvider clientId="39117228837-iktth2scgqkeojkeg5tbemcu2o9ab9fq.apps.googleusercontent.com">
+                        <AuthProvider>
+                            <PrivateRoute>
+                                <GoogleCalendarGeneratorProvider>
+                                    {/* <GoogleCalendarGenerator > */}
+                                    <Outlet /> {/* Render nested routes */}
+                                    {/* </GoogleCalendarGenerator > */}
+                                </GoogleCalendarGeneratorProvider>
+                            </PrivateRoute>
+                        </AuthProvider>
+                    </GoogleOAuthProvider>
+                }>
+                    <Route path="step1-html-upload" element={<SubmitYourTkbHTML />} />
+                    <Route path="step2-generate-calendar" element={<GeneratedCalendar />} />
+                </Route>            
+
                 <Route index element={
                     <GoogleOAuthProvider clientId="39117228837-iktth2scgqkeojkeg5tbemcu2o9ab9fq.apps.googleusercontent.com">
                         <AuthProvider>
@@ -35,20 +51,6 @@ function App() {
                     </GoogleOAuthProvider>
                 }></Route>
 
-                <Route path="gcg/*" element={ // Use wildcard to catch all nested routes under /gcg
-                    <GoogleOAuthProvider clientId="39117228837-iktth2scgqkeojkeg5tbemcu2o9ab9fq.apps.googleusercontent.com">
-                        <AuthProvider>
-                            <GoogleCalendarGeneratorProvider>
-                                <GoogleCalendarGenerator >
-                                    <Outlet /> {/* Render nested routes */}
-                                </GoogleCalendarGenerator >
-                            </GoogleCalendarGeneratorProvider>
-                        </AuthProvider>
-                    </GoogleOAuthProvider>
-                }>
-                    <Route path="step1-html-upload" element={<SubmitYourTkbHTML />} />
-                    <Route path="step2-generate-calendar" element={<GeneratedCalendar />} />
-                </Route>            
             </Route>
         )
     )

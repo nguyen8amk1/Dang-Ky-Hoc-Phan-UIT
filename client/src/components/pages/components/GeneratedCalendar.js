@@ -53,7 +53,6 @@ function GeneratedCalendar() {
         // TODO: what i'm gonna need 
         // 1. 2 Buttons 
         // 2. A calendar view 
-        
         <>
             <Grid container
                 direction="row"

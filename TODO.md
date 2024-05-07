@@ -304,8 +304,16 @@
 
 **THE ROUTING WON'T COLLIDE WITH THE APP LOGIC(STATE MACHINE) IF THE ROUTE GO TO THE PAGE THAT SHOULDN'T BE VISITED, THE LOGIC WILL HANDLE THE REDIRECT**
     https://xstatebyexample.com/authentication/
+    **FOR NOW JUST HANDLE THE GLOBAL STATES THE "NORMAL" WAY**
+        + Move the app to use the custom PrivateRoute [] (30m) 
+            Map out how the routing should work, since we're not having login page 
+            -> Replace the <Navigate login> to a login modal  
 
-        + How our app currently works: @Current 
+            Add the logic to do the transition between step 1 and step 2 in a more "state machine way" @Next
+
+        + Refactor the components file system [] (1h) @Next
+
+        + How our app currently works: 
             + User login with google 
                 + Store user information in localStorage 
             + If haven't login show the login button on the appbar
@@ -437,6 +445,22 @@ STATE MACHINE NOT REALLY MATTER TO ANYTHINGS THAT YOU ARE CODING**
 
 + Tu hoc adding UI: 
     -> including Chu Nhat 
+
+## Bug 
+        This is a big Bug:
+            Something wrong with the routing 
+            the expected behaviour would be it's rendering the login 
+            whenever user navigate to a protected page
+            but it's just navigate back to the root 
+
+            + When you navigate using the "thu ngay" button, it does show the login modal [] 
+                -> Solution: Add the login prompt logic right into the page itself @Current 
+                    this solution not working :v 
+
+                But when you navigate using the url directly, it's just navigate right back to the root
+
+                + Maybe changing the order of the routes element a bit 
+            -> Not a problem of private route 
 
 ## DONE
 Setup the Git Repo [] 
