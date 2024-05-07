@@ -1,10 +1,9 @@
-import { createBrowserRouter, createRoutesFromElements, RouterProvider, Routes, Route, Link} from 'react-router-dom';
+import { createBrowserRouter, createRoutesFromElements, RouterProvider, Routes, Route, Link, Outlet} from 'react-router-dom';
 import './App.css';
 import { AuthProvider } from './auth/AuthProvider';
 import {Home} from './components/pages/Home'; 
 
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import {Outlet} from 'react-router-dom'
 
 import {createTheme} from '@mui/material/styles';
 import {ThemeProvider} from '@emotion/react';

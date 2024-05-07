@@ -5,7 +5,7 @@ import { NavLink, Link} from 'react-router-dom';
 
 const lastestProduct = {
     name: "Google Calendar Generator", 
-    description: "Tạo Google Calendar từ TKB UIT", 
+    description: "Tạo Google Calendar từ TKB UIT",
 }
 
 export const Home = () => {

@@ -284,7 +284,7 @@
         + Fix bugs: 
             + The finish status kinda sketchy, when dialog close event the status change then close. [] 
 
-            + Some time create tkb only create the Calendar but not the event @Current 
+            + Some time create tkb only create the Calendar but not the event 
                 -> The few first passes work perfectly
                 -> But then things start to break 
 
@@ -299,6 +299,36 @@
 
 
         + Publish the google app @Later 
+
+        + Draw the Client as a tree to see the dependency chain 
+
+**THE ROUTING WON'T COLLIDE WITH THE APP LOGIC(STATE MACHINE) IF THE ROUTE GO TO THE PAGE THAT SHOULDN'T BE VISITED, THE LOGIC WILL HANDLE THE REDIRECT**
+    https://xstatebyexample.com/authentication/
+
+        + How our app currently works: @Current 
+            + User login with google 
+                + Store user information in localStorage 
+            + If haven't login show the login button on the appbar
+            + Only homepage accessible without login 
+
+            + All web app page need login to work 
+                + 1. Submit TKB HTML page: 
+                    + If not login -> Display login modal  
+                + 2. Generate Google Calendar page
+                    + If not login 
+                        -> 1.Display login modal  
+                        -> 2. After login redirect back to step 1  
+                            
+
+**YOU UI/NAVIGATION/OTHER THINGS ONLY REACT TO THE STATE MACHINE, 
+STATE MACHINE NOT REALLY MATTER TO ANYTHINGS THAT YOU ARE CODING**
+            Navigation:  
+            Call the checkloginservices and checking for the authmachine state
+                Logged in or logged out-> Homepage
+                Logged in -> 
+                    Webapppage
+                        Submit tkb 
+                        Generate google calendar
 
 + List out the missing parts of our websites: 
     SEO: google analytic ?? 

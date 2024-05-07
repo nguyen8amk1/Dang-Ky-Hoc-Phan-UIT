@@ -109,6 +109,7 @@ export const AuthProvider = ({children}) => {
         try{
             setUser({});
             localStorage.removeItem("accessToken");
+            localStorage.removeItem("user");
             navigate('/');
         } catch(e) {
             console.error(e);
@@ -120,5 +121,4 @@ export const AuthProvider = ({children}) => {
             {isLoading ? <CircularProgress /> : children}
         </AuthContext.Provider>
     )
-
 }

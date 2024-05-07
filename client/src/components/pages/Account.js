@@ -1,12 +1,12 @@
 import { AuthData } from "../../auth/AuthProvider"
 
 export const Account = () => {
-     const { user } = AuthData();
+    const { user } = AuthData();
 
-     return (
-          <div className="page">
-               <h2>Your Account</h2>
-               <p>Username: {user.name}</p>
-          </div>
-     )
+    return (
+        <div className="page">
+            <h2>Your Account</h2>
+            <p>Username: {user.name}</p>
+        </div>
+    )
 }
