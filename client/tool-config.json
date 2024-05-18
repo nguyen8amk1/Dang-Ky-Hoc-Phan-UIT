@@ -1,0 +1,5 @@
+{
+    "dev__image_tag_name":"nguyen8a/dev-nalendar-app:latest",
+    "dev__container_name": "dev_nalendar_app_container", 
+    "prod__image_tag_name": "nguyen8a/nanlendar-app:latest"
+}

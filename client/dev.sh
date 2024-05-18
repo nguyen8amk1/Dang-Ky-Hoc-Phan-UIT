@@ -10,6 +10,37 @@ push_flag=false
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # echo $script_dir
+#
+CONFIG_FILE="./tool-config.json"
+
+# Check if jq is installed
+if ! command -v jq &>/dev/null; then
+	echo "Error: jq could not be found, please install jq to use this script."
+	exit 1
+fi
+
+# Check if the file exists
+if [ ! -f "$CONFIG_FILE" ]; then
+	echo "Error: File not found: $CONFIG_FILE"
+	exit 1
+fi
+
+# Extract and print the value of the "name" field
+image_tag_name=$(jq -r '.dev__image_tag_name' "$CONFIG_FILE")
+container_name=$(jq -r '.dev__container_name' "$CONFIG_FILE")
+
+if [ "$image_tag_name" = "null" ]; then
+	echo "Error: The image-tag-name field is not present in the config file."
+	exit 1
+fi
+
+if [ "$container_name" = "null" ]; then
+	echo "Error: The container-name field is not present in the config file."
+	exit 1
+fi
+
+# image_tag_name="nguyen8a/dev-nalendar-app:latest"
+# container_name="dev_nalendar_app_container" # NOTE: this container name should be generated from the image_tag_name
 
 # Set the script to exit immediately if any command exits with a non-zero status
 set -e
@@ -50,9 +81,6 @@ while [[ $# -gt 0 ]]; do
 		# ;;
 	esac
 done
-
-image_tag_name="nguyen8a/dev-nalendar-app:latest"
-container_name="dev_nalendar_app_container"
 
 build_docker_image() {
 	if ! sudo docker build --tag $image_tag_name --file "$script_dir/Dev-Dockerfile" $script_dir; then

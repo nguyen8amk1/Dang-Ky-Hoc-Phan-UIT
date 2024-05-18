@@ -446,6 +446,9 @@ STATE MACHINE NOT REALLY MATTER TO ANYTHINGS THAT YOU ARE CODING**
 + Tu hoc adding UI: 
     -> including Chu Nhat 
 
+**JUST USE THE STATE MACHINE AS A DIAGRAM THEN IMPLEMENT IT NATIVELY IN REACT USING USESTATE** 
+
+
 ## Bug 
         This is a big Bug:
             Something wrong with the routing 
@@ -454,8 +457,6 @@ STATE MACHINE NOT REALLY MATTER TO ANYTHINGS THAT YOU ARE CODING**
             but it's just navigate back to the root 
 
             + When you navigate using the "thu ngay" button, it does show the login modal [] 
-                -> Solution: Add the login prompt logic right into the page itself @Current 
-                    this solution not working :v 
 
                 But when you navigate using the url directly, it's just navigate right back to the root
 

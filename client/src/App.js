@@ -20,51 +20,86 @@ const theme = createTheme({
     // NOTE: any custom theme put here
 }); 
 
-function App() {
-    // FIXME: do something with this mess, this is just a hack :v @Hacking
-    const router = createBrowserRouter(
-        createRoutesFromElements(
-            // TODO: create a layout that wraps around these, to have a uniform layout
-            <Route path='/'>
-                <Route path="gcg/*" element={ // Use wildcard to catch all nested routes under /gcg
-                    <GoogleOAuthProvider clientId="39117228837-iktth2scgqkeojkeg5tbemcu2o9ab9fq.apps.googleusercontent.com">
-                        <AuthProvider>
-                            <PrivateRoute>
-                                <GoogleCalendarGeneratorProvider>
-                                    {/* <GoogleCalendarGenerator > */}
-                                    <Outlet /> {/* Render nested routes */}
-                                    {/* </GoogleCalendarGenerator > */}
-                                </GoogleCalendarGeneratorProvider>
-                            </PrivateRoute>
-                        </AuthProvider>
-                    </GoogleOAuthProvider>
-                }>
-                    <Route path="step1-html-upload" element={<SubmitYourTkbHTML />} />
-                    <Route path="step2-generate-calendar" element={<GeneratedCalendar />} />
-                </Route>            
+// FIXME: do something with this mess, this is just a hack :v @Hacking
+const router = createBrowserRouter(
+    createRoutesFromElements(
+        // TODO: create a layout that wraps around these, to have a uniform layout
+        <Route path='/'>
+            <Route path="gcg/*" element={ // Use wildcard to catch all nested routes under /gcg
+                <GoogleOAuthProvider clientId="39117228837-iktth2scgqkeojkeg5tbemcu2o9ab9fq.apps.googleusercontent.com">
+                    <AuthProvider>
+                        <PrivateRoute>
+                            <GoogleCalendarGeneratorProvider>
+                                {/* <GoogleCalendarGenerator > */}
+                                <Outlet /> {/* Render nested routes */}
+                                {/* </GoogleCalendarGenerator > */}
+                            </GoogleCalendarGeneratorProvider>
+                        </PrivateRoute>
+                    </AuthProvider>
+                </GoogleOAuthProvider>
+            }>
+                <Route path="step1-html-upload" element={<SubmitYourTkbHTML />} />
+                <Route path="step2-generate-calendar" element={<GeneratedCalendar />} />
+            </Route>            
 
-                <Route index element={
-                    <GoogleOAuthProvider clientId="39117228837-iktth2scgqkeojkeg5tbemcu2o9ab9fq.apps.googleusercontent.com">
-                        <AuthProvider>
-                            <Home/>
-                        </AuthProvider>
-                    </GoogleOAuthProvider>
-                }></Route>
+            <Route index element={
+                <GoogleOAuthProvider clientId="39117228837-iktth2scgqkeojkeg5tbemcu2o9ab9fq.apps.googleusercontent.com">
+                    <AuthProvider>
+                        <Home/>
+                    </AuthProvider>
+                </GoogleOAuthProvider>
+            }></Route>
 
-            </Route>
-        )
+        </Route>
     )
+)
+
+// const router = createBrowserRouter([
+//     {
+//         path:'/', 
+//         element: 
+//             <GoogleOAuthProvider clientId="39117228837-iktth2scgqkeojkeg5tbemcu2o9ab9fq.apps.googleusercontent.com">
+//                 <AuthProvider>
+//                     <Home/>
+//                 </AuthProvider>
+//             </GoogleOAuthProvider>, 
+//         // errorElement:, 
+//         children: [
+//             {
+//                 path: "gcg/step1-html-upload", 
+//                 // errorElement:, 
+//                 element: 
+//                 <GoogleOAuthProvider clientId="39117228837-iktth2scgqkeojkeg5tbemcu2o9ab9fq.apps.googleusercontent.com">
+//                     <AuthProvider>
+//                         <PrivateRoute><SubmitYourTkbHTML/></PrivateRoute>
+//                     </AuthProvider>
+//                 </GoogleOAuthProvider>
+//             }, 
+//             {
+//                 path: "gcg/step2-generate-calendar", 
+//                 // errorElement:, 
+//                 element: 
+//                 <GoogleOAuthProvider clientId="39117228837-iktth2scgqkeojkeg5tbemcu2o9ab9fq.apps.googleusercontent.com">
+//                     <AuthProvider>
+//                         <PrivateRoute><GeneratedCalendar/></PrivateRoute>
+//                     </AuthProvider>
+//                 </GoogleOAuthProvider>
+//             }, 
+//         ], 
+//     }, 
+// ]);
+
+function App() {
 
     return (
         <ThemeProvider theme={theme}>
-            <RouterProvider router={router}>
-                <GoogleOAuthProvider clientId="39117228837-iktth2scgqkeojkeg5tbemcu2o9ab9fq.apps.googleusercontent.com">
-                    <AuthProvider>
-                        {/* <RenderMenu /> */}
-                        {/* <RenderRoutes /> */}
-                    </AuthProvider>
-                </GoogleOAuthProvider>
-            </RouterProvider>
+            <RouterProvider router={router}/>
+                {/* <GoogleOAuthProvider clientId="39117228837-iktth2scgqkeojkeg5tbemcu2o9ab9fq.apps.googleusercontent.com"> */}
+                {/*     <AuthProvider> */}
+                {/*         {/* <RenderMenu /> */} */}
+                {/*         {/* <RenderRoutes /> */} */}
+                {/*     </AuthProvider> */}
+                {/* </GoogleOAuthProvider> */}
         </ThemeProvider>
     );
 }
