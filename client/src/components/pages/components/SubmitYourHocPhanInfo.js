@@ -120,8 +120,8 @@ const outputCorrectLichThiFormat = (lichthi) => {
             endDate: convertDateFormat(mon.NgayThi),
             // FIXME: this starttime and endtime is not correct for generating google calendar
             // since thoi gian thi not cleanly map to tiet 
-            startTime: tietStartTimeMapping[parseInt(mon.Tiet[0])], 
-            endTime: tietEndMapping[parseInt(mon.Tiet[mon.Tiet.length-1])], 
+            startTime: tietStartTimeMapping[parseInt(mon.Tiet[0])-1], 
+            endTime: tietEndMapping[parseInt(mon.Tiet[mon.Tiet.length-1])-1], 
             gap: 1, 
             description: "Ngủ quên là rớt chết mẹ ráng chịu",
             color: 11, 
