@@ -159,8 +159,18 @@ const fetchAndParseXlsx = async (url) => {
 }
 
 
+const maLop2LichThi = (maLop) => {
+    // NOTE: this is just test code, this code should run on the frontend 
+    const lichthibody = JSON.parse(loadFromCache("https://student.uit.edu.vn/sites/daa/files/202405/lichthi_dotthi_1_l2_hk2_nh2023_thong_bao.xlsx")).lich_thi_body;
+    const dataArray = Object.values(lichthibody);
+    // Filter the array to find matching "MaLop"
+    const result = dataArray.filter(item => item.MaLop === maLop);
+    return result;
+}
+
 
 
 module.exports = {
-    fetchAndParseXlsx
+    fetchAndParseXlsx, 
+    maLop2LichThi, 
 }; 

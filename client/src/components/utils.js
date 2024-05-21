@@ -132,3 +132,34 @@ export const parseCourseInfo = (inputString) => {
 //         console.error(e.message);
 //     }
 // });
+//
+
+const maLop2LichThi = (maLop, lichthibody) => {
+    // TODO: this lichthibody should be the saved lichthibody get when you try to do someshit :v 
+    //const lichthibody = JSON.parse(loadFromCache("https://student.uit.edu.vn/sites/daa/files/202405/lichthi_dotthi_1_l2_hk2_nh2023_thong_bao.xlsx")).lich_thi_body;
+    const dataArray = Object.values(lichthibody);
+    // Filter the array to find matching "MaLop"
+    const result = dataArray.filter(item => item.MaLop === maLop);
+    return result;
+}
+
+
+/* the example use code 
+
+    // NOTE: this malop is gonna be stored in the frontend localstorage
+    const maLop = [
+        "CS105.O21.KHCL", 
+        "NT213.O22.ATCL", 
+        "SOMETHINGELSE", 
+        "SOMETHINGELSE", 
+        "SOMETHINGELSE", 
+    ]; 
+
+    let matchingObjects = [];
+    maLop.forEach(ml => {
+        const matches = maLop2LichThi(ml);
+        if (matches.length > 0) {
+            matchingObjects = matchingObjects.concat(matches);
+        }
+    });
+*/
