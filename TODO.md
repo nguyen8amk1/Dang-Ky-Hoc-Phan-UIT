@@ -3,6 +3,31 @@
 2. Pages check the global user authentication context to render data accordingly
 
 ## TODO
+0. thong tin dkhp parser [X] @Haven't_Test 
+    output the format that we use for the google calendar generator []
+    the format that store in the localstrorage
+
+1. an xlsx reader (we already have the base in uit-tool) [] 
+    extract the original xlsx parsing function [] 
+    modify that function to match with our description [] 
+        -> Problem: 
+            We need a backend to be able to do the auto xlsx service  
+        -> Solution: 
+            We just gonna work on the backend and process the xlsx [] 
+                1. Setup the backend dev.sh  [] (1h) @Current
+                    
+            then send the pre-processes xlxs info to the front end 
+            
+    -> Output to frontend: lich thi info 
+
+2. a mapping mechanism that map: []
+    class name and lich thi info 
+    + NOTE: 
+        The class information already stored in the local storage
+    
+-> All we need is another page in the series of pages in the original Nalendar pp 
+1 more feature 
+
 + Steps: 
     + Local: 
         ./build_dev_image.sh -> ./dev-compose.sh   

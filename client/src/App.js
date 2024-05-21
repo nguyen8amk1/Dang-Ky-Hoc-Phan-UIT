@@ -90,6 +90,14 @@ const router = createBrowserRouter(
 // ]);
 
 function App() {
+    // try {
+    //     fetchAndParseXlsx("https://student.uit.edu.vn/sites/daa/files/202405/lichthi_dotthi_1_l2_hk2_nh2023_thong_bao.xlsx").then(res => {
+    //         console.log(res);
+    //     });
+    //
+    // } catch (e) {
+    //     console.log(e);
+    // }
 
     return (
         <ThemeProvider theme={theme}>
