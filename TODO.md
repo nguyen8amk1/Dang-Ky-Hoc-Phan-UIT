@@ -15,15 +15,14 @@
         -> Solution: 
             We just gonna work on the backend and process the xlsx [] 
                 1. Setup the backend dev.sh  [X] (1h)
-                2. Process the xlsx info into a format that easy to map [] 
-                    What the format gonna be?? @Current 
-                    
+                2. Process the xlsx info into a format that easy to map [X] 
             then send the pre-processes xlxs info to the front end 
             
     -> Output to frontend: lich thi info 
 
-2. a mapping mechanism that map: []
-    class name and lich thi info 
+2. (Frontend) a mapping mechanism that 
+    map class name and lich thi info [] @Current 
+        But currently we just gonna test on the backend
     + NOTE: 
         The class information already stored in the local storage
     
