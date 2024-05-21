@@ -1,21 +1,21 @@
-const XLSX = require('xlsx');
 const axios = require('axios');
+const XLSX = require('xlsx');
+
 
 const isURL = (url) => {
     return (/^https?:\/\//.test(url)); 
 }
 
-const localStorage = {
-    getItem: (somethign) => null, 
-    setItem: (one, two) => null, 
-}; 
+const isCached = (key) => {
+    return false;
+}
 
 const fetchAndParseXlsx = async (url) => {
     if(!isURL(url)) throw new Error("Filename suppose to be a URL");
     let workbook = undefined; 
 
-    if(localStorage.getItem(url)) {
-        workbook = localStorage.getItem(url);
+    if(isCached(url)) {
+        //workbook = localStorage.getItem(url);
 
     } else {
         try {
@@ -36,6 +36,7 @@ const fetchAndParseXlsx = async (url) => {
             console.error('Error fetching or parsing the XLSX file:', error);
         }
     }
+
     // For example, get the first sheet
     const sheetName = workbook.SheetNames[0];
     const worksheet = workbook.Sheets[sheetName];
@@ -46,9 +47,6 @@ const fetchAndParseXlsx = async (url) => {
     // Output the JSON data
     return jsonData; 
 
-    // const bstr = ; // TODO: what does xlsx expect the input would be  ??
-    //
-    // const wb = XLSX.read(bstr, { type: rABS ? 'binary' : 'array' });
     // const wsLyThuyet = wb.Sheets[wb.SheetNames[0]];
     // const wsThucHanh = wb.Sheets[wb.SheetNames[1]];
     // const dataLyThuyet = XLSX.utils.sheet_to_json<any[][]>(wsLyThuyet, { header: 1 });
@@ -70,6 +68,9 @@ const fetchAndParseXlsx = async (url) => {
     // }
 }
 
-fetchAndParseXlsx("https://student.uit.edu.vn/sites/daa/files/202405/lichthi_dotthi_1_l2_hk2_nh2023_thong_bao.xlsx").then(res => {
-    console.log(res);
-})
+
+
+
+module.exports = {
+    fetchAndParseXlsx
+}; 

@@ -14,7 +14,9 @@
             We need a backend to be able to do the auto xlsx service  
         -> Solution: 
             We just gonna work on the backend and process the xlsx [] 
-                1. Setup the backend dev.sh  [] (1h) @Current
+                1. Setup the backend dev.sh  [X] (1h)
+                2. Process the xlsx info into a format that easy to map [] 
+                    What the format gonna be?? @Current 
                     
             then send the pre-processes xlxs info to the front end 
             
