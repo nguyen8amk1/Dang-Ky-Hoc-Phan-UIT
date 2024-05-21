@@ -7,7 +7,7 @@ Clean the Project structure to a more basic structure:
     + components
     + pages 
 
-0. thong tin dkhp parser [X] @Haven't_Test 
+0. thong tin dkhp parser [X] 
     -> Write a form for the thongtindkhp input [X] 
     output the format that we use for the google calendar generator [X]
         ie. the format that store in the localstrorage
@@ -15,7 +15,7 @@ Clean the Project structure to a more basic structure:
 4.  1. Connect the front end with the backend through localhost [] @Current
         just to make sure it works
 
-    2. Go with nginx with the prod version
+    2. Go with nginx with the prod version @Next
     
 -> All we need is another page in the series of pages in the original Nalendar pp 
 1 more feature 

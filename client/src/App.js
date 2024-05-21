@@ -13,6 +13,7 @@ import { RenderMenu, RenderRoutes}from './components/structure/RenderNavigation'
 import SubmitYourTkbHTML from './components/pages/components/SubmitYourTkbHTML'
 import SubmitYourHocPhanInfo from './components/pages/components/SubmitYourHocPhanInfo'
 import GeneratedCalendar from './components/pages/components/GeneratedCalendar'
+import GeneratedLichThi from './components/pages/components/GeneratedLichThi'
 import { GoogleCalendarGeneratorProvider, useGoogleCalendarGeneratorContext } from './components/pages/GoogleCalendarGenerator'
 import {PrivateRoute}  from './components/pages/components/PrivateRoute';
 import ThoiKhoaBieuTable from './components/pages/components/ThoiKhoaBieuTable';
@@ -108,7 +109,7 @@ function App() {
     const b = 
         <>
             <SubmitYourHocPhanInfo/>
-            <ThoiKhoaBieuTable/>
+            <GeneratedLichThi />
         </>
 
     return (

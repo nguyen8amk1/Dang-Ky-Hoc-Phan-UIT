@@ -118,6 +118,8 @@ const outputCorrectLichThiFormat = (lichthi) => {
             name: mon.TenMonHoc,
             startDate: convertDateFormat(mon.NgayThi),
             endDate: convertDateFormat(mon.NgayThi),
+            // FIXME: this starttime and endtime is not correct for generating google calendar
+            // since thoi gian thi not cleanly map to tiet 
             startTime: tietStartTimeMapping[parseInt(mon.Tiet[0])], 
             endTime: tietEndMapping[parseInt(mon.Tiet[mon.Tiet.length-1])], 
             gap: 1, 
