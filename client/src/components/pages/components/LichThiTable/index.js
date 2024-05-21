@@ -100,7 +100,7 @@ function Render() {
     
     const rowDataHocTrenTruong = html2RowDataHocTrenTruong(dataExcel.data);
 
-    //const location = useLocation()
+    const location = useLocation()
     //const isChiVeTkb = useTkbStore(selectIsChiVeTkb)
     const {
         tkbTableRef,

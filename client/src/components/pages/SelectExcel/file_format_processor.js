@@ -25,7 +25,7 @@ export const UIT_xlsxFileProcessing = (e, rABS, setDataExcel, file) => {
     }); 
 }
 
-const outputCorrectFormat = (schedule) => {
+export const outputCorrectFormat = (schedule) => {
     // NOTE: we have
     // color
     // description

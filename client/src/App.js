@@ -15,6 +15,7 @@ import SubmitYourHocPhanInfo from './components/pages/components/SubmitYourHocPh
 import GeneratedCalendar from './components/pages/components/GeneratedCalendar'
 import { GoogleCalendarGeneratorProvider, useGoogleCalendarGeneratorContext } from './components/pages/GoogleCalendarGenerator'
 import {PrivateRoute}  from './components/pages/components/PrivateRoute';
+import ThoiKhoaBieuTable from './components/pages/components/ThoiKhoaBieuTable';
 
 
 const theme = createTheme({
@@ -104,7 +105,11 @@ function App() {
             {/* </GoogleOAuthProvider> */}
         </ThemeProvider>
 
-    const b = <SubmitYourHocPhanInfo/>
+    const b = 
+        <>
+            <SubmitYourHocPhanInfo/>
+            <ThoiKhoaBieuTable/>
+        </>
 
     return (
         //a
