@@ -11,6 +11,7 @@ import GoogleCalendarGenerator from './components/pages/GoogleCalendarGenerator'
 import { RenderMenu, RenderRoutes}from './components/structure/RenderNavigation'; 
 
 import SubmitYourTkbHTML from './components/pages/components/SubmitYourTkbHTML'
+import SubmitYourHocPhanInfo from './components/pages/components/SubmitYourHocPhanInfo'
 import GeneratedCalendar from './components/pages/components/GeneratedCalendar'
 import { GoogleCalendarGeneratorProvider, useGoogleCalendarGeneratorContext } from './components/pages/GoogleCalendarGenerator'
 import {PrivateRoute}  from './components/pages/components/PrivateRoute';
@@ -89,17 +90,25 @@ const router = createBrowserRouter(
 //     }, 
 // ]);
 
+
+
 function App() {
-    return (
+    const a = 
         <ThemeProvider theme={theme}>
             <RouterProvider router={router}/>
-                {/* <GoogleOAuthProvider clientId="39117228837-iktth2scgqkeojkeg5tbemcu2o9ab9fq.apps.googleusercontent.com"> */}
-                {/*     <AuthProvider> */}
-                {/*         {/* <RenderMenu /> */} */}
-                {/*         {/* <RenderRoutes /> */} */}
-                {/*     </AuthProvider> */}
-                {/* </GoogleOAuthProvider> */}
+            {/* <GoogleOAuthProvider clientId="39117228837-iktth2scgqkeojkeg5tbemcu2o9ab9fq.apps.googleusercontent.com">  */}
+                {/* <AuthProvider> */}
+                    {/* <RenderMenu />  */}
+                    {/* <RenderRoutes /> */}
+            {/*     </AuthProvider>  */}
+            {/* </GoogleOAuthProvider> */}
         </ThemeProvider>
+
+    const b = <SubmitYourHocPhanInfo/>
+
+    return (
+        //a
+        b
     );
 }
 

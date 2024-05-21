@@ -132,11 +132,12 @@ export const parseCourseInfo = (inputString) => {
 //         console.error(e.message);
 //     }
 // });
-//
 
-const maLop2LichThi = (maLop, lichthibody) => {
-    // TODO: this lichthibody should be the saved lichthibody get when you try to do someshit :v 
-    //const lichthibody = JSON.parse(loadFromCache("https://student.uit.edu.vn/sites/daa/files/202405/lichthi_dotthi_1_l2_hk2_nh2023_thong_bao.xlsx")).lich_thi_body;
+
+
+
+export const maLop2LichThi = (maLop, lichthibody) => {
+    // console.log(maLop);
     const dataArray = Object.values(lichthibody);
     // Filter the array to find matching "MaLop"
     const result = dataArray.filter(item => item.MaLop === maLop);

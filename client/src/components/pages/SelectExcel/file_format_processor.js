@@ -58,12 +58,14 @@ const outputCorrectFormat = (schedule) => {
         let tietEnd = endTime2TietMapping[entry.endTime]; 
         let tietStart = startTime2TietMapping[entry.startTime]; 
 
+        // FIXME: This is a little patch that just do some random thing 
+        // fix it anytime you can 
         result.push({
-            MaLop: "ditme", 
+            MaLop: entry.malop || "ditme", 
             NgonNgu: "saigon", 
             TenMH: entry.name, 
             TenGV: "ditmesaigon", 
-            PhongHoc: "khong the nao", 
+            PhongHoc: entry.phonghoc || "khong the nao", 
             NBD: entry.startDate, 
             NKT: entry.endDate,
             Thu: entry.weekday,

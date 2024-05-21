@@ -3,26 +3,19 @@
 2. Pages check the global user authentication context to render data accordingly
 
 ## TODO
+Clean the Project structure to a more basic structure: 
+    + components
+    + pages 
+
 0. thong tin dkhp parser [X] @Haven't_Test 
-    output the format that we use for the google calendar generator [] @Current
+    -> Write a form for the thongtindkhp input [] @Current
+
+    output the format that we use for the google calendar generator [] @Next
         ie. the format that store in the localstrorage
 
-1. an xlsx reader (we already have the base in uit-tool) [X] 
-        -> Problem: 
-            We need a backend to be able to do the auto xlsx service  
-        -> Solution: 
-            We just gonna work on the backend and process the xlsx [X] 
-                1. Setup the backend dev.sh  [X] (1h)
-                2. Process the xlsx info into a format that easy to map [X] 
-            then send the pre-processes xlxs info to the front end 
-            
-    -> Output to frontend: lich thi info 
-
-2. (Frontend) a mapping mechanism that 
-    map class name and lich thi info [X]
-        But currently we just gonna test on the backend
-    + NOTE: 
-        The class information already stored in the local storage
+4.  1. Connect the front end with the backend through localhost @Next
+        just to make sure it works
+    2. Go with nginx with the prod version
     
 -> All we need is another page in the series of pages in the original Nalendar pp 
 1 more feature 
@@ -515,3 +508,22 @@ Setup the Git Repo []
                     -> api url: 
                 + create new calendar
                     -> api url: 
+
+
+
+1. an xlsx reader (we already have the base in uit-tool) [X] 
+        -> Problem: 
+            We need a backend to be able to do the auto xlsx service  
+        -> Solution: 
+            We just gonna work on the backend and process the xlsx [X] 
+                1. Setup the backend dev.sh  [X] (1h)
+                2. Process the xlsx info into a format that easy to map [X] 
+            then send the pre-processes xlxs info to the front end 
+            
+    -> Output to frontend: lich thi info 
+
+2. (Frontend) a mapping mechanism that 
+    map class name and lich thi info [X]
+        But currently we just gonna test on the backend
+    + NOTE: 
+        The class information already stored in the local storage
