@@ -18,8 +18,35 @@ Clean the Project structure to a more basic structure:
     2. Go with nginx with the prod version @Next
     
 5. Map out how things will behave in XState [] (2h) @Current
-    How i actually want to use it: 
+    **EVERY STATE IN A ROUTING_STATE_MACHINE SHOULD BE A PAGE** 
+    + **FIRST DETERMINE WHAT'S A STATE AND EVENT REPRESENT IN THAT STATE MACHINE**: 
+        + vd:    
+            + 1. Routing state machine 
+                + a state:  a page 
+                + an event: a navigation 
                 
+            + 2. Authentication state machine
+                + a state: global authentication value 
+                    (vd: logged in, logged out, pending verification)
+                + an event: CRUD operations to the global authentication value 
+                    (vd: login, logout, token refresh)
+
+            + 3. Page Behaviour state machine 
+                + a state: a snapshot of what components are currently shown
+                    (vd: loading, error, content display)
+                
+                + an event: trigger that changes the list of displayed components 
+                    -> deciding what component to render when an trigger come
+                     (vd: fetching data, handling user input, receiving an error).
+
+            + 4. A component behaviour state machine: 
+                + a state: a value that store the current "state" of the component
+                    (vd: toggled on/off, expanded/collapsed, active/inactive).
+
+                + an event: an action/trigger that changes the component state
+                    (vd: user clicks a button, data is received from a parent component, a timeout occurs).
+
+
 
 6. Push to Production Environment to test stuff [] @Next
     There might be a problem i need to fix 
