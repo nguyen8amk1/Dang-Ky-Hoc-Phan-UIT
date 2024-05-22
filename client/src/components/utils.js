@@ -71,7 +71,6 @@ export const extractInputStrings = (text) => {
 // const inputStrings = extractInputStrings(text);
 // console.log(inputStrings);
 
-
 export const parseCourseInfo = (inputString) => {
     // Split the input string by newlines first
     const lines = inputString.split('\n');
@@ -84,31 +83,116 @@ export const parseCourseInfo = (inputString) => {
     // Join the lines back with a space for uniformity
     const unifiedString = lines.join(' ');
 
-    // Regular expression to capture meaningful parts, considering that course names and instructor names might have spaces
-    const regex = /^(\d+)\s+([A-Za-z0-9]+)\s+([A-Za-z0-9.]+)\s+(.+?)\s+(\d+)\s+(.+?)\s+(Thứ\s+\*?[\d\s]+\s+Tiết\s+\*?[\d\s\-]+)\s+(Phòng\s+[\w.\*]+)$/;
+    // Split by whitespace and filter out empty parts
+    const parts = unifiedString.split(/\s+/).filter(Boolean);
 
-    // Match the unified string with the regex
-    const match = unifiedString.match(regex);
-
-    // If the match fails, throw an error
-    if (!match) {
+    // Ensure there are at least three parts (courseNumber, courseCode, classCode)
+    if (parts.length < 3) {
         throw new Error("Invalid input string format");
+    }
+
+    // Extract the mandatory parts
+    let courseNumber, courseCode, classCode, startIndex;
+    if (parts[0].match(/^\d+$/)) {
+        courseNumber = parts[0];
+        courseCode = parts[1];
+        classCode = parts[2];
+        startIndex = 3;
+    } else {
+        courseNumber = null;
+        courseCode = parts[0];
+        classCode = parts[1];
+        startIndex = 2;
+    }
+
+    // Check if classCode is in the expected format
+    if (!classCode.match(/^[A-Za-z0-9.]+$/)) {
+        throw new Error("Invalid input string format: classCode missing or invalid");
+    }
+
+    // Extract optional parts
+    let courseName = null, credits = null, instructors = null, schedule = null, location = null;
+    
+    if (startIndex < parts.length) {
+        // Look for credits which should be a number
+        const creditsIndex = parts.slice(startIndex).findIndex(part => part.match(/^\d+$/));
+        if (creditsIndex !== -1) {
+            credits = parseInt(parts[startIndex + creditsIndex]);
+            courseName = parts.slice(startIndex, startIndex + creditsIndex).join(' ');
+            startIndex += creditsIndex + 1;
+        } else {
+            courseName = parts.slice(startIndex).join(' ');
+        }
+    }
+
+    if (startIndex < parts.length) {
+        const remainingParts = parts.slice(startIndex).join(' ');
+        instructors = remainingParts.match(/^[^Thứ]+/);
+        if (instructors) {
+            instructors = instructors[0].trim().split(/,\s*|\s{2,}/);
+        }
+        schedule = remainingParts.match(/(Thứ\s+\*?[\d\s]+\s+Tiết\s+\*?[\d\s\-]+)/) ? remainingParts.match(/(Thứ\s+\*?[\d\s]+\s+Tiết\s+\*?[\d\s\-]+)/)[0] : null;
+        location = remainingParts.match(/(Phòng\s+[\w.\*]+)/) ? remainingParts.match(/(Phòng\s+[\w.\*]+)/)[0] : null;
     }
 
     // Construct the object to return
     const result = {
-        courseNumber: match[1],
-        courseCode: match[2],
-        classCode: match[3],
-        courseName: match[4],
-        credits: parseInt(match[5]),
-        instructors: match[6].split(/,\s*|\s{2,}/),  // Split multiple instructors by commas or multiple spaces
-        schedule: match[7],
-        location: match[8]
+        courseNumber: courseNumber || null,
+        courseCode: courseCode || null,
+        classCode: classCode,
+        courseName: courseName || null,
+        credits: credits || null,
+        instructors: instructors || null,
+        schedule: schedule || null,
+        location: location || null
     };
 
     return result;
 }
+
+
+// TODO: this old version still works as expected, it's just not priorities the classcode 
+// export const parseCourseInfo = (inputString) => {
+//     // Split the input string by newlines first
+//     const lines = inputString.split('\n');
+//
+//     // Handle cases with multiline instructor names
+//     if (lines.length > 2) {
+//         lines[1] = lines.slice(1).join(' ');
+//     }
+//
+//     // Join the lines back with a space for uniformity
+//     const unifiedString = lines.join(' ');
+//
+//     // Regular expression to capture meaningful parts, making schedule and location optional
+//     const regex = /^(\d+)\s+([A-Za-z0-9]+)\s+([A-Za-z0-9.]+)\s+(.+?)\s+(\d+)\s+(.+?)(?:\s+(Thứ\s+\*?[\d\s]+\s+Tiết\s+\*?[\d\s\-]+)\s+(Phòng\s+[\w.\*]+))?$/;
+//
+//     // Match the unified string with the regex
+//     const match = unifiedString.match(regex);
+//
+//     // If the match fails, throw an error
+//     if (!match) {
+//         throw new Error("Invalid input string format");
+//     }
+//
+//     // Construct the object to return
+//     const result = {
+//         courseNumber: match[1],
+//         courseCode: match[2],
+//         classCode: match[3],
+//         courseName: match[4],
+//         credits: parseInt(match[5]),
+//         instructors: match[6].split(/,\s*|\s{2,}/),  // Split multiple instructors by commas or multiple spaces
+//     };
+//
+//     // Add optional schedule and location if they exist
+//     if (match[7] && match[8]) {
+//         result.schedule = match[7];
+//         result.location = match[8];
+//     }
+//
+//     return result;
+// }
 
 // // Example usage:
 // const inputStrings = [
@@ -139,8 +223,10 @@ export const parseCourseInfo = (inputString) => {
 export const maLop2LichThi = (maLop, lichthibody) => {
     // console.log(maLop);
     const dataArray = Object.values(lichthibody);
+    console.log("lichthibody: ", dataArray);
     // Filter the array to find matching "MaLop"
     const result = dataArray.filter(item => item.MaLop === maLop);
+    console.log(`malop: ${maLop}, malop2lichthi: ${result}`);
     return result;
 }
 

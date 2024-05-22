@@ -19,7 +19,7 @@ Clean the Project structure to a more basic structure:
     
 5. Map out how things will behave in XState [] (2h) @Next
 
--> All we need is another page in the series of pages in the original Nalendar pp 
+-> All we need is another page in the series of pages in the original Nalendar app 
 1 more feature 
 
 + Steps: 
