@@ -12,12 +12,17 @@ Clean the Project structure to a more basic structure:
     output the format that we use for the google calendar generator [X]
         ie. the format that store in the localstrorage
 
-4.  1. Connect the front end with the backend through localhost [] @Current
+4.  1. Connect the front end with the backend through localhost [] @Next
         just to make sure it works
 
     2. Go with nginx with the prod version @Next
     
-5. Map out how things will behave in XState [] (2h) @Next
+5. Map out how things will behave in XState [] (2h) @Current
+    How i actually want to use it: 
+                
+
+6. Push to Production Environment to test stuff [] @Next
+    There might be a problem i need to fix 
 
 -> All we need is another page in the series of pages in the original Nalendar app 
 1 more feature 

@@ -1,4 +1,4 @@
-if ! sudo docker-compose --file ./prod-docker-compose.yml pull; then
+if ! sudo docker compose --file ./prod-docker-compose.yml pull; then
 	echo "Error: Failed to pull the latest image"
 	exit 0
 fi

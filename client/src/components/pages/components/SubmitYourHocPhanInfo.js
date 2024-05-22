@@ -5,97 +5,6 @@ import {tietStartTimeMapping, tietEndMapping} from '../SelectExcel/utils';
 import {outputCorrectFormat} from '../../pages/SelectExcel/file_format_processor.js';
 import { useTkbStore } from '../../zus';
 
-/*
- *
- *
- *
- *
- * *{
-  "data": [
-    {
-      "MaLop": "ditme",
-      "NgonNgu": "saigon",
-      "TenMH": "Quản trị mạng và hệ thống - NT132.O12.ATCL - EN",
-      "TenGV": "ditmesaigon",
-      "PhongHoc": "khong the nao",
-      "NBD": "11/09/23",
-      "NKT": "30/12/23",
-      "Thu": 2,
-      "Tiet": "012"
-    },
-    {
-      "MaLop": "ditme",
-      "NgonNgu": "saigon",
-      "TenMH": "Lập trình ứng dụng Web - NT208.O13.ATCL - VN",
-      "TenGV": "ditmesaigon",
-      "PhongHoc": "khong the nao",
-      "NBD": "11/09/23",
-      "NKT": "25/11/23",
-      "Thu": 5,
-      "Tiet": "012"
-    },
-    {
-      "MaLop": "ditme",
-      "NgonNgu": "saigon",
-      "TenMH": "An toàn mạng - NT140.O12.ATCL - VN",
-      "TenGV": "ditmesaigon",
-      "PhongHoc": "khong the nao",
-      "NBD": "11/09/23",
-      "NKT": "30/12/23",
-      "Thu": 6,
-      "Tiet": "012"
-    },
-    {
-      "MaLop": "ditme",
-      "NgonNgu": "saigon",
-      "TenMH": "Phân tích và thiết kế thuật toán - CS112.O11.KHCL - VN",
-      "TenGV": "ditmesaigon",
-      "PhongHoc": "khong the nao",
-      "NBD": "11/09/23",
-      "NKT": "30/12/23",
-      "Thu": 7,
-      "Tiet": "012"
-    },
-    {
-      "MaLop": "ditme",
-      "NgonNgu": "saigon",
-      "TenMH": "Chủ nghĩa xã hội khoa học - SS009.O12 - VN",
-      "TenGV": "ditmesaigon",
-      "PhongHoc": "khong the nao",
-      "NBD": "11/09/23",
-      "NKT": "30/12/23",
-      "Thu": 4,
-      "Tiet": "34"
-    },
-    {
-      "MaLop": "ditme",
-      "NgonNgu": "saigon",
-      "TenMH": "Quản trị mạng và hệ thống - NT132.O12.ATCL.2 - EN(HT1) - (Cách 2 tuần)",
-      "TenGV": "ditmesaigon",
-      "PhongHoc": "khong the nao",
-      "NBD": "02/10/23",
-      "NKT": "30/12/23",
-      "Thu": 2,
-      "Tiet": "56789"
-    },
-    {
-      "MaLop": "ditme",
-      "NgonNgu": "saigon",
-      "TenMH": "An toàn mạng - NT140.O12.ATCL.2 - VN(HT1) - (Cách 2 tuần)",
-      "TenGV": "ditmesaigon",
-      "PhongHoc": "khong the nao",
-      "NBD": "02/10/23",
-      "NKT": "30/12/23",
-      "Thu": 6,
-      "Tiet": "56789"
-    }
-  ],
-  "fileName": "Lịch TKB - Lịch thi _ Cổng thông tin đào tạo1.html",
-  "lastUpdate": "22:24 21/05/2024"
-}
-*/
-
-
 
 const convertDateFormat = (date) => {
     // Split the input date by hyphen
@@ -236,8 +145,6 @@ function SubmitYourHocPhanInfo() {
                     <label htmlFor="w3info">Submit your THONG TIN DKHP</label>
                 </p>
                 <textarea
-                    id="w3info"
-                    name="w3info"
                     rows="40"
                     cols="100"
                     value={info}

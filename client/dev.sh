@@ -97,6 +97,7 @@ run_and_link_docker_image() {
 	if ! sudo docker run --name $container_name -p $host_port:$container_port --rm \
 		-v "$script_dir/src":"/$workdir/src" \
 		-v "$script_dir/public":"/$workdir/public" \
+		-v "$script_dir/machines":"/$workdir/machines" \
 		-v "/app/node_modules" \
 		$image_tag_name; then
 		echo "Error: Something wrong with docker run process"
