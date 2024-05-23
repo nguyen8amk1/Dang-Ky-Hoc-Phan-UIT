@@ -32,13 +32,6 @@ function LichThiPreview({setWantToUploadAnotherTTDKHPEvent}) {
     const [currentState, setCurrentState] = useState(States.WANT_TO_GENERATE_GOOGLE_CALENDAR);
     const [event__suddenlyDontWantToLoginAnymore, setEvent__suddenlyDontWantToLoginAnymore] = useState(false); 
 
-    // TODO: how to do enum is JS ?? 
-    // 4 states: 
-    // haven't
-    // isDoing 
-    // success 
-    // fail 
-    
     useEffect(() => {
         switch(currentState) {
             case States.WANT_TO_GENERATE_GOOGLE_CALENDAR: {
@@ -61,7 +54,6 @@ function LichThiPreview({setWantToUploadAnotherTTDKHPEvent}) {
                     console.log("THIS USER IS SUPPOSE TO BE LOGGED IN ALREADY");
                     setCurrentState(States.GENERATING_GOOGLE_CALENDAR);
                 } else if(event__suddenlyDontWantToLoginAnymore){
-                    console.log("SOMETHING HAPPENS");
                     setEvent__suddenlyDontWantToLoginAnymore(false); // Reset Event
                     setCurrentState(States.WANT_TO_GENERATE_GOOGLE_CALENDAR);
                 }

@@ -1,10 +1,17 @@
 // TODO: design the hoc phan info behaviour in xstate editor 
 import React, { useState } from 'react';
+import {useNavigate} from 'react-router-dom';
 import {maLop2LichThi, extractInputStrings, parseCourseInfo} from '../utils'; 
 import {tietStartTimeMapping, tietEndMapping} from '../pages/SelectExcel/utils';
 import {outputCorrectFormat} from '../pages/SelectExcel/file_format_processor.js';
 import { useTkbStore } from '../utils/zus';
-
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle'
+import {Box, Container, Typography, Grid, Button} from '@mui/material';
+import Backdrop from '@mui/material/Backdrop';
 
 const convertDateFormat = (date) => {
     // Split the input date by hyphen
@@ -45,7 +52,10 @@ const outputCorrectLichThiFormat = (lichthi) => {
     return correctFormat;
 }
 
-function SubmitYourHocPhanInfo({setGoodSubmittedInfoEvent}) {
+
+
+function SubmitYourHocPhanInfo({lichThiHaveBeenGenerated, setGoodSubmittedInfoEvent, setWantToSeePreviouslyCreatedCalendarEvent}) {
+    const navigate = useNavigate();
     const [info, setInfo] = useState('Submit your thong tin dkhp');
     const setDataExcel = useTkbStore((s) => s.setDataExcel);
 
@@ -92,7 +102,7 @@ function SubmitYourHocPhanInfo({setGoodSubmittedInfoEvent}) {
 
         localStorage.setItem("raw-lichthi-schedule", JSON.stringify(schedule));
         //console.log(schedule);
-        //
+        
         const correctedFormatSchedule = outputCorrectFormat(schedule);
         setDataExcel({
             data: correctedFormatSchedule,
@@ -106,8 +116,40 @@ function SubmitYourHocPhanInfo({setGoodSubmittedInfoEvent}) {
 
     };
 
+    const handleGoBackHome = () => {
+        navigate('/');
+    }
+
+    const handleShowPreviouslyCreatedCalendar= () => {
+        setWantToSeePreviouslyCreatedCalendarEvent(true);
+    }
+
     return (
         <>
+            <Grid container
+                direction="row"
+                justifyContent="space-around"
+                alignItems="center"
+                sx={{
+                    margin: '3em'
+                }}
+            >
+                <Grid item>
+                    {/* TODO: when clicked remove the generatedCalendar and submittedfile and navigate to the gcg/step1-html-upload*/}
+                    <Button size="large" variant="contained" sx={{
+                        width: '13em',
+                        height: '4em',
+                    }} onClick={handleGoBackHome} >Go back home</Button>
+                </Grid>
+
+
+                <Grid item>
+                    <Button disabled={!lichThiHaveBeenGenerated} size="large" variant="contained" sx={{
+                        width: '13em',
+                        height: '4em',
+                    }} onClick={handleShowPreviouslyCreatedCalendar}>Previously created calendar</Button>
+                </Grid>
+            </Grid>
             <form onSubmit={handleSubmit}>
                 <p>
                     <label htmlFor="w3info">Submit your THONG TIN DKHP</label>

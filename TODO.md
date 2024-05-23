@@ -14,13 +14,15 @@ What we actually need in this lich thi iteration: [] (4h)
                 2. protected -- generate google calendar 
                     -- Private Action State machine [] (1h) @Later
                     -> Show the login modal when user try to click the generate button [X]
-                    -> Actually make the login works, since the AuthProvider kinda broken [] @Current
-    
-    
-+ Make the lich thi site pretty (4h) [] @Next
-    Sliding animation 
-    Proper positioning 
+                    -> Actually make the login works, since the AuthProvider kinda broken [] 
 
+        Make the moving between steps button in step 1 (1h) [X] 
+    
++ Make the lich thi site pretty (4h) [] 
+    + Proper positioning [] (2h) @Current
+    + Sliding animation  [] (1h) @Next
+    + Proper snackbar notification 
+        + bad inputted information [] (20p) @Next 
 
 
 Clean the Project structure to a more basic structure: 

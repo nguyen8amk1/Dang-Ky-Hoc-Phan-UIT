@@ -10,7 +10,8 @@ const States = {
 
 export function LichThi_GoogleCalendarGenerator() {
     const [goodSubmittedInfoEvent, setGoodSubmittedInfoEvent] = useState(false);
-    const [wantToUploadAnotherTTDKHPEvent, setWantToUploadAnotherTTDKHPEvent] = useState(false);    
+    const [wantToUploadAnotherTTDKHPEvent, setWantToUploadAnotherTTDKHPEvent] = useState(false);
+    const [wantToSeePreviouslyCreatedCalendarEvent, setWantToSeePreviouslyCreatedCalendarEvent] = useState(false);
     const [currentState, setCurrentState] = useState(States.CHECK_IF_LICH_THI_HAVE_BEEN_GENERATED_BEFORE);
 
     useEffect(() => {
@@ -27,14 +28,14 @@ export function LichThi_GoogleCalendarGenerator() {
                 break;
             }
             case States.SUBMIT_TTDKHP: {
+                if(wantToSeePreviouslyCreatedCalendarEvent) {
+                    setWantToSeePreviouslyCreatedCalendarEvent(false); // Reset the event  
+                    setCurrentState(States.SHOW_CALENDAR_PREVIEW);
+                } 
                 if(goodSubmittedInfoEvent) {
                     setGoodSubmittedInfoEvent(false); // Reset the event  
-
                     setCurrentState(States.SHOW_CALENDAR_PREVIEW);
-                } else {
-                    setCurrentState(States.SUBMIT_TTDKHP);
-                }
-
+                } 
                 break;
             } 
             case States.SHOW_CALENDAR_PREVIEW: {
@@ -47,12 +48,12 @@ export function LichThi_GoogleCalendarGenerator() {
                 }
             }
         }
-    }, [currentState, wantToUploadAnotherTTDKHPEvent, goodSubmittedInfoEvent]);
+    }, [currentState, wantToSeePreviouslyCreatedCalendarEvent, wantToUploadAnotherTTDKHPEvent, goodSubmittedInfoEvent]);
 
     return (
         <>
             {(  currentState===States.SUBMIT_TTDKHP) && 
-                <SubmitYourHocPhanInfo setGoodSubmittedInfoEvent={setGoodSubmittedInfoEvent}/>
+                <SubmitYourHocPhanInfo lichThiHaveBeenGenerated={localStorage.getItem("raw-lichthi-schedule") !== null} setWantToSeePreviouslyCreatedCalendarEvent={setWantToSeePreviouslyCreatedCalendarEvent} setGoodSubmittedInfoEvent={setGoodSubmittedInfoEvent}/>
             }
 
             {(  currentState===States.SHOW_CALENDAR_PREVIEW) && 
