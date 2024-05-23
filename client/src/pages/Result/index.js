@@ -12,22 +12,33 @@ import { useTkbStore } from '../../utils//zus';
 import CalendarCreator from './google_calendar'; 
 
 export const generateGoogleCalendar = async () => {
-    // TODO: return the result status 
-    console.log("Generate Google Calendar");
-    const accessToken = localStorage.getItem("accessToken");
+    try {
+        // TODO: return the result status 
+        console.log("Generate Google Calendar");
+        //const accessToken = localStorage.getItem("accessToken");
+        const accessToken = JSON.parse(localStorage.getItem("authState")).accessToken;
 
-    const calendarCreator = new CalendarCreator();
-    calendarCreator.setAccessToken(accessToken);
+        const calendarCreator = new CalendarCreator();
+        calendarCreator.setAccessToken(accessToken);
 
-    const calendarId = await calendarCreator.createCalendar("A NEW CALENDAR");
-    console.log("New calendar id", calendarId);
-    calendarCreator.setCalendarId(calendarId);
-    
-    const schedule = JSON.parse(localStorage.getItem('raw-format-schedule') || []); 
-    console.log("schedule: ", schedule);
-    calendarCreator.generateResultCalendar(schedule);
+        const calendarId = await calendarCreator.createCalendar("A NEW CALENDAR");
+        console.log("New calendar id", calendarId);
+        calendarCreator.setCalendarId(calendarId);
+        //localStorage.getItem('raw-format-schedule') || []; 
+        
+        //console.log("raw format schedule: " + localStorage.getItem('raw-format-schedule'));
+        const schedule = JSON.parse(localStorage.getItem('raw-format-schedule'))  || []; 
+        console.log("schedule: ", schedule);
+        if(schedule.length <= 0) return false;
 
-    return true;
+        calendarCreator.generateResultCalendar(schedule);
+        return true;
+
+    } catch (e) {
+        console.log(e);
+        return false;
+    }
+
 }
 
 export default function Index() {

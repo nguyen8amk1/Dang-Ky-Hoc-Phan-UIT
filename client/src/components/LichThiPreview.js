@@ -25,11 +25,9 @@ const States = {
 
 function LichThiPreview({setWantToUploadAnotherTTDKHPEvent}) {
     const navigate = useNavigate();
+    const [currentState, setCurrentState] = useState(States.WANT_TO_GENERATE_GOOGLE_CALENDAR);
     const {userIsAuthenticated} = AuthData();
     //const {clearCalendarSession} = useGoogleCalendarGeneratorContext();
-    const [calendarState, setCalendarState] = useState("haven't");
-
-    const [currentState, setCurrentState] = useState(States.WANT_TO_GENERATE_GOOGLE_CALENDAR);
     const [event__suddenlyDontWantToLoginAnymore, setEvent__suddenlyDontWantToLoginAnymore] = useState(false); 
 
     useEffect(() => {
@@ -38,7 +36,16 @@ function LichThiPreview({setWantToUploadAnotherTTDKHPEvent}) {
                 break; 
             }
             case States.GENERATING_GOOGLE_CALENDAR: {
-                // TODO: 
+                async function generateCalendar() {
+                    const generateCalendarSuccess = await generateGoogleCalendar();
+                    if(generateCalendarSuccess) {
+                        setCurrentState(States.GENERATE_GOOGLE_CALENDAR_SUCCESS);
+                    } else {
+                        setCurrentState(States.GENERATE_GOOGLE_CALENDAR_FAIL);
+                    }
+                }
+
+                generateCalendar();
                 break; 
             }
             case States.GENERATE_GOOGLE_CALENDAR_SUCCESS: {
@@ -50,6 +57,7 @@ function LichThiPreview({setWantToUploadAnotherTTDKHPEvent}) {
                 break; 
             }
             case States.DEMAND_USER_TO_LOGIN: {
+                console.log("user is : " + userIsAuthenticated());
                 if(userIsAuthenticated()) {
                     console.log("THIS USER IS SUPPOSE TO BE LOGGED IN ALREADY");
                     setCurrentState(States.GENERATING_GOOGLE_CALENDAR);
@@ -61,19 +69,13 @@ function LichThiPreview({setWantToUploadAnotherTTDKHPEvent}) {
             }
         }
 
-    }, [currentState, event__suddenlyDontWantToLoginAnymore]); 
+    }, [currentState, event__suddenlyDontWantToLoginAnymore, userIsAuthenticated]); 
+
 
 
     const handleGenerateGoogleCalendar = async () => {
         if(userIsAuthenticated()) {
             setCurrentState(States.GENERATING_GOOGLE_CALENDAR);
-            // TODO: 
-            // setCalendarState("isDoing"); 
-            // const result = await generateGoogleCalendar(); 
-            // if(result)
-            //     setCalendarState("success");
-            // else 
-            //     setCalendarState("fail");
         } else {
             setCurrentState(States.DEMAND_USER_TO_LOGIN);
         }
@@ -84,14 +86,6 @@ function LichThiPreview({setWantToUploadAnotherTTDKHPEvent}) {
         //navigate('/gcg/step-1-html-upload');
     }
 
-    const getCalendarStateStatus = () => {
-        if(calendarState === 'success') {
-            return "Success"; 
-        }
-        else if(calendarState === 'fail') {
-            return "Failed"; 
-        }
-    }
 
     return(
         // TODO: what i'm gonna need 
@@ -125,13 +119,14 @@ function LichThiPreview({setWantToUploadAnotherTTDKHPEvent}) {
             </Grid>
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={calendarState === 'isDoing'}
+                open={currentState === States.GENERATING_GOOGLE_CALENDAR}
             >
                 <CircularProgress color="inherit" />
             </Backdrop>
 
-            <Dialog onClose={() => {setCalendarState("haven't")}} open={calendarState === 'success' || calendarState === 'fail'}>
-                <DialogTitle>The operation is {getCalendarStateStatus()}</DialogTitle>
+            <Dialog onClose={() => {setCurrentState(States.WANT_TO_GENERATE_GOOGLE_CALENDAR)}} open={currentState === States.GENERATE_GOOGLE_CALENDAR_FAIL || currentState === States.GENERATE_GOOGLE_CALENDAR_SUCCESS}>
+                { currentState === States.GENERATE_GOOGLE_CALENDAR_SUCCESS && <DialogTitle>The operation is SUCCESS</DialogTitle> }
+                { currentState === States.GENERATE_GOOGLE_CALENDAR_FAIL && <DialogTitle>The operation is FAIL</DialogTitle> }
             </Dialog>
 
             <ThoiKhoaBieuTable />

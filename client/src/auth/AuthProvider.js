@@ -1,133 +1,166 @@
-import { createContext, useContext, useState, useEffect } from "react"
+import React, { createContext, useContext, useReducer, useEffect, useState } from "react";
 import { CircularProgress } from '@mui/material';
-
 import { useNavigate, useLocation } from "react-router-dom";
-
 import { useGoogleLogin } from '@react-oauth/google';
-import jwt_decode from 'jwt-decode';
 import axios from 'axios';
 
 const AuthContext = createContext();
 export const AuthData = () => useContext(AuthContext);
 
-export const AuthProvider = ({children}) => {
-    const navigate = useNavigate();
-    const location = useLocation();
+const loadStateFromLocalStorage = () => {
+  const storedState = JSON.parse(localStorage.getItem('authState'));
+  if (storedState) {
+    return {
+      ...storedState,
+      status: 'tokenExpired'  // Trigger token refresh on load
+    };
+  } else {
+    return {
+      status: 'unauthenticated',
+      accessToken: null,
+      refreshToken: null,
+      user: null,
+      error: null,
+    };
+  }
+};
 
-    const [ user, setUser ] = useState({})
-    const [isLoading, setIsLoading] = useState(true);
-    
-    const getUserInfo = async () => {
-        // TODO: get the new access token, to compare with the old one 
-        // FIXME: with this way of handling, everytime there are no internet connection -> auto logout  
-        // -> since no internet also create exception
-        const oldAccessToken = localStorage.getItem('accessToken'); 
-        const newAccessToken = oldAccessToken;
-        let userInfo; 
-        try {
-            const res = await axios.get(
-                "https://www.googleapis.com/oauth2/v3/userinfo", 
-                {
-                    headers: {
-                        Authorization: `Bearer ${newAccessToken}`
-                    }
-                }
-            )
-            userInfo = {displayName: res.data.name, picture: res.data.picture}; 
-            console.log(res);
-        } catch(e) {
-            userInfo = undefined
-            console.error(e);
-        }
-        return userInfo;
-        //callback(userInfo);
-    } 
+const initialState = loadStateFromLocalStorage();
 
-    const checkIfSessionValid = async () => {
-        // TODO: do something to check if the session is valid 
+const authReducer = (state, action) => {
+  switch (action.type) {
+    case 'LOGIN':
+      return {
+        ...state,
+        status: 'authenticating',
+      };
+    case 'LOGIN_SUCCESS':
+      return {
+        ...state,
+        status: 'authenticated',
+        accessToken: action.payload.accessToken,
+        refreshToken: action.payload.refreshToken,
+        user: action.payload.user,
+      };
+    case 'LOGIN_FAILURE':
+      return {
+        ...state,
+        status: 'unauthenticated',
+        error: action.payload,
+      };
+    case 'LOGOUT':
+      return {
+        status: 'unauthenticated',
+        accessToken: null,
+        refreshToken: null,
+        user: null,
+        error: null,
+      };
+    case 'TOKEN_EXPIRED':
+      return {
+        ...state,
+        status: 'tokenExpired',
+      };
+    case 'TOKEN_REFRESH_SUCCESS':
+      return {
+        ...state,
+        status: 'authenticated',
+        accessToken: action.payload.accessToken,
+        refreshToken: action.payload.refreshToken,
+      };
+    case 'TOKEN_REFRESH_FAILURE':
+      return {
+        ...state,
+        status: 'unauthenticated',
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
 
+const AuthProvider = ({ children }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [state, dispatch] = useReducer(authReducer, initialState);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const setTokenExpiryTimer = (expiresIn) => {
+    setTimeout(() => {
+      dispatch({ type: 'TOKEN_EXPIRED' });
+    }, expiresIn * 1000);
+  };
+
+  const refreshToken = async () => {
+    try {
+      const res = await axios.post('/refresh-token', { token: state.refreshToken });
+      const { accessToken, refreshToken, expiresIn } = res.data;
+      dispatch({
+        type: 'TOKEN_REFRESH_SUCCESS',
+        payload: { accessToken, refreshToken }
+      });
+      setTokenExpiryTimer(expiresIn);
+    } catch (error) {
+      dispatch({ type: 'TOKEN_REFRESH_FAILURE', payload: error });
     }
+  };
 
-    // useEffect( async ()=> {
-    //     // NOTE: Setting the user information everytime the page load
-    //     // TODO: 
-    //     // 1. check if the access token is still valid -> calling the information url 
-    //     // if user result valid -> setUser with the user information getted 
-    //     // else -> setUser({})
-    //
-    //     const userInfo = await getUserInfo(); 
-    //     console.log("on state change: ", userInfo); 
-    //     // TODO: delegate all the userInfo information setting in here instead in the login function
-    //     // TODO: find a way to get new access token 
-    //     //  -> onIdTokenChanged
-    //     if(!userInfo) {
-    //         console.log("userInfo sign out");
-    //         setIsLoading(false);
-    //         logout();
-    //         return; 
-    //     } 
-    //
-    //     console.log("userInfo sign in Or token Change");
-    //     setUser({name: userInfo.displayName, image: userInfo.picture}); 
-    //     // if (userInfo.accessToken !== localStorage.getItem('accessToken')) {
-    //     //     console.log("Token change");
-    //     //     localStorage.setItem('accessToken', userInfo.accessToken);
-    //     //     //window.location.reload();
-    //     // }
-    //     setIsLoading(false);
-    //
-    // }, []); 
-
-    const userIsAuthenticated = () => {
-        //return localStorage.getItem("accessToken"); 
-        //return true;
-        if(user) return user?.name;
-        return false;
-        //return false;
+  useEffect(() => {
+    if (state.status === 'tokenExpired') {
+      refreshToken();
+    } else {
+      setIsLoading(false);
     }
-    
-    const login = useGoogleLogin({
-        onSuccess: async response => {
-            localStorage.setItem('accessToken', response.access_token);
-            console.log(response.access_token);
+  }, [state.status]);
 
-            try {
-                const res = await axios.get(
-                    "https://www.googleapis.com/oauth2/v3/userinfo", 
-                    {
-                        headers: {
-                            Authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                        }
-                    }
-                )
-                console.log(res.data);
-                setUser({name: res.data.name, image: res.data.picture});
-                console.log("authenticated user: ", user);
-                console.log("location: ", location);
-                //navigate('/');
+  useEffect(() => {
+    if (state.status === 'authenticated' || state.status === 'unauthenticated') {
+      localStorage.setItem('authState', JSON.stringify(state));
+    }
+  }, [state]);
 
-            } catch(e) {
-                setUser(undefined);
-                console.error(e);
+  const login = useGoogleLogin({
+    onSuccess: async response => {
+      dispatch({ type: 'LOGIN' });
+      try {
+        const res = await axios.get(
+          "https://www.googleapis.com/oauth2/v3/userinfo",
+          {
+            headers: {
+              Authorization: `Bearer ${response.access_token}`
             }
-        }
-    });
-    
-    const logout = async () => {
-        try{
-            setUser({});
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("user");
-            navigate('/');
-        } catch(e) {
-            console.error(e);
-        }
+          }
+        );
+        const user = { name: res.data.name, image: res.data.picture };
+        dispatch({
+          type: 'LOGIN_SUCCESS',
+          payload: {
+            accessToken: response.access_token,
+            refreshToken: response.refresh_token,
+            user
+          }
+        });
+        setTokenExpiryTimer(response.expires_in);
+      } catch (error) {
+        dispatch({ type: 'LOGIN_FAILURE', payload: error });
+      }
     }
+  });
 
-    return (
-        <AuthContext.Provider value={{user, userIsAuthenticated, login, logout}}>
-        {/*     {isLoading ? <CircularProgress /> : children} */}
-            {children}
-        </AuthContext.Provider>
-    )
-}
+  const logout = () => {
+    dispatch({ type: 'LOGOUT' });
+    navigate('/');
+  };
+
+  const userIsAuthenticated = () => state.status === 'authenticated';
+    console.log(state);
+
+  return (
+    <AuthContext.Provider value={{ user: state.user, userIsAuthenticated, login, logout }}>
+      {isLoading ? <CircularProgress /> : children}
+    </AuthContext.Provider>
+  );
+};
+
+export { AuthProvider };
+

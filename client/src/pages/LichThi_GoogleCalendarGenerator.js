@@ -11,7 +11,8 @@ const States = {
 };
 
 export function LichThi_GoogleCalendarGenerator() {
-    // NOTE: infoEvent have 3 values: null, false, true
+    // NOTE: infoEvent have 3 values: null, false, true 
+    //  (we need null since react will not re-render when the infoevent keep being assigned false -> no change)
     const [goodSubmittedInfoEvent, setGoodSubmittedInfoEvent] = useState(null);
     const [wantToUploadAnotherTTDKHPEvent, setWantToUploadAnotherTTDKHPEvent] = useState(false);
     const [wantToSeePreviouslyCreatedCalendarEvent, setWantToSeePreviouslyCreatedCalendarEvent] = useState(false);
@@ -24,7 +25,7 @@ export function LichThi_GoogleCalendarGenerator() {
         console.log("Re-render")
         switch(currentState) {
             case States.CHECK_IF_LICH_THI_HAVE_BEEN_GENERATED_BEFORE: {
-                const lichThiHaveBeenGenerated = localStorage.getItem("raw-lichthi-schedule") !== null; 
+                const lichThiHaveBeenGenerated = localStorage.getItem("raw-format-schedule") !== null; 
                 if(lichThiHaveBeenGenerated === true) {
                     setCurrentState(States.SHOW_CALENDAR_PREVIEW);
                 } else {
@@ -69,7 +70,7 @@ export function LichThi_GoogleCalendarGenerator() {
             />
 
             {(  currentState===States.SUBMIT_TTDKHP) && 
-                <SubmitYourHocPhanInfo lichThiHaveBeenGenerated={localStorage.getItem("raw-lichthi-schedule") !== null} setWantToSeePreviouslyCreatedCalendarEvent={setWantToSeePreviouslyCreatedCalendarEvent} setGoodSubmittedInfoEvent={setGoodSubmittedInfoEvent}/>
+                <SubmitYourHocPhanInfo lichThiHaveBeenGenerated={localStorage.getItem("raw-format-schedule") !== null} setWantToSeePreviouslyCreatedCalendarEvent={setWantToSeePreviouslyCreatedCalendarEvent} setGoodSubmittedInfoEvent={setGoodSubmittedInfoEvent}/>
             }
 
             {(  currentState===States.SHOW_CALENDAR_PREVIEW) && 

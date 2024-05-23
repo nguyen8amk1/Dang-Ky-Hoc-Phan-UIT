@@ -102,7 +102,7 @@ function SubmitYourHocPhanInfo({lichThiHaveBeenGenerated, setGoodSubmittedInfoEv
 
         // TODO: do the matching between the courseInfo with the 
 
-        localStorage.setItem("raw-lichthi-schedule", JSON.stringify(schedule));
+        localStorage.setItem("raw-format-schedule", JSON.stringify(schedule));
         //console.log(schedule);
         
         const correctedFormatSchedule = outputCorrectFormat(schedule);
