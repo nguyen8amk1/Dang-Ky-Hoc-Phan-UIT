@@ -3,6 +3,17 @@
 2. Pages check the global user authentication context to render data accordingly
 
 ## TODO
+What we actually need in this lich thi iteration: [] (4h) @Current
+    1 single page with 2 steps - conditional rendering (**WITH SLIDING ANIMATIONS??**) : 
+        Step 1 -- that let's the user input the thong tin dkhp  (1h) [] -- Component State Machine
+        Step 2 -- Lich thi Preview  -- Component State Machine
+            with 2 buttons/actions: 
+                1. go back and input another one 
+                2. protected -- generate google calendar -- Protected Component State machine 
+
+
+
+
 Clean the Project structure to a more basic structure: 
     + components
     + pages 
