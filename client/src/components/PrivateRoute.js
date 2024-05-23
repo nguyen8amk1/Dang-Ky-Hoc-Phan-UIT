@@ -1,4 +1,4 @@
-import { AuthData } from '../../../auth/AuthProvider';
+import { AuthData } from '../auth/AuthProvider';
 import Login from './Login'; 
 
 import {Navigate} from 'react-router-dom';

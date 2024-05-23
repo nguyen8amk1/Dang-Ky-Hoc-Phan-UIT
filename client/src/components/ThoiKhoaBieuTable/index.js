@@ -6,9 +6,9 @@ import ImageIcon from "@mui/icons-material/Image"
 import { useState } from "react"
 
 //import { ROUTES } from "../../../constants"
-import { getDanhSachTiet } from "../../../utils"
+import { getDanhSachTiet } from "../../components/utils"
 //import { selectIsChiVeTkb, useTkbStore } from "../../../zus"
-import { useTkbStore, selectDataExcel } from "../../../zus"
+import { useTkbStore, selectDataExcel } from "../zus"
 import ClassCell, { ClassCellContext } from "./ClassCell"
 import TableHead from "./TableHead"
 

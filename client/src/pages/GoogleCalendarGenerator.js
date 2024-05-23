@@ -1,10 +1,10 @@
-import Login from './components/Login'; 
+import Login from '../components/Login'; 
 import {useState, useEffect, createContext, useContext} from 'react'; 
-import SubmitYourTkbHTML from './components/SubmitYourTkbHTML'
-import GeneratedCalendar from './components/GeneratedCalendar'
+import SubmitYourTkbHTML from '../components/SubmitYourTkbHTML'
+import GeneratedCalendar from '../components/GeneratedCalendar'
 import { CircularProgress } from '@mui/material';
-import Header from './components/WebAppHeader'; 
-import { AuthData } from "../../auth/AuthProvider";
+import Header from '../components/WebAppHeader'; 
+import { AuthData } from "../auth/AuthProvider";
 import { Navigate, Outlet } from 'react-router-dom';
 
 const GoogleCalendarGeneratorContext = createContext();

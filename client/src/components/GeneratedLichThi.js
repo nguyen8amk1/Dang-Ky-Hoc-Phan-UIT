@@ -4,18 +4,18 @@ import Backdrop from '@mui/material/Backdrop';
 import { CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import {useGoogleCalendarGeneratorContext} from '../GoogleCalendarGenerator';
-import Result from '../Result';
-import {generateGoogleCalendar} from '../Result';
+import {useGoogleCalendarGeneratorContext} from '../pages/GoogleCalendarGenerator';
+import Result from '../pages/Result';
+import {generateGoogleCalendar} from '../pages/Result';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle'
 
-function GeneratedCalendar() {
-    const navigate = useNavigate();
-    const {clearCalendarSession} = useGoogleCalendarGeneratorContext();
+function GeneratedLichThi() {
+    //const navigate = useNavigate();
+    //const {clearCalendarSession} = useGoogleCalendarGeneratorContext();
     const [calendarState, setCalendarState] = useState("haven't");
 
     // TODO: how to do enum is JS ?? 
@@ -36,8 +36,8 @@ function GeneratedCalendar() {
     }
 
     const handleUploadAnotherTKB = () => {
-        clearCalendarSession(); 
-        navigate('/gcg/step-1-html-upload');
+        //clearCalendarSession(); 
+        //navigate('/gcg/step-1-html-upload');
     }
 
     const getCalendarStateStatus = () => {
@@ -91,4 +91,4 @@ function GeneratedCalendar() {
     );
 }
 
-export default GeneratedCalendar;
+export default GeneratedLichThi;

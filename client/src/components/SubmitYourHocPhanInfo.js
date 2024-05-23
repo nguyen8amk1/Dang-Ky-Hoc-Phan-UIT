@@ -1,9 +1,9 @@
 // TODO: design the hoc phan info behaviour in xstate editor 
 import React, { useState } from 'react';
-import {maLop2LichThi, extractInputStrings, parseCourseInfo} from '../components/../../utils'; 
-import {tietStartTimeMapping, tietEndMapping} from '../SelectExcel/utils';
-import {outputCorrectFormat} from '../../pages/SelectExcel/file_format_processor.js';
-import { useTkbStore } from '../../zus';
+import {maLop2LichThi, extractInputStrings, parseCourseInfo} from './utils'; 
+import {tietStartTimeMapping, tietEndMapping} from '../pages/SelectExcel/utils';
+import {outputCorrectFormat} from '../pages/SelectExcel/file_format_processor.js';
+import { useTkbStore } from '../components/zus';
 
 
 const convertDateFormat = (date) => {

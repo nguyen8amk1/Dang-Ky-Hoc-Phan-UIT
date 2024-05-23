@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
-import { AuthData } from "../../../auth/AuthProvider";
+import { AuthData } from "../auth/AuthProvider";
 import { useNavigate, useLocation } from "react-router-dom";
 
 

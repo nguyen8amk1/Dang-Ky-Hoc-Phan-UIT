@@ -1,22 +1,21 @@
 import { createBrowserRouter, createRoutesFromElements, RouterProvider, BrowserRouter, Routes, Route, Link, Outlet} from 'react-router-dom';
 import './App.css';
 import { AuthProvider } from './auth/AuthProvider';
-import {Home} from './components/pages/Home'; 
+import {Home} from './pages/Home'; 
 
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 import {createTheme} from '@mui/material/styles';
 import {ThemeProvider} from '@emotion/react';
-import GoogleCalendarGenerator from './components/pages/GoogleCalendarGenerator'; 
-import { RenderMenu, RenderRoutes}from './components/structure/RenderNavigation'; 
+import GoogleCalendarGenerator from './pages/GoogleCalendarGenerator'; 
 
-import SubmitYourTkbHTML from './components/pages/components/SubmitYourTkbHTML'
-import SubmitYourHocPhanInfo from './components/pages/components/SubmitYourHocPhanInfo'
-import GeneratedCalendar from './components/pages/components/GeneratedCalendar'
-import GeneratedLichThi from './components/pages/components/GeneratedLichThi'
-import { GoogleCalendarGeneratorProvider, useGoogleCalendarGeneratorContext } from './components/pages/GoogleCalendarGenerator'
-import {PrivateRoute}  from './components/pages/components/PrivateRoute';
-import ThoiKhoaBieuTable from './components/pages/components/ThoiKhoaBieuTable';
+import SubmitYourTkbHTML from './components/SubmitYourTkbHTML'
+import SubmitYourHocPhanInfo from './components/SubmitYourHocPhanInfo'
+import GeneratedCalendar from './components/GeneratedCalendar'
+import GeneratedLichThi from './components/GeneratedLichThi'
+import { GoogleCalendarGeneratorProvider, useGoogleCalendarGeneratorContext } from './pages/GoogleCalendarGenerator'
+import {PrivateRoute}  from './components/PrivateRoute';
+import ThoiKhoaBieuTable from './components/ThoiKhoaBieuTable';
 
 
 const theme = createTheme({
@@ -113,8 +112,8 @@ function App() {
         </>
 
     return (
-        //a
-        b
+        a
+        //b
     );
 }
 

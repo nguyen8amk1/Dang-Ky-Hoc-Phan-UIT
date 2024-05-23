@@ -2,10 +2,10 @@ import {Box, Container, Typography, Grid, Button} from '@mui/material';
 import { DropzoneArea } from 'mui-file-dropzone';
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import {useGoogleCalendarGeneratorContext} from '../GoogleCalendarGenerator';
-import { useTkbStore, selectDataExcel } from '../../zus';
-import {UIT_htmlFileProcessing} from '../SelectExcel/file_format_processor'; 
-import {AuthData} from '../../../auth/AuthProvider';
+import {useGoogleCalendarGeneratorContext} from '../pages/GoogleCalendarGenerator';
+import { useTkbStore, selectDataExcel } from '../components/zus';
+import {UIT_htmlFileProcessing} from '../pages/SelectExcel/file_format_processor'; 
+import {AuthData} from '../auth/AuthProvider';
 import Login from './Login';
 
 function SubmitYourTkbHTML() {
