@@ -131,4 +131,3 @@ export const endTime2TietMapping = {
     "16:15:00": 9, 
     "17:00:00": 10
 }
-

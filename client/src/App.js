@@ -7,13 +7,12 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 
 import {createTheme} from '@mui/material/styles';
 import {ThemeProvider} from '@emotion/react';
-import GoogleCalendarGenerator from './pages/GoogleCalendarGenerator'; 
 
 import SubmitYourTkbHTML from './components/SubmitYourTkbHTML'
 import SubmitYourHocPhanInfo from './components/SubmitYourHocPhanInfo'
 import GeneratedCalendar from './components/GeneratedCalendar'
 import GeneratedLichThi from './components/GeneratedLichThi'
-import { GoogleCalendarGeneratorProvider, useGoogleCalendarGeneratorContext } from './pages/GoogleCalendarGenerator'
+import { GoogleCalendarGenerator, GoogleCalendarGeneratorProvider, useGoogleCalendarGeneratorContext } from './pages/LichHoc_GoogleCalendarGenerator';
 import {PrivateRoute}  from './components/PrivateRoute';
 import ThoiKhoaBieuTable from './components/ThoiKhoaBieuTable';
 
@@ -112,8 +111,8 @@ function App() {
         </>
 
     return (
-        a
-        //b
+        //a
+        b
     );
 }
 

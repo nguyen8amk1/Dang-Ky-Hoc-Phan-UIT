@@ -4,7 +4,7 @@ import Backdrop from '@mui/material/Backdrop';
 import { CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import {useGoogleCalendarGeneratorContext} from '../pages/GoogleCalendarGenerator';
+import {useGoogleCalendarGeneratorContext} from '../pages/LichHoc_GoogleCalendarGenerator';
 import Result from '../pages/Result';
 import {generateGoogleCalendar} from '../pages/Result';
 import Dialog from '@mui/material/Dialog';

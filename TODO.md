@@ -373,7 +373,7 @@ Clean the Project structure to a more basic structure:
 
             Add the logic to do the transition between step 1 and step 2 in a more "state machine way" @Next
 
-        + Refactor the components file system [] (1h) @Next
+        + Refactor the components file system [X] (1h)
 
         + How our app currently works: 
             + User login with google 
