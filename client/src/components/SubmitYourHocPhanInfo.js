@@ -43,50 +43,9 @@ const outputCorrectLichThiFormat = (lichthi) => {
         correctFormat = correctFormat.concat(convert(mon));
     });
     return correctFormat;
-
-    /* TODO: Modify this to match our needs, 
-        *  we just need a good schedule and everything will work 
-        *  **our current format
-    {
-        "MaMonHoc": "CS105",
-        "TenMonHoc": "Đồ họa máy tính",
-        "MaLop": "CS105.O21.KHCL",
-        "NgayThi": "27-06-2024",
-        "Thu": "5",
-        "CaThi": 3,
-        "Tiet": "678",
-        "PhongThi": "C112",
-        "HocKi": "2",
-        "NamHoc": "2023-2024"
-    }
-        *  **schedule format
-        *[
-
-    {
-    (optional) malop: ,  -> MaLop
-    (optional) phonghoc: -> PhongThi
-    name: "", [X] -> TenMonHoc
-    startDate: "11/09/23", -> NgayThi
-        TODO: change from 27-06-2024 to 27/09/24 format 
-    endDate: "30/12/23", -> NgayThi
-    startTime: "07:30:00", 
-    endTime: "09:45:00", 
-        ->  TODO: 
-        NOTE: Tiet should start from 0 to n
-        startTime = tietStartTimeMapping[Tiet[0]]; // 
-        endTime = tietEndMapping[Tiet[Tiet.length-1]]; // 
-
-    gap: 1, 
-    description: "Ngủ quên là rớt chết mẹ ráng chịu",
-    color: 11, 
-    weekday: -> Thu 
-    },
-
-]
-*/
 }
 
-function SubmitYourHocPhanInfo() {
+function SubmitYourHocPhanInfo({setGoodSubmittedInfoEvent}) {
     const [info, setInfo] = useState('Submit your thong tin dkhp');
     const setDataExcel = useTkbStore((s) => s.setDataExcel);
 
@@ -96,7 +55,12 @@ function SubmitYourHocPhanInfo() {
         console.log('info submitted:', info);
 
         const inputStrings = extractInputStrings(info);
-        console.log(inputStrings);
+        console.log("Input strings: ", inputStrings);
+        //console.log("set good submitted info ");
+        const goodInputString = inputStrings.length > 0;
+        setGoodSubmittedInfoEvent(goodInputString);
+
+        if(!goodInputString) return;
 
         const courseInfos = inputStrings.map(inputString => {
             try {
@@ -128,14 +92,18 @@ function SubmitYourHocPhanInfo() {
 
         localStorage.setItem("raw-lichthi-schedule", JSON.stringify(schedule));
         //console.log(schedule);
-        
+        //
+        const correctedFormatSchedule = outputCorrectFormat(schedule);
         setDataExcel({
-            data: outputCorrectFormat(schedule),
+            data: correctedFormatSchedule,
             //fileName: file.name,
             fileName: "something",
             //lastUpdate: toDateTimeString(new Date())
             lastUpdate: "something"
         }); 
+
+        //setLichThiHaveBeenGeneratedEvent(correctedFormatSchedule.length > 0);
+
     };
 
     return (

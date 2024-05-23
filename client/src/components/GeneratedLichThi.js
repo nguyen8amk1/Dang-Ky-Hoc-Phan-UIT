@@ -13,7 +13,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle'
 
-function GeneratedLichThi() {
+function GeneratedLichThi({setWantToUploadAnotherTTDKHPEvent}) {
     //const navigate = useNavigate();
     //const {clearCalendarSession} = useGoogleCalendarGeneratorContext();
     const [calendarState, setCalendarState] = useState("haven't");
@@ -67,7 +67,7 @@ function GeneratedLichThi() {
                     <Button size="large" variant="contained" sx={{
                         width: '13em',
                         height: '4em',
-                    }} onClick={handleUploadAnotherTKB} >Upload TKB khác</Button>
+                    }} onClick={() => {setWantToUploadAnotherTTDKHPEvent(true)}} >Upload TKB khác</Button>
                 </Grid>
                 <Grid item>
                     <Button size="large" variant="contained" sx={{
