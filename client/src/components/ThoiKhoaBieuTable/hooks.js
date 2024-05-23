@@ -3,8 +3,8 @@ import html2canvas from "html2canvas"
 import React from "react"
 //import { enqueueSnackbar } from "notistack"
 //import { //tracker.} from "../../.."
-import { findOverlapedClasses, getDanhSachTiet } from "../../components/utils"
-import { selectPhanLoaiHocTrenTruong, useTkbStore } from "../zus"
+import { findOverlapedClasses, getDanhSachTiet } from "../../utils"
+import { selectPhanLoaiHocTrenTruong, useTkbStore } from "../../utils/zus"
 import { downloadFromCanvas, getTietIndex } from "./utils"
 
 /* // Uncomment to see how rowData can be conducted:

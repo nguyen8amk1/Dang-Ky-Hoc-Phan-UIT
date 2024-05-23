@@ -7,7 +7,7 @@ import Tooltip from "@mui/material/Tooltip"
 // import SoTinChi from "../components/SoTinChi"
 import ThoiKhoaBieuTable from "../../components/ThoiKhoaBieuTable"
 //import { selectIsChiVeTkb, selectTongSoTcBuoc3, useTkbStore } from "../../zus"
-import { useTkbStore } from '../../components/zus';
+import { useTkbStore } from '../../utils//zus';
 // import ScriptDangKyInput, { DanhSachLopInput } from "./ScriptDangKyInput"
 import CalendarCreator from './google_calendar'; 
 

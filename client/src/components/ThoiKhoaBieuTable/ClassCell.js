@@ -8,7 +8,7 @@ import reverse from 'lodash/reverse';
 import { useMemo, useState } from 'react';
 //import { tracker } from '../../..';
 //import { isSameAgGridRowId, uniqMaLop } from '../../../utils';
-import { selectIsChiVeTkb, selectSelectedClasses, selectSelectedClassesBuoc3, useTkbStore } from '../zus';
+import { selectIsChiVeTkb, selectSelectedClasses, selectSelectedClassesBuoc3, useTkbStore } from '../..//utils/zus';
 import { usePhanLoaiHocTrenTruongContext } from './hooks';
 import './styles.css';
 
