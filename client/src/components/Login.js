@@ -3,12 +3,21 @@ import DialogContent from '@mui/material/DialogContent';
 import Dialog from '@mui/material/Dialog';
 import {Button, Typography, List, ListItem, ListItemText, ListItemButton, Stack} from '@mui/material';
 import SignInWithGoogleButton from './SignInWithGoogleButton';
+import {useState} from 'react';
 
-function Login({loggedIn=false}) {
-    if(loggedIn) return <></>
+function Login({loggedIn=false, setEvent__suddenlyDontWantToLoginAnymore}) {
+    const [open, setOpen] = useState(true); 
+    //if(loggedIn) return <></>
+
+    const handleClose = () => {
+        console.log("FUCKING WOW SHIT");
+        setOpen(false); 
+        setEvent__suddenlyDontWantToLoginAnymore(true);
+    }
+
     return(
         <>
-            <Dialog onClose={() => {console.log("Dang nhap di, close cai lon")}} open={true}>
+            <Dialog onClose={handleClose}  open={open}>
                 <DialogTitle>Đăng nhập với Google</DialogTitle>
                 <DialogContent>
                 <List sx={{ 

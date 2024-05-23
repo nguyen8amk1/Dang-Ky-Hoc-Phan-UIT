@@ -12,7 +12,9 @@ What we actually need in this lich thi iteration: [] (4h)
             with 2 buttons/actions: 
                 1. go back and input another one [X]
                 2. protected -- generate google calendar 
-                    -- Protected Component State machine [] (1h) @Current
+                    -- Private Action State machine [] (1h) @Later
+                    -> Show the login modal when user try to click the generate button [X]
+                    -> Actually make the login works, since the AuthProvider kinda broken [] @Current
     
     
 + Make the lich thi site pretty (4h) [] @Next

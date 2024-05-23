@@ -47,7 +47,7 @@ export function LichThi_GoogleCalendarGenerator() {
                 }
             }
         }
-    }, [wantToUploadAnotherTTDKHPEvent, goodSubmittedInfoEvent]);
+    }, [currentState, wantToUploadAnotherTTDKHPEvent, goodSubmittedInfoEvent]);
 
     return (
         <>

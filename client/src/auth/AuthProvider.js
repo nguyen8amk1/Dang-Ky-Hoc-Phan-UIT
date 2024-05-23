@@ -80,8 +80,10 @@ export const AuthProvider = ({children}) => {
 
     const userIsAuthenticated = () => {
         //return localStorage.getItem("accessToken"); 
-        //return user?.name; 
+        //return true;
+        if(user) return user?.name;
         return false;
+        //return false;
     }
     
     const login = useGoogleLogin({
