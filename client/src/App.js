@@ -9,12 +9,14 @@ import {createTheme} from '@mui/material/styles';
 import {ThemeProvider} from '@emotion/react';
 
 import SubmitYourTkbHTML from './components/SubmitYourTkbHTML'
-import SubmitYourHocPhanInfo from './components/SubmitYourHocPhanInfo'
 import GeneratedCalendar from './components/GeneratedCalendar'
-import GeneratedLichThi from './components/GeneratedLichThi'
 import { GoogleCalendarGenerator, GoogleCalendarGeneratorProvider, useGoogleCalendarGeneratorContext } from './pages/LichHoc_GoogleCalendarGenerator';
+
+
 import {PrivateRoute}  from './components/PrivateRoute';
 import ThoiKhoaBieuTable from './components/ThoiKhoaBieuTable';
+
+import {LichThi_GoogleCalendarGenerator} from './pages/LichThi_GoogleCalendarGenerator.js'
 
 
 const theme = createTheme({
@@ -53,7 +55,13 @@ const router = createBrowserRouter(
 
         </Route>
     )
-)
+); 
+
+// Home -> Generate Lich Thi Page
+// Home -> Generate Lich Hoc Page
+const router_thi = createBrowserRouter(
+
+);
 
 // const router = createBrowserRouter([
 //     {
@@ -106,8 +114,7 @@ function App() {
 
     const b = 
         <>
-            <SubmitYourHocPhanInfo/>
-            <GeneratedLichThi />
+            <LichThi_GoogleCalendarGenerator/>
         </>
 
     return (
