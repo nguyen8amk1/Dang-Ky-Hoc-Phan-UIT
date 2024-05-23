@@ -13,7 +13,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle'
 
-function GeneratedLichThi({setWantToUploadAnotherTTDKHPEvent}) {
+function LichThiPreview({setWantToUploadAnotherTTDKHPEvent}) {
     //const navigate = useNavigate();
     //const {clearCalendarSession} = useGoogleCalendarGeneratorContext();
     const [calendarState, setCalendarState] = useState("haven't");
@@ -91,4 +91,4 @@ function GeneratedLichThi({setWantToUploadAnotherTTDKHPEvent}) {
     );
 }
 
-export default GeneratedLichThi;
+export default LichThiPreview;

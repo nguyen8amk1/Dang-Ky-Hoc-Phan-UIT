@@ -11,9 +11,13 @@ What we actually need in this lich thi iteration: [] (4h)
         Step 2 -- Lich thi Preview  -- Component State Machine
             with 2 buttons/actions: 
                 1. go back and input another one [X]
-                2. protected -- generate google calendar -- Protected Component State machine [] @Current
+                2. protected -- generate google calendar 
+                    -- Protected Component State machine [] (1h) @Current
     
-
+    
++ Make the lich thi site pretty (4h) [] @Next
+    Sliding animation 
+    Proper positioning 
 
 
 

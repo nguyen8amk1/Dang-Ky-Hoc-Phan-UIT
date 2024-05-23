@@ -1,5 +1,5 @@
 import SubmitYourHocPhanInfo from '../components/SubmitYourHocPhanInfo';
-import GeneratedLichThi from '../components/GeneratedLichThi';
+import LichThiPreview from '../components/LichThiPreview';
 import {useState, useEffect} from 'react';
 
 const States = {
@@ -11,47 +11,38 @@ const States = {
 export function LichThi_GoogleCalendarGenerator() {
     const [goodSubmittedInfoEvent, setGoodSubmittedInfoEvent] = useState(false);
     const [wantToUploadAnotherTTDKHPEvent, setWantToUploadAnotherTTDKHPEvent] = useState(false);    
-    //const [currentState, setCurrentState] = useState("CHECK_IF_LICH_THI_HAVE_BEEN_GENERATED_BEFORE");
     const [currentState, setCurrentState] = useState(States.CHECK_IF_LICH_THI_HAVE_BEEN_GENERATED_BEFORE);
 
     useEffect(() => {
         console.log("Re-render")
         switch(currentState) {
-            //case "CHECK_IF_LICH_THI_HAVE_BEEN_GENERATED_BEFORE": {
             case States.CHECK_IF_LICH_THI_HAVE_BEEN_GENERATED_BEFORE: {
                 const lichThiHaveBeenGenerated = localStorage.getItem("raw-lichthi-schedule") !== null; 
                 if(lichThiHaveBeenGenerated == true) {
-                    //setCurrentState("SHOW_CALENDAR_PREVIEW");
                     setCurrentState(States.SHOW_CALENDAR_PREVIEW);
                 } else {
-                    //setCurrentState("SUBMIT_TTDKHP");
                     setCurrentState(States.SUBMIT_TTDKHP);
                 }
 
                 break;
             }
-            //case "SUBMIT_TTDKHP": {
             case States.SUBMIT_TTDKHP: {
                 if(goodSubmittedInfoEvent) {
                     setGoodSubmittedInfoEvent(false); // Reset the event  
 
-                    //setCurrentState("SHOW_CALENDAR_PREVIEW");
                     setCurrentState(States.SHOW_CALENDAR_PREVIEW);
                 } else {
-                    //setCurrentState("SUBMIT_TTDKHP");
                     setCurrentState(States.SUBMIT_TTDKHP);
                 }
 
                 break;
             } 
-            //case 'SHOW_CALENDAR_PREVIEW': {
             case States.SHOW_CALENDAR_PREVIEW: {
                 if(wantToUploadAnotherTTDKHPEvent) {
                     setWantToUploadAnotherTTDKHPEvent(false); // Reset the event 
 
 
 
-                    //setCurrentState("SUBMIT_TTDKHP");
                     setCurrentState(States.SUBMIT_TTDKHP);
                 }
             }
@@ -65,7 +56,7 @@ export function LichThi_GoogleCalendarGenerator() {
             }
 
             {(  currentState===States.SHOW_CALENDAR_PREVIEW) && 
-                <GeneratedLichThi setWantToUploadAnotherTTDKHPEvent={setWantToUploadAnotherTTDKHPEvent}/>
+                <LichThiPreview setWantToUploadAnotherTTDKHPEvent={setWantToUploadAnotherTTDKHPEvent}/>
             } 
         </>
     );

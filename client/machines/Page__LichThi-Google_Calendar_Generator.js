@@ -32,9 +32,33 @@ export const machine = createMachine(
               actions: [],
             },
           ],
+          "Want to show the previously generated calendar": [
+            {
+              target: "Show Calendar Preview",
+              guard: "lich thi have been generated before",
+              actions: [
+                {
+                  type: "do the sliding action",
+                },
+              ],
+            },
+          ],
         },
       },
-      "Show Calendar Preview": {},
+      "Show Calendar Preview": {
+        on: {
+          "want to upload another thong tin dang ki hoc phan": [
+            {
+              target: "Submit thong tin dang ky hoc phan",
+              actions: [
+                {
+                  type: "do the sliding action",
+                },
+              ],
+            },
+          ],
+        },
+      },
       "checking if there are any good information at all": {
         entry: {
           type: "do the checking",
@@ -68,9 +92,14 @@ export const machine = createMachine(
       }) => {},
       "do the checking": ({ context, event }) => {},
       "show information bad modal": ({ context, event }) => {},
+      "do the sliding action": ({ context, event }) => {},
     },
     actors: {},
-    guards: {},
+    guards: {
+      "lich thi have been generated before": ({ context, event }, params) => {
+        return false;
+      },
+    },
     delays: {},
   },
 );
