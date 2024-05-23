@@ -3,6 +3,11 @@
 2. Pages check the global user authentication context to render data accordingly
 
 ## TODO
++ BUG: 
+    A very big bug 
+    **IF 2 SUBJECTS DOING TEST ON THE SAME TIME BUT DIFFERENT DATES 
+        ONLY 1 GOT SHOWED**
+
 What we actually need in this lich thi iteration: [] (4h)
     Make the routing work [X] (10m) 
     1 single page with 2 steps - conditional rendering (**WITH SLIDING ANIMATIONS??**) : --Page State Machine
@@ -14,15 +19,17 @@ What we actually need in this lich thi iteration: [] (4h)
                 2. protected -- generate google calendar 
                     -- Private Action State machine [] (1h) @Later
                     -> Show the login modal when user try to click the generate button [X]
-                    -> Actually make the login works, since the AuthProvider kinda broken [] 
+                    -> Actually make the login works, since the AuthProvider kinda broken [] (2h) @Current 
 
         Make the moving between steps button in step 1 (1h) [X] 
     
 + Make the lich thi site pretty (4h) [] 
-    + Proper positioning [] (2h) @Current
+    + Proper positioning [] (2h) @Later
+        make the form looks good 
+
     + Sliding animation  [] (1h) @Next
     + Proper snackbar notification 
-        + bad inputted information [] (20p) @Next 
+        + bad inputted information [X] 
 
 
 Clean the Project structure to a more basic structure: 

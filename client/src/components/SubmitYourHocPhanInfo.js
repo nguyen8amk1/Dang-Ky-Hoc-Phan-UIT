@@ -10,8 +10,9 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle'
-import {Box, Container, Typography, Grid, Button} from '@mui/material';
-import Backdrop from '@mui/material/Backdrop';
+import {Backdrop, TextField, Box, Container, Typography, Grid, Button} from '@mui/material';
+// import Backdrop from '@mui/material/Backdrop';
+// import TextField from '@mui/material/TextField';
 
 const convertDateFormat = (date) => {
     // Split the input date by hyphen
@@ -56,7 +57,7 @@ const outputCorrectLichThiFormat = (lichthi) => {
 
 function SubmitYourHocPhanInfo({lichThiHaveBeenGenerated, setGoodSubmittedInfoEvent, setWantToSeePreviouslyCreatedCalendarEvent}) {
     const navigate = useNavigate();
-    const [info, setInfo] = useState('Submit your thong tin dkhp');
+    const [info, setInfo] = useState('');
     const setDataExcel = useTkbStore((s) => s.setDataExcel);
 
     const handleSubmit = (event) => {
@@ -68,6 +69,7 @@ function SubmitYourHocPhanInfo({lichThiHaveBeenGenerated, setGoodSubmittedInfoEv
         console.log("Input strings: ", inputStrings);
         //console.log("set good submitted info ");
         const goodInputString = inputStrings.length > 0;
+        console.log("set good submitted info event " + goodInputString)
         setGoodSubmittedInfoEvent(goodInputString);
 
         if(!goodInputString) return;
@@ -150,16 +152,24 @@ function SubmitYourHocPhanInfo({lichThiHaveBeenGenerated, setGoodSubmittedInfoEv
                     }} onClick={handleShowPreviouslyCreatedCalendar}>Previously created calendar</Button>
                 </Grid>
             </Grid>
+
+
+
+
             <form onSubmit={handleSubmit}>
                 <p>
                     <label htmlFor="w3info">Submit your THONG TIN DKHP</label>
                 </p>
-                <textarea
-                    rows="40"
-                    cols="100"
+                <TextField
+                    sx={{ m: 1, width: '100ch'}}
+                    id="outlined-textarea"
+                    label="Thông tin Đăng Ký học phần"
+                    placeholder="Copy Paste Thông tin Đăng Ký học phần của bạn vào đây"
+                    rows={20}
                     value={info}
                     onChange={(e) => setInfo(e.target.value)}
-                ></textarea>
+                    multiline
+                    />
                 <br />
                 <input type="submit" value="Submit" />
             </form>
