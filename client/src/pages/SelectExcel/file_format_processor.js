@@ -1,4 +1,5 @@
-import { HTMLCalendarParser, startTime2TietMapping, endTime2TietMapping, arrayToTkbObject, sheetJSFT, toDateTimeString } from './utils';
+import { startTime2TietMapping, endTime2TietMapping, arrayToTkbObject, sheetJSFT, toDateTimeString } from './utils';
+import {HTMLCalendarParser} from './parsers'; 
 import XLSX from 'xlsx';
 
 export const UIT_xlsxFileProcessing = (e, rABS, setDataExcel, file) => {
