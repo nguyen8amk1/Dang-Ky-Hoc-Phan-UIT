@@ -48,39 +48,40 @@ export const AuthProvider = ({children}) => {
 
     }
 
-    useEffect( async ()=> {
-        // NOTE: Setting the user information everytime the page load
-        // TODO: 
-        // 1. check if the access token is still valid -> calling the information url 
-        // if user result valid -> setUser with the user information getted 
-        // else -> setUser({})
-
-        const userInfo = await getUserInfo(); 
-        console.log("on state change: ", userInfo); 
-        // TODO: delegate all the userInfo information setting in here instead in the login function
-        // TODO: find a way to get new access token 
-        //  -> onIdTokenChanged
-        if(!userInfo) {
-            console.log("userInfo sign out");
-            setIsLoading(false);
-            logout();
-            return; 
-        } 
-
-        console.log("userInfo sign in Or token Change");
-        setUser({name: userInfo.displayName, image: userInfo.picture}); 
-        // if (userInfo.accessToken !== localStorage.getItem('accessToken')) {
-        //     console.log("Token change");
-        //     localStorage.setItem('accessToken', userInfo.accessToken);
-        //     //window.location.reload();
-        // }
-        setIsLoading(false);
-
-    }, []); 
+    // useEffect( async ()=> {
+    //     // NOTE: Setting the user information everytime the page load
+    //     // TODO: 
+    //     // 1. check if the access token is still valid -> calling the information url 
+    //     // if user result valid -> setUser with the user information getted 
+    //     // else -> setUser({})
+    //
+    //     const userInfo = await getUserInfo(); 
+    //     console.log("on state change: ", userInfo); 
+    //     // TODO: delegate all the userInfo information setting in here instead in the login function
+    //     // TODO: find a way to get new access token 
+    //     //  -> onIdTokenChanged
+    //     if(!userInfo) {
+    //         console.log("userInfo sign out");
+    //         setIsLoading(false);
+    //         logout();
+    //         return; 
+    //     } 
+    //
+    //     console.log("userInfo sign in Or token Change");
+    //     setUser({name: userInfo.displayName, image: userInfo.picture}); 
+    //     // if (userInfo.accessToken !== localStorage.getItem('accessToken')) {
+    //     //     console.log("Token change");
+    //     //     localStorage.setItem('accessToken', userInfo.accessToken);
+    //     //     //window.location.reload();
+    //     // }
+    //     setIsLoading(false);
+    //
+    // }, []); 
 
     const userIsAuthenticated = () => {
         //return localStorage.getItem("accessToken"); 
-        return user?.name; 
+        //return user?.name; 
+        return false;
     }
     
     const login = useGoogleLogin({
@@ -123,7 +124,8 @@ export const AuthProvider = ({children}) => {
 
     return (
         <AuthContext.Provider value={{user, userIsAuthenticated, login, logout}}>
-            {isLoading ? <CircularProgress /> : children}
+        {/*     {isLoading ? <CircularProgress /> : children} */}
+            {children}
         </AuthContext.Provider>
     )
 }

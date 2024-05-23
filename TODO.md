@@ -3,8 +3,10 @@
 2. Pages check the global user authentication context to render data accordingly
 
 ## TODO
-What we actually need in this lich thi iteration: [] (4h) @Current
-    1 single page with 2 steps - conditional rendering (**WITH SLIDING ANIMATIONS??**) : 
+What we actually need in this lich thi iteration: [] (4h)
+    Make the routing work [X] (10m) 
+    1 single page with 2 steps - conditional rendering (**WITH SLIDING ANIMATIONS??**) : --Page State Machine
+        -> Implement the page state machine [] (2h) @Current
         Step 1 -- that let's the user input the thong tin dkhp  (1h) [] -- Component State Machine
         Step 2 -- Lich thi Preview  -- Component State Machine
             with 2 buttons/actions: 

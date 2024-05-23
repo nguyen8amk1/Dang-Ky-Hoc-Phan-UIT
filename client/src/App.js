@@ -60,7 +60,28 @@ const router = createBrowserRouter(
 // Home -> Generate Lich Thi Page
 // Home -> Generate Lich Hoc Page
 const router_thi = createBrowserRouter(
+    createRoutesFromElements(
+        <Route path='/'>
+            <Route index element={
+                <GoogleOAuthProvider clientId="39117228837-iktth2scgqkeojkeg5tbemcu2o9ab9fq.apps.googleusercontent.com">
+                    <AuthProvider>
+                        <Home/>
+                    </AuthProvider>
+                </GoogleOAuthProvider>
+            }></Route>
 
+            <Route path="thi-gcg" element={ // Use wildcard to catch all nested routes under /gcg
+                <GoogleOAuthProvider clientId="39117228837-iktth2scgqkeojkeg5tbemcu2o9ab9fq.apps.googleusercontent.com">
+                    <AuthProvider>
+                        <LichThi_GoogleCalendarGenerator/>
+                    </AuthProvider>
+                </GoogleOAuthProvider>
+            }>
+            </Route>
+
+
+        </Route>
+    ) 
 );
 
 // const router = createBrowserRouter([
@@ -113,9 +134,9 @@ function App() {
         </ThemeProvider>
 
     const b = 
-        <>
-            <LichThi_GoogleCalendarGenerator/>
-        </>
+        <ThemeProvider theme={theme}>
+            <RouterProvider router={router_thi}/>
+        </ThemeProvider>
 
     return (
         //a
