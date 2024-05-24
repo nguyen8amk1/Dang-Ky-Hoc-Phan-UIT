@@ -2,11 +2,36 @@
 1. Have a global user authentication context
 2. Pages check the global user authentication context to render data accordingly
 
-## TODO
-+ BUG: 
-    A very big bug 
-    **IF 2 SUBJECTS DOING TEST ON THE SAME TIME BUT DIFFERENT DATES 
+## Bug 
++ Big Bug:
+    + Something wrong with the routing [X] 
+        --- **this bugs seems like it's have already been fixed, 
+                but i haven't tested yet**
+        the expected behaviour would be it's rendering the login 
+        whenever user navigate to a protected page
+        but it's just navigate back to the root 
+
+        + When you navigate using the "thu ngay" button, it does show the login modal [] 
+
+            But when you navigate using the url directly, it's just navigate right back to the root
+
+            + Maybe changing the order of the routes element a bit 
+
+    -> Not a problem of private route 
+
+    + **IF 2 SUBJECTS DOING TEST ON THE SAME TIME BUT DIFFERENT DATES []
         ONLY 1 GOT SHOWED**
+        -> But it seems like this bugs only happens on the preview 
+        -> Generating the calendar (which is the important bits) seems fine 
+            -> **BUT AGAIN, I HAVEN'T TESTED YET**
+
+
++ Small bugs: 
+    The success modal show before the event actually been created ?
+        It should be after 
+
+
+## TODO
 
 What we actually need in this lich thi iteration: [] (4h)
     Make the routing work [X] (10m) 
@@ -23,6 +48,9 @@ What we actually need in this lich thi iteration: [] (4h)
 
         Make the moving between steps button in step 1 (1h) [X] 
     
++ Make the site available globally [] @Current
+    console.google public 
+
 + Make the lich thi site pretty (4h) [] 
     + Proper positioning [] (2h) @Later
         make the form looks good 
@@ -46,7 +74,7 @@ Clean the Project structure to a more basic structure:
 
     2. Go with nginx with the prod version @Next
     
-5. Map out how things will behave in XState [] (2h) @Current
+5. Map out how things will behave in XState [] (2h) 
     **EVERY STATE IN A ROUTING_STATE_MACHINE SHOULD BE A PAGE** 
     + **FIRST DETERMINE WHAT'S A STATE AND EVENT REPRESENT IN THAT STATE MACHINE**: 
         + vd:    
@@ -529,20 +557,6 @@ STATE MACHINE NOT REALLY MATTER TO ANYTHINGS THAT YOU ARE CODING**
 **JUST USE THE STATE MACHINE AS A DIAGRAM THEN IMPLEMENT IT NATIVELY IN REACT USING USESTATE** 
 
 
-## Bug 
-        This is a big Bug:
-            Something wrong with the routing 
-            the expected behaviour would be it's rendering the login 
-            whenever user navigate to a protected page
-            but it's just navigate back to the root 
-
-            + When you navigate using the "thu ngay" button, it does show the login modal [] 
-
-                But when you navigate using the url directly, it's just navigate right back to the root
-
-                + Maybe changing the order of the routes element a bit 
-            -> Not a problem of private route 
-
 ## DONE
 Setup the Git Repo [] 
     Nalendar [X]
@@ -590,3 +604,10 @@ Setup the Git Repo []
         But currently we just gonna test on the backend
     + NOTE: 
         The class information already stored in the local storage
+
+## FIXED BUGS: 
++ The class Matching have some problems, it match more than 1 class [x] 
+    some class name sometimes duplicated ?? 
+        since there are too many students -> separating the rooms 
+        -> Solution: We have to compress all the duplicated class into 1 
+            by concat all the fields of the class 

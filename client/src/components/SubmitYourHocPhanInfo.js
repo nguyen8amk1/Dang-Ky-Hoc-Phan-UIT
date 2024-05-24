@@ -94,13 +94,32 @@ function SubmitYourHocPhanInfo({lichThiHaveBeenGenerated, setGoodSubmittedInfoEv
             }
         });
 
-        const schedule = outputCorrectLichThiFormat(matchedLops);
+        console.log("Matched Lops", matchedLops);
+
+        // NOTE: process the matchedLops once again, 
+        //  to merge all the classCode duplicates 
+        const mergedLops = matchedLops.reduce((acc, current) => {
+            // Find if the "MaLop" already exists in the accumulator
+            const existing = acc.find(item => item.MaLop === current.MaLop);
+            
+            if (existing) {
+                // Concatenate the current "PhongThi" value with existing value
+                existing.PhongThi += `, ${current.PhongThi}`;
+            } else {
+                // If the "MaLop" doesn't exist, add the current object
+                acc.push({ ...current });
+            }
+            
+            return acc;
+        }, []);
+
+        console.log(mergedLops);
+
+        const schedule = outputCorrectLichThiFormat(mergedLops);
         console.log(schedule);
 
         // console.log(courseInfos);
         // console.log(matchedLops);
-
-        // TODO: do the matching between the courseInfo with the 
 
         localStorage.setItem("raw-format-schedule", JSON.stringify(schedule));
         //console.log(schedule);
