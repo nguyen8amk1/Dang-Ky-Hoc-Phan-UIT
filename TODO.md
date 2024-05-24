@@ -48,8 +48,9 @@ What we actually need in this lich thi iteration: [] (4h)
 
         Make the moving between steps button in step 1 (1h) [X] 
     
-+ Make the site available globally [] @Current
-    console.google public 
++ Make the site available globally [] (1h) @Current
+    console.cloud.google public 
+    add the fixed lich thi info [X]
 
 + Make the lich thi site pretty (4h) [] 
     + Proper positioning [] (2h) @Later

@@ -11,8 +11,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle'
 import {Backdrop, TextField, Box, Container, Typography, Grid, Button} from '@mui/material';
+import {lichthibodyJSON} from './test_lichthibody';
 // import Backdrop from '@mui/material/Backdrop';
 // import TextField from '@mui/material/TextField';
+//
 
 const convertDateFormat = (date) => {
     // Split the input date by hyphen
@@ -83,7 +85,9 @@ function SubmitYourHocPhanInfo({lichThiHaveBeenGenerated, setGoodSubmittedInfoEv
         }).filter(course => course);
 
         localStorage.setItem("courseInfo", JSON.stringify(courseInfos));
-        const lichthibody = JSON.parse(localStorage.getItem('lichthibody')).lich_thi_body;
+        //const lichthibody = JSON.parse(localStorage.getItem('lichthibody')).lich_thi_body;
+        console.log(JSON.parse(lichthibodyJSON));
+        const lichthibody = JSON.parse(lichthibodyJSON).lich_thi_body;
 
         let matchedLops = [];
         courseInfos.forEach(course => {

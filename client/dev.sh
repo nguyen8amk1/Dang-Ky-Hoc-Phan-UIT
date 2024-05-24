@@ -7,11 +7,12 @@ install_deps=false
 build_flag=false
 commit_flag=false
 push_flag=false
+no_link_flag=false
 
-script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# echo $script_dir
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# echo $SCRIPT_DIR
 #
-CONFIG_FILE="./tool-config.json"
+CONFIG_FILE="$SCRIPT_DIR/tool-config.json"
 
 # Check if jq is installed
 if ! command -v jq &>/dev/null; then
@@ -68,6 +69,10 @@ while [[ $# -gt 0 ]]; do
 		build_flag=true
 		shift
 		;;
+	-nl | --nolink)
+		no_link_flag=true
+		shift
+		;;
 	*)
 		# 1. Input all the dependencies -> ./dev.sh --install express react ...
 		if $install_deps; then
@@ -86,19 +91,39 @@ while [[ $# -gt 0 ]]; do
 done
 
 build_docker_image() {
-	if ! sudo docker build --tag $image_tag_name --file "$script_dir/Dev-Dockerfile" $script_dir; then
+	if ! sudo docker build --tag $image_tag_name --file "$SCRIPT_DIR/Dev-Dockerfile" $SCRIPT_DIR; then
 		echo "Error: Something wrong with docker build process"
 		exit 1
+	fi
+}
+
+run() {
+	if $no_link_flag; then
+		echo "Dev: Run the New Docker Image"
+		run_docker_image
+	else
+		echo "Dev: Run the New Docker Image"
+		echo "Dev: Connect the src volume to the Docker Container"
+		run_and_link_docker_image
 	fi
 }
 
 run_and_link_docker_image() {
 	# FIXME: this script is coupled to the app part
 	if ! sudo docker run --name $container_name -p $host_port:$container_port --rm \
-		-v "$script_dir/src":"/$workdir/src" \
-		-v "$script_dir/public":"/$workdir/public" \
-		-v "$script_dir/machines":"/$workdir/machines" \
+		-v "$SCRIPT_DIR/src":"/$workdir/src" \
+		-v "$SCRIPT_DIR/public":"/$workdir/public" \
+		-v "$SCRIPT_DIR/machines":"/$workdir/machines" \
 		-v "/app/node_modules" \
+		$image_tag_name; then
+		echo "Error: Something wrong with docker run process"
+		exit 1
+	fi
+}
+
+run_docker_image() {
+	# FIXME: this script is coupled to the app part
+	if ! sudo docker run --name $container_name -p $host_port:$container_port --rm \
 		$image_tag_name; then
 		echo "Error: Something wrong with docker run process"
 		exit 1
@@ -151,7 +176,7 @@ add_packagejson_dependency() {
 	local package_json="package.json"
 
 	# Check if package.json exists
-	if [ ! -f "$script_dir/$package_json" ]; then
+	if [ ! -f "$SCRIPT_DIR/$package_json" ]; then
 		echo "Error: package.json not found."
 		return 1
 	fi
@@ -171,16 +196,16 @@ add_packagejson_dependency() {
 
 install_new_dependencies() {
 	echo "Dev: Installing new dependencies:"
-	# 3. push the content to this file $script_dir/Temp-Install_New_Dependencies-Dockerfile
-	generate_install_dependencies_docker_file_content >$script_dir/Temp-Install_New_Dependencies-Dockerfile
+	# 3. push the content to this file $SCRIPT_DIR/Temp-Install_New_Dependencies-Dockerfile
+	generate_install_dependencies_docker_file_content >$SCRIPT_DIR/Temp-Install_New_Dependencies-Dockerfile
 
-	if ! sudo docker build --tag $image_tag_name --file $script_dir/Temp-Install_New_Dependencies-Dockerfile $script_dir; then
+	if ! sudo docker build --tag $image_tag_name --file $SCRIPT_DIR/Temp-Install_New_Dependencies-Dockerfile $SCRIPT_DIR; then
 		echo "Error: Something wrong with installing new dependencies process"
-		rm $script_dir/Temp-Install_New_Dependencies-Dockerfile
+		rm $SCRIPT_DIR/Temp-Install_New_Dependencies-Dockerfile
 		exit 0
 	fi
 
-	rm $script_dir/Temp-Install_New_Dependencies-Dockerfile
+	rm $SCRIPT_DIR/Temp-Install_New_Dependencies-Dockerfile
 
 	dependency_pairs=$(dependencies_processing)
 	echo "Dev: Dependencies:"
@@ -194,9 +219,8 @@ install_new_dependencies() {
 
 # Perform default action if no flags provided
 if ! $build_flag && ! $install_flag && ! $commit_flag && ! $push_flag; then
-	echo "Dev: Run the client Docker Image"
-	echo "Dev: Connect the src volume to the Docker Container"
-	run_and_link_docker_image
+	#run_and_link_docker_image
+	run
 fi
 
 container_running() {
@@ -222,15 +246,15 @@ if [ "$commit_flag" = true ]; then
 	echo "Dev: Commit new code into the new dev image"
 	# build_docker_image
 
-	generate_copy_code_docker_file_content >$script_dir/Temp-Commit_New_Code-Dockerfile
+	generate_copy_code_docker_file_content >$SCRIPT_DIR/Temp-Commit_New_Code-Dockerfile
 
-	if ! sudo docker build --tag $image_tag_name --file $script_dir/Temp-Commit_New_Code-Dockerfile $script_dir; then
+	if ! sudo docker build --tag $image_tag_name --file $SCRIPT_DIR/Temp-Commit_New_Code-Dockerfile $SCRIPT_DIR; then
 		echo "Error: Something wrong with commiting new code process"
-		rm $script_dir/Temp-Commit_New_Code-Dockerfile
+		rm $SCRIPT_DIR/Temp-Commit_New_Code-Dockerfile
 		exit 0
 	fi
 
-	rm $script_dir/Temp-Commit_New_Code-Dockerfile
+	rm $SCRIPT_DIR/Temp-Commit_New_Code-Dockerfile
 fi
 
 if [ "$install_flag" = true ]; then
@@ -242,9 +266,8 @@ if [ "$install_flag" = true ]; then
 	echo "Dev: Install New Dependencies"
 	install_new_dependencies
 
-	echo "Dev: Run the New Docker Image"
-	echo "Dev: Connect the src volume to the Docker Container"
-	run_and_link_docker_image
+	#run_and_link_docker_image
+	run
 fi
 
 if [ "$push_flag" = true ]; then
