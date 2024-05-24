@@ -28,7 +28,7 @@ if ! sudo docker pull $image_tag_name; then
 	exit 0
 fi
 
-if ! sudo docker run -p 80:80 -d --rm $image_tag_name; then
+if ! sudo docker run -p 80:80 --rm $image_tag_name; then
 	echo "Error: Something wrong with docker run process"
 	exit 0
 fi
